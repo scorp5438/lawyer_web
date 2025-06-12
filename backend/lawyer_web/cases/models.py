@@ -23,21 +23,27 @@ class Cases(models.Model):
         related_query_name='practice',
         verbose_name='категория процесса'
     )
-    start_date = models.CharField(
+    start_date = models.DateTimeField(
         auto_now_add=True,
         verbose_name='начало процесса'
     )
-    end_date = models.CharField(
+    end_date = models.DateTimeField(
         verbose_name='окончание процесса'
     )
     review = models.CharField(
         max_length=200,
-        blank=False,
-        null=False,
+        blank=True,
+        null=True,
         verbose_name='отзыв'
 
     )
 
+    class Meta:
+        verbose_name = 'Делопроизводство'
+        verbose_name_plural = 'Делопроизводство'
+
+    def __str__(self):
+        return self.name_case
 
 class Practice(models.Model):
     category = models.CharField(
@@ -53,3 +59,10 @@ class Practice(models.Model):
         null=False,
         verbose_name='Описание практики'
     )
+
+    class Meta:
+        verbose_name = 'Практику'
+        verbose_name_plural = 'Практика'
+
+    def __str__(self):
+        return self.category

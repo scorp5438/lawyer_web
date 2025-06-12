@@ -57,18 +57,25 @@ class Article(models.Model):
     )
 
     class Meta:
-        verbose_name = 'Статья'
-        verbose_name_plural = 'Статью'
+        verbose_name = 'Статью'
+        verbose_name_plural = 'Статья'
 
-    class Category(models.Model):
-        name = models.CharField(
-            max_length=30,
-            blank=False,
-            null=False,
-            db_index=True,
-            verbose_name='категория статьи'
-        )
+    def __str__(self):
+        return self.title
 
-        class Meta:
-            verbose_name = 'Категория'
-            verbose_name_plural = 'Категорию'
+
+class Category(models.Model):
+    name = models.CharField(
+        max_length=30,
+        blank=False,
+        null=False,
+        db_index=True,
+        verbose_name='категория статьи'
+    )
+
+    class Meta:
+        verbose_name = 'Категорию'
+        verbose_name_plural = 'Категория'
+
+    def __str__(self):
+        return self.name
