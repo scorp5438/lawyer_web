@@ -10,6 +10,7 @@
     width: 200px;
     border: none;
     border-bottom: 3px solid #FFD700FF;
+    background: none;
     @include flex-center-column;
     &_h1 {
       text-align: center;
