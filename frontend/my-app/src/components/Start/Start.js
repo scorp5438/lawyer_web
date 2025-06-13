@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
 import axios from "axios";
+import ArticleCard from "../Articles/ArticleCard";
 
 const Start = () => {
 
@@ -37,10 +38,7 @@ const Start = () => {
     }, []);
     return (
         <div>
-            <h1>User</h1>
-            <p>{user[0]?.username}</p>
-            <p>{user[0]?.first_name}</p>
-            <p>{user[0]?.phone}</p>
+            <ArticleCard />
         </div>
     )
 };
