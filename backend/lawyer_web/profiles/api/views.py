@@ -9,3 +9,4 @@ class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
     http_method_names = ['get',]
     permission_classes = [IsAuthenticated, IsAdminUser]
+
