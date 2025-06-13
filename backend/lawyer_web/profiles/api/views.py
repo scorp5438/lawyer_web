@@ -8,5 +8,5 @@ class UserViewSet(ModelViewSet):
     queryset = User.objects.select_related('profile').all()
     serializer_class = UserSerializer
     http_method_names = ['get',]
-    permission_classes = [IsAuthenticated, IsAdminUser]
+    # permission_classes = [IsAuthenticated, IsAdminUser]
 
