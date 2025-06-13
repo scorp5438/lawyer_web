@@ -16,9 +16,11 @@ const Start = () => {
 
             const response = await axios.get(
 
-                "http://127.0.0.1:8000/api/user/",
-                headers: {
-                    'X-Superuser'
+                "http://127.0.0.1:8000/api/user/", {
+                    headers: {
+                        'X-Superuser-Access': 'hjflSdhjlkSDfjo79sdffs009fs87s0df09s8d'
+                }
+
             }
             );
 
