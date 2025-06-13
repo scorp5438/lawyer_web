@@ -1,6 +1,7 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import CASCADE
-from django.contrib.auth.models import User
+
 
 class Profile(models.Model):
     user_id = models.OneToOneField(
@@ -17,10 +18,55 @@ class Profile(models.Model):
         unique=True,
         verbose_name='номер телефона'
     )
-    social_networks = models.JSONField(
+
+    fb = models.CharField(
+        max_length=50,
         blank=True,
-        default=list,
-        verbose_name='cоциальные сети'
+        null=True,
+        verbose_name='фейсбук'
+    )
+    x = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        verbose_name='твиттер'
+    )
+    tg = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        verbose_name='телеграмм'
+    )
+    wa = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        verbose_name='ватсап'
+    )
+    viber = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        verbose_name='вайбер'
+    )
+    # Если будет меняться модель, переписать название поля на  inst и в сериалайзере
+    inst = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        verbose_name='инстаграм'
+    )
+    site = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        verbose_name='сайт'
+    )
+    bio = models.TextField(
+        max_length=5000,
+        blank=True,
+        null=True,
+        verbose_name='биография'
     )
 
     class Meta:
