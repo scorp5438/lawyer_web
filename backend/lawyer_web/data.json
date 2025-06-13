@@ -1,1095 +1,135 @@
 [
 {
-    "model": "admin.logentry",
-    "pk": 4,
-    "fields": {
-        "action_time": "2025-06-12T13:38:10.048Z",
-        "user": 4,
-        "content_type": 4,
-        "object_id": "5",
-        "object_repr": "123",
-        "action_flag": 3,
-        "change_message": ""
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 5,
-    "fields": {
-        "action_time": "2025-06-12T13:38:10.048Z",
-        "user": 4,
-        "content_type": 4,
-        "object_id": "10",
-        "object_repr": "123123",
-        "action_flag": 3,
-        "change_message": ""
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 6,
-    "fields": {
-        "action_time": "2025-06-12T13:38:10.048Z",
-        "user": 4,
-        "content_type": 4,
-        "object_id": "6",
-        "object_repr": "eqr",
-        "action_flag": 3,
-        "change_message": ""
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 7,
-    "fields": {
-        "action_time": "2025-06-12T13:38:10.048Z",
-        "user": 4,
-        "content_type": 4,
-        "object_id": "11",
-        "object_repr": "qweqwe",
-        "action_flag": 3,
-        "change_message": ""
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 8,
-    "fields": {
-        "action_time": "2025-06-12T13:38:10.048Z",
-        "user": 4,
-        "content_type": 4,
-        "object_id": "9",
-        "object_repr": "qwer",
-        "action_flag": 3,
-        "change_message": ""
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 9,
-    "fields": {
-        "action_time": "2025-06-12T13:38:10.048Z",
-        "user": 4,
-        "content_type": 4,
-        "object_id": "12",
-        "object_repr": "йцук",
-        "action_flag": 3,
-        "change_message": ""
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 10,
-    "fields": {
-        "action_time": "2025-06-12T13:38:10.048Z",
-        "user": 4,
-        "content_type": 4,
-        "object_id": "7",
-        "object_repr": "йцукй",
-        "action_flag": 3,
-        "change_message": ""
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 11,
-    "fields": {
-        "action_time": "2025-06-12T13:38:10.048Z",
-        "user": 4,
-        "content_type": 4,
-        "object_id": "8",
-        "object_repr": "фыв",
-        "action_flag": 3,
-        "change_message": ""
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 12,
-    "fields": {
-        "action_time": "2025-06-12T13:38:14.725Z",
-        "user": 4,
-        "content_type": 4,
-        "object_id": "4",
-        "object_repr": "admin",
-        "action_flag": 2,
-        "change_message": "[{\"added\": {\"name\": \"\\u041f\\u0440\\u043e\\u0444\\u0438\\u043b\\u044c\", \"object\": \"Profile object (1)\"}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 13,
-    "fields": {
-        "action_time": "2025-06-12T13:38:46.204Z",
-        "user": 4,
-        "content_type": 4,
-        "object_id": "4",
-        "object_repr": "admin",
-        "action_flag": 2,
-        "change_message": "[{\"changed\": {\"fields\": [\"First name\", \"Last name\"]}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 14,
-    "fields": {
-        "action_time": "2025-06-12T14:35:59.802Z",
-        "user": 4,
-        "content_type": 8,
-        "object_id": "1",
-        "object_repr": "Category object (1)",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 15,
-    "fields": {
-        "action_time": "2025-06-12T14:36:07.984Z",
-        "user": 4,
-        "content_type": 8,
-        "object_id": "2",
-        "object_repr": "Category object (2)",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 16,
-    "fields": {
-        "action_time": "2025-06-12T14:36:12.560Z",
-        "user": 4,
-        "content_type": 8,
-        "object_id": "3",
-        "object_repr": "Category object (3)",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 17,
-    "fields": {
-        "action_time": "2025-06-12T14:36:16.495Z",
-        "user": 4,
-        "content_type": 8,
-        "object_id": "4",
-        "object_repr": "Category object (4)",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 18,
-    "fields": {
-        "action_time": "2025-06-12T14:36:20.888Z",
-        "user": 4,
-        "content_type": 8,
-        "object_id": "5",
-        "object_repr": "Category object (5)",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 19,
-    "fields": {
-        "action_time": "2025-06-12T14:36:45.838Z",
-        "user": 4,
-        "content_type": 8,
-        "object_id": "1",
-        "object_repr": "Category object (1)",
-        "action_flag": 3,
-        "change_message": ""
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 20,
-    "fields": {
-        "action_time": "2025-06-12T14:36:45.838Z",
-        "user": 4,
-        "content_type": 8,
-        "object_id": "2",
-        "object_repr": "Category object (2)",
-        "action_flag": 3,
-        "change_message": ""
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 21,
-    "fields": {
-        "action_time": "2025-06-12T14:36:45.838Z",
-        "user": 4,
-        "content_type": 8,
-        "object_id": "3",
-        "object_repr": "Category object (3)",
-        "action_flag": 3,
-        "change_message": ""
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 22,
-    "fields": {
-        "action_time": "2025-06-12T14:36:45.838Z",
-        "user": 4,
-        "content_type": 8,
-        "object_id": "4",
-        "object_repr": "Category object (4)",
-        "action_flag": 3,
-        "change_message": ""
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 23,
-    "fields": {
-        "action_time": "2025-06-12T14:36:45.838Z",
-        "user": 4,
-        "content_type": 8,
-        "object_id": "5",
-        "object_repr": "Category object (5)",
-        "action_flag": 3,
-        "change_message": ""
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 24,
-    "fields": {
-        "action_time": "2025-06-12T14:36:55.731Z",
-        "user": 4,
-        "content_type": 8,
-        "object_id": "6",
-        "object_repr": "Category object (6)",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 25,
-    "fields": {
-        "action_time": "2025-06-12T14:36:57.940Z",
-        "user": 4,
-        "content_type": 8,
-        "object_id": "7",
-        "object_repr": "Category object (7)",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 26,
-    "fields": {
-        "action_time": "2025-06-12T14:37:00.391Z",
-        "user": 4,
-        "content_type": 8,
-        "object_id": "8",
-        "object_repr": "Category object (8)",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 27,
-    "fields": {
-        "action_time": "2025-06-12T14:38:14.898Z",
-        "user": 4,
-        "content_type": 9,
-        "object_id": "1",
-        "object_repr": "Article object (1)",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 28,
-    "fields": {
-        "action_time": "2025-06-12T14:38:44.708Z",
-        "user": 4,
-        "content_type": 9,
-        "object_id": "2",
-        "object_repr": "Article object (2)",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 29,
-    "fields": {
-        "action_time": "2025-06-12T14:39:05.759Z",
-        "user": 4,
-        "content_type": 9,
-        "object_id": "1",
-        "object_repr": "Article object (1)",
-        "action_flag": 2,
-        "change_message": "[]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 30,
-    "fields": {
-        "action_time": "2025-06-12T14:39:43.118Z",
-        "user": 4,
-        "content_type": 9,
-        "object_id": "1",
-        "object_repr": "Новая заметка",
-        "action_flag": 2,
-        "change_message": "[]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 31,
-    "fields": {
-        "action_time": "2025-06-12T14:40:08.037Z",
-        "user": 4,
-        "content_type": 9,
-        "object_id": "1",
-        "object_repr": "Новая заметка",
-        "action_flag": 2,
-        "change_message": "[]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 32,
-    "fields": {
-        "action_time": "2025-06-12T14:51:12.467Z",
-        "user": 4,
-        "content_type": 11,
-        "object_id": "1",
-        "object_repr": "Practice object (1)",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 33,
-    "fields": {
-        "action_time": "2025-06-12T14:51:20.870Z",
-        "user": 4,
-        "content_type": 11,
-        "object_id": "2",
-        "object_repr": "Practice object (2)",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 34,
-    "fields": {
-        "action_time": "2025-06-12T14:51:32.274Z",
-        "user": 4,
-        "content_type": 11,
-        "object_id": "3",
-        "object_repr": "Practice object (3)",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 35,
-    "fields": {
-        "action_time": "2025-06-12T14:51:40.584Z",
-        "user": 4,
-        "content_type": 11,
-        "object_id": "4",
-        "object_repr": "Practice object (4)",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 36,
-    "fields": {
-        "action_time": "2025-06-12T14:51:48.847Z",
-        "user": 4,
-        "content_type": 11,
-        "object_id": "5",
-        "object_repr": "Practice object (5)",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 37,
-    "fields": {
-        "action_time": "2025-06-12T15:01:22.109Z",
-        "user": 4,
-        "content_type": 9,
-        "object_id": "1",
-        "object_repr": "Новая заметка",
-        "action_flag": 2,
-        "change_message": "[]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 38,
-    "fields": {
-        "action_time": "2025-06-12T15:03:20.323Z",
-        "user": 4,
-        "content_type": 10,
-        "object_id": "1",
-        "object_repr": "Лёлик и Болик",
-        "action_flag": 1,
-        "change_message": "[{\"added\": {}}]"
-    }
-},
-{
-    "model": "admin.logentry",
-    "pk": 39,
-    "fields": {
-        "action_time": "2025-06-13T11:59:59.834Z",
-        "user": 4,
-        "content_type": 4,
-        "object_id": "4",
-        "object_repr": "admin",
-        "action_flag": 2,
-        "change_message": "[{\"changed\": {\"name\": \"\\u041f\\u0440\\u043e\\u0444\\u0438\\u043b\\u044c\", \"object\": \"Profile object (1)\", \"fields\": [\"\\u0424\\u0435\\u0439\\u0441\\u0431\\u0443\\u043a\", \"\\u0422\\u0432\\u0438\\u0442\\u0442\\u0435\\u0440\", \"\\u0422\\u0435\\u043b\\u0435\\u0433\\u0440\\u0430\\u043c\\u043c\", \"\\u0412\\u0430\\u0442\\u0441\\u0430\\u043f\", \"\\u0421\\u0430\\u0439\\u0442\", \"\\u0411\\u0438\\u043e\\u0433\\u0440\\u0430\\u0444\\u0438\\u044f\"]}}]"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 1,
-    "fields": {
-        "name": "Can add log entry",
-        "content_type": 1,
-        "codename": "add_logentry"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 2,
-    "fields": {
-        "name": "Can change log entry",
-        "content_type": 1,
-        "codename": "change_logentry"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 3,
-    "fields": {
-        "name": "Can delete log entry",
-        "content_type": 1,
-        "codename": "delete_logentry"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 4,
-    "fields": {
-        "name": "Can view log entry",
-        "content_type": 1,
-        "codename": "view_logentry"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 5,
-    "fields": {
-        "name": "Can add permission",
-        "content_type": 2,
-        "codename": "add_permission"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 6,
-    "fields": {
-        "name": "Can change permission",
-        "content_type": 2,
-        "codename": "change_permission"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 7,
-    "fields": {
-        "name": "Can delete permission",
-        "content_type": 2,
-        "codename": "delete_permission"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 8,
-    "fields": {
-        "name": "Can view permission",
-        "content_type": 2,
-        "codename": "view_permission"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 9,
-    "fields": {
-        "name": "Can add group",
-        "content_type": 3,
-        "codename": "add_group"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 10,
-    "fields": {
-        "name": "Can change group",
-        "content_type": 3,
-        "codename": "change_group"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 11,
-    "fields": {
-        "name": "Can delete group",
-        "content_type": 3,
-        "codename": "delete_group"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 12,
-    "fields": {
-        "name": "Can view group",
-        "content_type": 3,
-        "codename": "view_group"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 13,
-    "fields": {
-        "name": "Can add user",
-        "content_type": 4,
-        "codename": "add_user"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 14,
-    "fields": {
-        "name": "Can change user",
-        "content_type": 4,
-        "codename": "change_user"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 15,
-    "fields": {
-        "name": "Can delete user",
-        "content_type": 4,
-        "codename": "delete_user"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 16,
-    "fields": {
-        "name": "Can view user",
-        "content_type": 4,
-        "codename": "view_user"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 17,
-    "fields": {
-        "name": "Can add content type",
-        "content_type": 5,
-        "codename": "add_contenttype"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 18,
-    "fields": {
-        "name": "Can change content type",
-        "content_type": 5,
-        "codename": "change_contenttype"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 19,
-    "fields": {
-        "name": "Can delete content type",
-        "content_type": 5,
-        "codename": "delete_contenttype"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 20,
-    "fields": {
-        "name": "Can view content type",
-        "content_type": 5,
-        "codename": "view_contenttype"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 21,
-    "fields": {
-        "name": "Can add session",
-        "content_type": 6,
-        "codename": "add_session"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 22,
-    "fields": {
-        "name": "Can change session",
-        "content_type": 6,
-        "codename": "change_session"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 23,
-    "fields": {
-        "name": "Can delete session",
-        "content_type": 6,
-        "codename": "delete_session"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 24,
-    "fields": {
-        "name": "Can view session",
-        "content_type": 6,
-        "codename": "view_session"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 25,
-    "fields": {
-        "name": "Can add Профиль",
-        "content_type": 7,
-        "codename": "add_profile"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 26,
-    "fields": {
-        "name": "Can change Профиль",
-        "content_type": 7,
-        "codename": "change_profile"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 27,
-    "fields": {
-        "name": "Can delete Профиль",
-        "content_type": 7,
-        "codename": "delete_profile"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 28,
-    "fields": {
-        "name": "Can view Профиль",
-        "content_type": 7,
-        "codename": "view_profile"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 29,
-    "fields": {
-        "name": "Can add Категория",
-        "content_type": 8,
-        "codename": "add_category"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 30,
-    "fields": {
-        "name": "Can change Категория",
-        "content_type": 8,
-        "codename": "change_category"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 31,
-    "fields": {
-        "name": "Can delete Категория",
-        "content_type": 8,
-        "codename": "delete_category"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 32,
-    "fields": {
-        "name": "Can view Категория",
-        "content_type": 8,
-        "codename": "view_category"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 33,
-    "fields": {
-        "name": "Can add Статья",
-        "content_type": 9,
-        "codename": "add_article"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 34,
-    "fields": {
-        "name": "Can change Статья",
-        "content_type": 9,
-        "codename": "change_article"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 35,
-    "fields": {
-        "name": "Can delete Статья",
-        "content_type": 9,
-        "codename": "delete_article"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 36,
-    "fields": {
-        "name": "Can view Статья",
-        "content_type": 9,
-        "codename": "view_article"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 37,
-    "fields": {
-        "name": "Can add cases",
-        "content_type": 10,
-        "codename": "add_cases"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 38,
-    "fields": {
-        "name": "Can change cases",
-        "content_type": 10,
-        "codename": "change_cases"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 39,
-    "fields": {
-        "name": "Can delete cases",
-        "content_type": 10,
-        "codename": "delete_cases"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 40,
-    "fields": {
-        "name": "Can view cases",
-        "content_type": 10,
-        "codename": "view_cases"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 41,
-    "fields": {
-        "name": "Can add practice",
-        "content_type": 11,
-        "codename": "add_practice"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 42,
-    "fields": {
-        "name": "Can change practice",
-        "content_type": 11,
-        "codename": "change_practice"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 43,
-    "fields": {
-        "name": "Can delete practice",
-        "content_type": 11,
-        "codename": "delete_practice"
-    }
-},
-{
-    "model": "auth.permission",
-    "pk": 44,
-    "fields": {
-        "name": "Can view practice",
-        "content_type": 11,
-        "codename": "view_practice"
-    }
-},
-{
-    "model": "auth.user",
-    "pk": 4,
-    "fields": {
-        "password": "pbkdf2_sha256$1000000$7Lt3YzTs0lgf50fEhTZNSG$zvSKgaIKvstRtTch6frcVnX3ugkJ9buSWGJ89HO7dxs=",
-        "last_login": "2025-06-12T13:00:45Z",
-        "is_superuser": true,
-        "username": "admin",
-        "first_name": "Сергей",
-        "last_name": "Прокопенко",
-        "email": "",
-        "is_staff": true,
-        "is_active": true,
-        "date_joined": "2025-06-12T13:00:42Z",
-        "groups": [],
-        "user_permissions": []
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 1,
-    "fields": {
-        "app_label": "admin",
-        "model": "logentry"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 2,
-    "fields": {
-        "app_label": "auth",
-        "model": "permission"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 3,
-    "fields": {
-        "app_label": "auth",
-        "model": "group"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 4,
-    "fields": {
-        "app_label": "auth",
-        "model": "user"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 5,
-    "fields": {
-        "app_label": "contenttypes",
-        "model": "contenttype"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 6,
-    "fields": {
-        "app_label": "sessions",
-        "model": "session"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 7,
-    "fields": {
-        "app_label": "profiles",
-        "model": "profile"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 8,
-    "fields": {
-        "app_label": "articles",
-        "model": "category"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 9,
-    "fields": {
-        "app_label": "articles",
-        "model": "article"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 10,
-    "fields": {
-        "app_label": "cases",
-        "model": "cases"
-    }
-},
-{
-    "model": "contenttypes.contenttype",
-    "pk": 11,
-    "fields": {
-        "app_label": "cases",
-        "model": "practice"
-    }
-},
-{
-    "model": "sessions.session",
-    "pk": "z7zot6fy3vzlou7luaj2k8gfsm02a9sl",
-    "fields": {
-        "session_data": ".eJxVjDsOwyAQBe9CHSF-i03K9D4DYlkcnEQgGbuKcvdgyUXSvpl5b-bDvmW_t7T6hdiVGXb53TDEZyoHoEco98pjLdu6ID8UftLGp0rpdTvdv4McWu61HI1Rs9NyQK2ACJRN1tIIIgpBDjsHmAkCOakFGXRRgcU0JC26FtnnC717N0g:1uPhXx:j3FPSaescYovRgI5i264iBsjHvqbCDCsrhgV4AVqtaA",
-        "expire_date": "2025-06-26T13:00:45.209Z"
-    }
-},
-{
-    "model": "profiles.profile",
-    "pk": 1,
-    "fields": {
-        "user_id": 4,
-        "phone": "777",
-        "fb": "fb.com",
-        "x": "x.com",
-        "tg": "tg.com",
-        "wa": "wa.com",
-        "viber": null,
-        "inst": null,
-        "site": "example.com",
-        "bio": "ЧТо-то обо мне"
-    }
-},
-{
-    "model": "articles.article",
-    "pk": 1,
-    "fields": {
-        "title": "Новая заметка",
-        "type": "заметка",
-        "category": 6,
-        "content": "Ну вот про землю. Все. конец",
-        "creation_date": "2025-06-12T14:38:14.890Z",
-        "update_date": "2025-06-12T15:01:22.108Z",
-        "image": ""
-    }
-},
-{
-    "model": "articles.article",
-    "pk": 2,
-    "fields": {
-        "title": "Еще одна какая-то статья",
-        "type": "новое в праве",
-        "category": 7,
-        "content": "Что-то там новое, пока не знаю",
-        "creation_date": "2025-06-12T14:38:44.706Z",
-        "update_date": "2025-06-12T14:38:44.706Z",
-        "image": ""
-    }
-},
-{
-    "model": "articles.category",
-    "pk": 6,
-    "fields": {
-        "name": "Земля"
-    }
-},
-{
-    "model": "articles.category",
-    "pk": 7,
-    "fields": {
-        "name": "Недвижимость"
-    }
-},
-{
-    "model": "articles.category",
-    "pk": 8,
-    "fields": {
-        "name": "Банкротство"
-    }
-},
-{
-    "model": "cases.cases",
-    "pk": 1,
-    "fields": {
-        "name_case": "Лёлик и Болик",
-        "description": "Спорили как то Лёлик и Болик и все. Конец",
-        "case_category": 2,
-        "start_date": "2025-06-12T15:03:20.321Z",
-        "end_date": "2025-06-04T12:15:00Z",
-        "review": null
-    }
-},
-{
-    "model": "cases.practice",
-    "pk": 1,
-    "fields": {
-        "category": "Уголовные дела",
-        "description": "Про уголовные дела"
-    }
-},
-{
-    "model": "cases.practice",
-    "pk": 2,
-    "fields": {
-        "category": "Семейные дела",
-        "description": "Про семейные дела"
-    }
-},
-{
-    "model": "cases.practice",
-    "pk": 3,
-    "fields": {
-        "category": "Гражданские дела",
-        "description": "Про гражданские дела"
-    }
-},
-{
-    "model": "cases.practice",
-    "pk": 4,
-    "fields": {
-        "category": "Автомобили и ДТП",
-        "description": "Про автомобили и ДТП"
-    }
-},
-{
-    "model": "cases.practice",
-    "pk": 5,
-    "fields": {
-        "category": "Дела об административных правонарушениях",
-        "description": "Про дела об административных правонарушениях"
-    }
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$7Lt3YzTs0lgf50fEhTZNSG$zvSKgaIKvstRtTch6frcVnX3ugkJ9buSWGJ89HO7dxs=",
+    "last_login": "2025-06-12T13:00:45Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "Сергей",
+    "last_name": "Прокопенко",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-06-12T13:00:42Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "profiles.profile",
+  "pk": 1,
+  "fields": {
+    "user_id": 4,
+    "phone": "777",
+    "fb": "fb.com",
+    "x": "x.com",
+    "tg": "tg.com",
+    "wa": "wa.com",
+    "viber": null,
+    "inst": null,
+    "site": "example.com",
+    "bio": "ЧТо-то обо мне"
+  }
+},
+{
+  "model": "articles.article",
+  "pk": 1,
+  "fields": {
+    "title": "Новая заметка",
+    "type": "заметка",
+    "category": 6,
+    "content": "Ну вот про землю. Все. конец",
+    "creation_date": "2025-06-12T14:38:14.890Z",
+    "update_date": "2025-06-12T15:01:22.108Z",
+    "image": ""
+  }
+},
+{
+  "model": "articles.article",
+  "pk": 2,
+  "fields": {
+    "title": "Еще одна какая-то статья",
+    "type": "новое в праве",
+    "category": 7,
+    "content": "Что-то там новое, пока не знаю",
+    "creation_date": "2025-06-12T14:38:44.706Z",
+    "update_date": "2025-06-12T14:38:44.706Z",
+    "image": ""
+  }
+},
+{
+  "model": "articles.category",
+  "pk": 6,
+  "fields": {
+    "name": "Земля"
+  }
+},
+{
+  "model": "articles.category",
+  "pk": 7,
+  "fields": {
+    "name": "Недвижимость"
+  }
+},
+{
+  "model": "articles.category",
+  "pk": 8,
+  "fields": {
+    "name": "Банкротство"
+  }
+},
+{
+  "model": "cases.cases",
+  "pk": 1,
+  "fields": {
+    "name_case": "Лёлик и Болик",
+    "description": "Спорили как то Лёлик и Болик и все. Конец",
+    "case_category": 2,
+    "start_date": "2025-06-12T15:03:20.321Z",
+    "end_date": "2025-06-04T12:15:00Z",
+    "review": null
+  }
+},
+{
+  "model": "cases.practice",
+  "pk": 1,
+  "fields": {
+    "category": "Уголовные дела",
+    "description": "Про уголовные дела"
+  }
+},
+{
+  "model": "cases.practice",
+  "pk": 2,
+  "fields": {
+    "category": "Семейные дела",
+    "description": "Про семейные дела"
+  }
+},
+{
+  "model": "cases.practice",
+  "pk": 3,
+  "fields": {
+    "category": "Гражданские дела",
+    "description": "Про гражданские дела"
+  }
+},
+{
+  "model": "cases.practice",
+  "pk": 4,
+  "fields": {
+    "category": "Автомобили и ДТП",
+    "description": "Про автомобили и ДТП"
+  }
+},
+{
+  "model": "cases.practice",
+  "pk": 5,
+  "fields": {
+    "category": "Дела об административных правонарушениях",
+    "description": "Про дела об административных правонарушениях"
+  }
 }
 ]
