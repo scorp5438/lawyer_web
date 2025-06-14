@@ -3,9 +3,11 @@ from pathlib import Path
 
 from corsheaders.defaults import default_headers
 
+from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -136,3 +138,17 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CELERY_BROKER_URL = os.getenv('REDIS_HOST','redis://localhost:6379/0')
+CELERY_RESULT_BACKEND = os.getenv('REDIS_HOST','redis://localhost:6379/0')
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+
+# Настройки для отправки писем через mail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv('EMAIL_USER', 'test@mail.ru')  # Ваш email
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD','Daekro!!')  # Пароль от почты или пароль приложения (для Gmail)
+DEFAULT_FROM_EMAIL = os.getenv('EMAIL_USER', 'test@mail.ru')  # Email, который будет указан как отправитель

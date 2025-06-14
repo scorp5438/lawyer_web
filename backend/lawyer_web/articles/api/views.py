@@ -1,19 +1,35 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.viewsets import ViewSet
+from rest_framework.pagination import PageNumberPagination
 
 from .serializers import ArticleSerializer, CategorySerializer, TypeSerializer
 from ..models import Article, Category
 
 
+class CustomPagination(PageNumberPagination):
+    page_size = 10  # Количество элементов на странице
+    page_size_query_param = 'page_size'  # Параметр для изменения размера страницы
+    max_page_size = 100  # Максимальное количество элементов на странице
+
+
 class ArticleViewSet(ModelViewSet):
     queryset = Article.objects.select_related('category').all()
+    pagination_class = CustomPagination
     serializer_class = ArticleSerializer
     http_method_names = ['get', 'post', 'delete', 'patch']
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [
+        DjangoFilterBackend,  # для обычной фильтрации
+        filters.SearchFilter,  # для поиска по полям
+        filters.OrderingFilter  # для сортировки
+    ]
     filterset_fields = ['type', 'category']
+    search_fields = ['$title', '$title', '$content']
+    ordering_fields = ['pk', 'title', 'type', 'category', 'update_date']
+    ordering = ['-pk']
 
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
