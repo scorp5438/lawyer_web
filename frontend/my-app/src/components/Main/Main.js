@@ -6,7 +6,7 @@ import {fetchData} from "../utils/api";
 import ArticleCard from "../Articles/ArticleCard";
 import axios from "axios";
 import './main.scss'
-import Logo from "../Logo/Logo";
+import CaseList from "../CaseList/CaseList";
 
 
 
@@ -42,7 +42,13 @@ const Main = () => {
                         </p>
                     </div>
                 </div>
-                <ArticleCard />
+                <section className="main__content_body">
+                    <ArticleCard />
+                </section>
+                <section className="main__content_footer">
+                    <CaseList />
+                </section>
+
             </div>
             <div>
                 <Footer
