@@ -1,27 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
-import Start from "./components/Start/Start";
+import './App.scss';
+import { useEffect, useState } from "react";
+import Logo from "./components/Logo/Logo";
+import Main from "./components/Main/Main";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Start />
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [showLogo, setShowLogo] = useState(true); // Состояние для показа Logo
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowLogo(false); // Через 3 секунды Logo исчезает
+        }, 2000);
+
+        return () => clearTimeout(timer); // Очистка таймера на размонтирование
+    }, []);
+
+    return (
+        <div className="App">
+            {showLogo ? (
+                <div className="logo-wrapper">
+                    <Logo />
+                </div>
+            ) : (
+                <div className="form-wrapper">
+                    <Main />
+                </div>
+            )}
+        </div>
+    );
 }
 
 export default App;

@@ -1,12 +1,17 @@
-import React, { useState, useCallback, useEffect } from "react";
-import axios from "axios";
-import ArticleCard from "../Articles/ArticleCard";
+import React, { useState, useEffect } from "react";
 import Head from "../Head/Head";
 import Footer from "../Footer/Footer";
+
 import {fetchData} from "../utils/api";
+import ArticleCard from "../Articles/ArticleCard";
+import axios from "axios";
+import './main.scss'
+import Logo from "../Logo/Logo";
 
-const Start = () => {
 
+
+
+const Main = () => {
     const [user, setUser] = useState([]);
 
     useEffect(() => {
@@ -19,7 +24,6 @@ const Start = () => {
 
         fetchData(url, headers, setUser, []);
     }, []);
-
     return (
         <div>
             <div>
@@ -27,16 +31,26 @@ const Start = () => {
                     user={user}
                 />
             </div>
-            <div>
+            <div className="main__content">
+                <div className="main__content_logo">
+                    <div className="main__content_logo_h1">
+                        <h1>SAProLex</h1>
+                    </div>
+                    <div className="main__content_logo">
+                        <p className="main__content_logo_p">
+                            ADVICE THAT MATTERS
+                        </p>
+                    </div>
+                </div>
                 <ArticleCard />
             </div>
             <div>
                 <Footer
-                user={user}
+                    user={user}
                 />
             </div>
         </div>
-    )
+    );
 };
-export default Start;
 
+export default Main;
