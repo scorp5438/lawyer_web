@@ -1,0 +1,41 @@
+services:
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/health/" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    environment:
+      - PYTHONPATH=/app
+      - CELERY_BROKER_URL=${REDIS_HOST}
+      - CELERY_RESULT_BACKEND=${REDIS_HOST}
+      - REDIS_HOST=${REDIS_HOST}
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
+  celery:
+    build: .
+    env_file:
+      - .env
+    command: celery -A lawyer_web worker --loglevel=info
+    depends_on:
+      - redis
+    environment:
+      - PYTHONPATH=/app
+    volumes:
+      - .:/app/
+    healthcheck:
+      test: [ "CMD", "celery", "-A", "lawyer_web", "status" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3

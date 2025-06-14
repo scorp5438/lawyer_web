@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ..models import Article
+from ..models import Article, Category
 
 
 class ArticleSerializer(serializers.ModelSerializer):
@@ -25,3 +25,23 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     def get_category_name(self, obj):
         return obj.category.name
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для модели Category
+    """
+
+    class Meta:
+        model = Category
+        fields = 'pk', 'name',
+
+
+class TypeSerializer(serializers.Serializer):
+    """
+    Сериализатор для choices поля type модели Article
+    """
+
+    types = serializers.ListField(
+        child=serializers.ChoiceField(choices=Article.ARTICLE_TYPES)
+    )

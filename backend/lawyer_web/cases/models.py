@@ -16,7 +16,7 @@ class Cases(models.Model):
         null=False,
         verbose_name='Описание процесса'
     )
-    case_category = models.OneToOneField(
+    case_category = models.ForeignKey(
         to='Practice',
         on_delete=CASCADE,
         related_name='practice',
