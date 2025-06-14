@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новое обращение клиента</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+        .content {
+            border: 1px solid #ddd;
+            border-top: none;
+            padding: 20px;
+            border-radius: 0 0 5px 5px;
+        }
+        .client-info {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .field {
+            margin-bottom: 10px;
+        }
+        .field-label {
+            font-weight: bold;
+            color: #2c3e50;
+            display: inline-block;
+            width: 150px;
+        }
+        .problem {
+            background-color: #f0f7ff;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            border-radius: 0 5px 5px 0;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Новое обращение клиента</h1>
+    </div>
+
+    <div class="content">
+        <div class="client-info">
+            <h2 style="margin-top: 0; color: #2c3e50;">Контактная информация</h2>
+
+            <div class="field">
+                <span class="field-label">Имя:</span>
+                <span>{{ first_name }} {{ last_name }}</span>
+            </div>
+
+            <div class="field">
+                <span class="field-label">Телефон:</span>
+                <span><a href="tel:{{ phone }}">{{ phone }}</a></span>
+            </div>
+
+            <div class="field">
+                <span class="field-label">Email:</span>
+                <span><a href="mailto:{{ email }}">{{ email }}</a></span>
+            </div>
+        </div>
+
+        <div class="problem">
+            <h3 style="margin-top: 0; color: #2c3e50;">Описание проблемы</h3>
+            <p>{{ text }}</p>
+        </div>
+
+        <div style="margin-top: 20px; text-align: center;">
+            <a href="mailto:{{ email }}?subject=Ответ на обращение"
+               style="background-color: #3498db;
+                      color: white;
+                      padding: 10px 20px;
+                      text-decoration: none;
+                      border-radius: 5px;
+                      display: inline-block;">
+                Ответить клиенту
+            </a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Это письмо было отправлено с формы обратной связи юридической службы.</p>
+        <p>Дата отправки: {{ current_date }}</p>
+    </div>
+</body>
+</html>
