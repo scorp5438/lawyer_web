@@ -2,7 +2,7 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
 
-from .serializers import CaseSerializer
+from .serializers import CaseSerializer, PracticeSerializer
 from ..models import Cases, Practice
 
 
@@ -20,5 +20,5 @@ class CaseViewSet(ModelViewSet):
 
 class PracticeViewSet(ModelViewSet):
     queryset = Practice.objects.all()
-    serializer_class = CaseSerializer
+    serializer_class = PracticeSerializer
     http_method_names = ['get',]
