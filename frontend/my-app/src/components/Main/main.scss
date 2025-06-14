@@ -5,6 +5,16 @@
   height: 820px;
   width: $widthSite;
   background: $mainBackground;
+  @include flex-center-top;
+
+  &_content {
+    width: $widthSiteContent;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 50px;
+  }
+
   &_logo {
     box-sizing: border-box;
     width: 200px;
@@ -12,12 +22,113 @@
     border-bottom: 3px solid #FFD700FF;
     background: none;
     @include flex-center-column;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+
     &_h1 {
       text-align: center;
-      border: none;
-      border-bottom: 2px solid #282c34;
       color: #FFD700FF;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
+  }
+
+  &_dis {
+    width: 200px;
+    @include flex-center;
+
+    &_p {
+      color: #FFD700FF;
+      text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  &_info {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    &_blog {
+      @include flex-center
+    }
+
+  }
+
+  &_categary {
+    &_categories-list {
+      @include flex-center-row;
+
+      &_item {
+        list-style-type: none;
+        font-weight: bold;
+        color: $colorP;
+        font-size: $sizeContent;
+        cursor: pointer;
+      }
+
+      &_item:hover {
+        border-bottom: 3px solid $colorH1;
+        color: $colorH1;
+        transition: background 0.3s ease;
+        margin-bottom: -3px;
+      }
+    }
+
+    &_info {
+      @include flex-center-row;
+
+      &_blog {
+        width: 500px;
+        @include flex-center-column;
+        gap: 30px;
+
+        &_head {
+          @include flex-center;
+          margin-top: 30px;
+
+          h2 {
+            color: $colorP;
+            font-size: $sizeContent;
+            border: none;
+            border-bottom: 3px solid $colorP;
+          }
+
+          &_practice {
+            @include grid-2x2-plus-row;
+            width: 500px;
+          }
+        }
+      }
+    }
+  }
+
+  .practice-item {
+    border: 3px solid $headerBackground;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    align-items: center;
+  }
+
+  .practice-item:hover {
+    color: $colorH1;
+    border: 3px solid $colorH1;
+    background-color: $colorP;
+    transition: background 0.3s ease;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .practice-item:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .practice-category {
+    color: $colorP;
+    font-size: $sizeNavigate;
+    cursor: pointer;
+  }
+
+  .practice-category:hover {
+    color: $colorH1;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+    transition: background 0.3s ease;
   }
 }

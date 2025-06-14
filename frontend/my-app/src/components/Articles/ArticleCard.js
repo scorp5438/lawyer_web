@@ -17,7 +17,7 @@ const ArticleCard = () => {
                         'Accept': 'application/json',
                     }
                 });
-                setArticles(response.data);
+                setArticles(response.data.results);
                 setLoading(false);
             } catch (err) {
                 if (!axios.isCancel(err)) {

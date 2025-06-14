@@ -11,3 +11,27 @@
   justify-content: center;
   gap: 30px;
 }
+@mixin flex-center-top {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@mixin grid-2x2-plus-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto auto auto;
+  gap: 20px;
+
+}
