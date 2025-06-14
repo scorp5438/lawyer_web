@@ -25,7 +25,7 @@ class CaseSerializer(serializers.ModelSerializer):
         return obj.case_category.category
 
 
-class CaseSerializer(serializers.ModelSerializer):
+class PracticeSerializer(serializers.ModelSerializer):
     """
     Сериализатор для модели Practice
     """
