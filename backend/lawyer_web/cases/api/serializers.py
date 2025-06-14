@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ..models import Cases
+from ..models import Cases, Practice
 
 
 class CaseSerializer(serializers.ModelSerializer):
@@ -23,3 +23,17 @@ class CaseSerializer(serializers.ModelSerializer):
 
     def get_case_category_name(self, obj):
         return obj.case_category.category
+
+
+class CaseSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для модели Practice
+    """
+
+    class Meta:
+        model = Practice
+        fields = (
+            'pk',
+            'category',
+            'description',
+        )

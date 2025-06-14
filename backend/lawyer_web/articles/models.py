@@ -5,7 +5,7 @@ from imagekit.processors import ResizeToFill
 
 
 class Article(models.Model):
-    type = [
+    ARTICLE_TYPES = [
         ('заметка', 'заметка'),
         ('статья', 'статья'),
         ('новое в праве', 'новое в праве')
@@ -21,11 +21,11 @@ class Article(models.Model):
     type = models.CharField(
         blank=False,
         null=False,
-        choices=type,
+        choices=ARTICLE_TYPES,
         db_index=True,
         verbose_name='тип статьи'
     )
-    category = models.OneToOneField(
+    category = models.ForeignKey(
         to='Category',
         on_delete=CASCADE,
         related_name='сategory',
