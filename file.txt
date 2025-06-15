@@ -1,0 +1,96 @@
+worker_processes auto;
+
+events {
+    worker_connections 1024;
+    multi_accept on;
+    use epoll;
+}
+
+http {
+    sendfile on;  # Отправка файлов через системный вызов sendfile (быстрее)
+    tcp_nopush on;  # Оптимизация передачи пакетов (включено только с sendfile)
+    tcp_nodelay on;  # Отключает алгоритм Нейгла (меньше задержек)
+    keepalive_timeout 30;  # Таймаут keepalive-соединений
+    keepalive_requests 1000;  # Количество запросов за одно соединение
+    types_hash_max_size 2048;  # Уменьшает потребление памяти
+
+    server_tokens off;  # Скрывает версию Nginx (безопасность)
+
+    # Кэширование информации о файлах
+    open_file_cache max=200000 inactive=20s;
+    open_file_cache_valid 30s;
+    open_file_cache_min_uses 2;
+    open_file_cache_errors on;
+
+    # Настройки буферов
+    client_body_buffer_size 16k;
+    client_header_buffer_size 1k;
+    client_max_body_size 8m;  # Максимальный размер загружаемого файла
+    large_client_header_buffers 4 8k;
+
+    # Таймауты (защита от медленных клиентов)
+    client_body_timeout 12;
+    client_header_timeout 12;
+    send_timeout 10;
+
+    # Gzip-сжатие (уменьшает трафик)
+    gzip on;
+    gzip_min_length 10240;
+    gzip_comp_level 3;
+    gzip_types text/plain text/css application/json application/javascript text/xml application/xml image/svg+xml;
+
+    # Защита от DDOS (лимиты запросов)
+    limit_req_zone $binary_remote_addr zone=one:10m rate=30r/s;
+
+    # Логи в формате JSON (удобно для анализа)
+    log_format main_json '{'
+        '"time": "$time_iso8601", '
+        '"remote_addr": "$remote_addr", '
+        '"request": "$request", '
+        '"status": "$status", '
+        '"bytes_sent": "$bytes_sent", '
+        '"referer": "$http_referer", '
+        '"user_agent": "$http_user_agent", '
+        '"request_time": "$request_time", '
+        '"upstream_response_time": "$upstream_response_time"'
+    '}';
+
+    access_log /var/log/nginx/access.log main_json;
+    error_log /var/log/nginx/error.log warn;
+
+    include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/sites-enabled/*;
+
+    server {
+        listen 80;
+        server_name localhost;
+
+        # Блокировка User-Agent (боты, сканеры)
+        if ($http_user_agent ~* (wget|curl|nikto|sqlmap|zgrab|python-requests)) {
+            return 403;
+        }
+
+        # Кэширование статических файлов
+        location /static/ {
+            alias /app/static/;
+            expires 30d;
+            add_header Cache-Control "no-store, no-cache, must-revalidate";
+        }
+
+        # Запрет доступа к скрытым файлам
+        location ~ /\. {
+            deny all;
+            access_log off;
+            log_not_found off;
+        }
+
+        # Прокси на Django (API + админка)
+        location / {
+            proxy_pass http://web:8000;  # Или Gunicorn/Uvicorn (127.0.0.1:8000)
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+    }
+}

@@ -7,8 +7,10 @@ from django.template.loader import render_to_string
 
 from django.contrib.auth.models import User
 
+
 @shared_task
 def send_form(data: dict):
+
     data['current_date'] = datetime.datetime.now().strftime("%d.%m.%Y %H:%M")
     user_email = User.objects.last().email
     html_message = render_to_string('email/form_template.html', data)
