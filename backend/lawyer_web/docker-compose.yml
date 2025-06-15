@@ -2,9 +2,7 @@ services:
 
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
-    env_file:
-      - .env
+    command: gunicorn --config gunicorn.conf.py lawyer_web.wsgi:application
     ports:
       - "8000:8000"
     healthcheck:
@@ -14,9 +12,18 @@ services:
       retries: 3
     environment:
       - PYTHONPATH=/app
-      - CELERY_BROKER_URL=${REDIS_HOST}
-      - CELERY_RESULT_BACKEND=${REDIS_HOST}
-      - REDIS_HOST=${REDIS_HOST}
+    volumes:
+      - static_volume:/app/static
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - static_volume:/app/static
+    depends_on:
+      - web
 
   redis:
     image: redis:alpine
@@ -25,8 +32,6 @@ services:
 
   celery:
     build: .
-    env_file:
-      - .env
     command: celery -A lawyer_web worker --loglevel=info
     depends_on:
       - redis
@@ -39,3 +44,6 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+
+volumes:
+  static_volume:

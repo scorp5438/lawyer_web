@@ -1,4 +1,6 @@
-FROM python:alpine
+FROM python:3.12
+
+RUN useradd -m lawyer
 
 WORKDIR /app
 
@@ -10,4 +12,10 @@ RUN pip cache purge
 
 COPY . .
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "lawyer_web.lawyer_web.wsgi:application"]
+RUN chown -R lawyer:lawyer /app
+
+USER lawyer
+
+RUN python manage.py collectstatic --noinput
+
+CMD ["gunicorn", "--config", "gunicorn.conf.py", "lawyer_web.lawyer_web.wsgi:application"]
