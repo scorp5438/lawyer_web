@@ -109,10 +109,10 @@
   }
 
   .practice-item:hover {
-    color: $colorH1;
     border: 3px solid $colorH1;
     background-color: $colorP;
     transition: background 0.3s ease;
+    color: $colorH1;
     text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
   }
 
@@ -129,6 +129,6 @@
   .practice-category:hover {
     color: $colorH1;
     text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
-    transition: background 0.3s ease;
+    //transition: background 0.3s ease;
   }
 }
