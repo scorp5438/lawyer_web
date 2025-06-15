@@ -13,32 +13,50 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 50px;
-  }
+    &_blockquote {
+      width: 100%;
+      display: flex    ;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      &_logo {
+        box-sizing: border-box;
+        width: 200px;
+        border: none;
+        border-bottom: 3px solid #FFD700FF;
+        background: none;
+        @include flex-center-column;
+        text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
 
-  &_logo {
-    box-sizing: border-box;
-    width: 200px;
-    border: none;
-    border-bottom: 3px solid #FFD700FF;
-    background: none;
-    @include flex-center-column;
-    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+        &_h1 {
+          text-align: center;
+          color: #FFD700FF;
+        }
 
-    &_h1 {
-      text-align: center;
-      color: #FFD700FF;
+      }
+      &_dis {
+        width: 200px;
+        @include flex-center;
+
+        &_p {
+          color: #FFD700FF;
+          text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
+
+    &_img {
+
+      &_photo {
+        width: 500px;
+        height: 500px;
+      }
     }
   }
 
-  &_dis {
-    width: 200px;
-    @include flex-center;
 
-    &_p {
-      color: #FFD700FF;
-      text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
-    }
-  }
+
+
 
   &_info {
     display: flex;
@@ -62,6 +80,7 @@
         font-size: $sizeContent;
         cursor: pointer;
       }
+
 
       &_item:hover {
         border-bottom: 3px solid $colorH1;
