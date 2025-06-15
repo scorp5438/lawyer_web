@@ -27,7 +27,7 @@ class ArticleViewSet(ModelViewSet):
         filters.OrderingFilter
     ]
     filterset_fields = ['type', 'category']
-    search_fields = ['$title', '$title', '$content']
+    search_fields = ['$title', '$content']
     ordering_fields = ['pk', 'title', 'type', 'category', 'update_date']
     ordering = ['-pk']
 
