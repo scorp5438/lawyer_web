@@ -11,9 +11,9 @@ from ..models import Article, Category
 
 
 class CustomPagination(PageNumberPagination):
-    page_size = 10  # Количество элементов на странице
-    page_size_query_param = 'page_size'  # Параметр для изменения размера страницы
-    max_page_size = 100  # Максимальное количество элементов на странице
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 100
 
 
 class ArticleViewSet(ModelViewSet):
@@ -22,12 +22,12 @@ class ArticleViewSet(ModelViewSet):
     serializer_class = ArticleSerializer
     http_method_names = ['get', 'post', 'delete', 'patch']
     filter_backends = [
-        DjangoFilterBackend,  # для обычной фильтрации
-        filters.SearchFilter,  # для поиска по полям
-        filters.OrderingFilter  # для сортировки
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter
     ]
     filterset_fields = ['type', 'category']
-    search_fields = ['$title', '$title', '$content']
+    search_fields = ['$title', '$content']
     ordering_fields = ['pk', 'title', 'type', 'category', 'update_date']
     ordering = ['-pk']
 

@@ -12,9 +12,9 @@ class CaseViewSet(ModelViewSet):
     serializer_class = CaseSerializer
     http_method_names = ['get', 'post', 'delete', 'patch']
     filter_backends = [
-        DjangoFilterBackend,  # для обычной фильтрации
-        filters.SearchFilter,  # для поиска по полям
-        filters.OrderingFilter  # для сортировки
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter
     ]
     filterset_fields = ['case_category']
     search_fields = ['$name_case', '$description']
