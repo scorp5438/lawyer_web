@@ -23,7 +23,7 @@ const ModalForm = ({handleCloseModal}) => {
 
         const url = "http://127.0.0.1:8000/api/get-csrf-token/";
         const headers = {
-            'HTTP_X_GET_TOKEN_CSRF_FOR_REACT': 'Hkjh98hjk8khj77slkhj'
+            'X-Get-Token-Csrf-For-React': 'Hkjh98hjk8khj77slkhj'
         };
 
         fetchData(url, headers, setToken);
@@ -106,7 +106,7 @@ const ModalForm = ({handleCloseModal}) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRFToken': token
+                    'X-CSRFToken': token.csrfToken
                 },
                 body: JSON.stringify({
                     first_name: formData.first_name,
