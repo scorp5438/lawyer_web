@@ -3,6 +3,7 @@ import './head.scss'
 import ModalForm from "../ModalForm/ModalForm";
 import axios from "axios";
 import IconClose from "../svg/IconClose";
+import {fetchData} from "../utils/api";
 
 const Head = ({user}) => {
     const [type, setType] = useState([]);
@@ -24,6 +25,8 @@ const Head = ({user}) => {
 
         fetchTypes();
     }, []);
+
+
     const handleOpenModal = () => {
         setShowModal(true);
     };

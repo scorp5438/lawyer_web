@@ -61,6 +61,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'X-Superuser-Access',
+    'HTTP_X_GET_TOKEN_CSRF_FOR_REACT',
 ]
 
 ROOT_URLCONF = 'lawyer_web.urls'

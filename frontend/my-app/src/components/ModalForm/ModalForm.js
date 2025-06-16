@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import {fetchData} from "../utils/api";
 import './modalForm.scss';
 const ModalForm = ({handleCloseModal}) => {
     const [formData, setFormData] = useState({
@@ -14,6 +15,19 @@ const ModalForm = ({handleCloseModal}) => {
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState(null);
+    const [token, setToken] = useState('');
+
+    useEffect(() => {
+        axios.defaults.withCredentials = true;
+
+
+        const url = "http://127.0.0.1:8000/api/get-csrf-token/";
+        const headers = {
+            'HTTP_X_GET_TOKEN_CSRF_FOR_REACT': 'Hkjh98hjk8khj77slkhj'
+        };
+
+        fetchData(url, headers, setToken);
+    }, []);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -88,10 +102,11 @@ const ModalForm = ({handleCloseModal}) => {
         setIsSubmitting(true);
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/data/', {  // Изменили URL API
+            const response = await fetch('http://127.0.0.1:8000/api/data/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'X-CSRFToken': token
                 },
                 body: JSON.stringify({
                     first_name: formData.first_name,
@@ -126,6 +141,7 @@ const ModalForm = ({handleCloseModal}) => {
         } finally {
             setIsSubmitting(false);
         }
+
     };
 
 
@@ -187,7 +203,7 @@ const ModalForm = ({handleCloseModal}) => {
 
                         <div className={`form-row__label ${errors.email ? 'has-error' : ''}`}>
                             <input
-                                type="email"
+                                type="text"
                                 name="email"
                                 value={formData.email}
                                 placeholder=" "
