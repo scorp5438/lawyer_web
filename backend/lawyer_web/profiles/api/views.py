@@ -34,9 +34,8 @@ class UserViewSet(ModelViewSet):
 
 
 class CustomCSRFView(APIView):
-    http_method_names = ['get', ]
 
-    def get_csrf_token(self, request):
+    def get(self, request):
         referrer = request.META.get('HTTP_X_GET_TOKEN_CSRF_FOR_REACT')
         if not referrer or 'Hkjh98hjk8khj77slkhj' != referrer:
             return JsonResponse({'error': 'Access denied'}, status=403)
