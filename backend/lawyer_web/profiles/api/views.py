@@ -1,5 +1,8 @@
 from django.contrib.auth.models import User
+from django.http import JsonResponse
+from django.middleware.csrf import get_token
 from rest_framework.permissions import IsAdminUser
+from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
 from .permissions import HasHeaderReact
@@ -29,3 +32,13 @@ class UserViewSet(ModelViewSet):
     http_method_names = ['get',]
     permission_classes = [HasHeaderReact | IsAdminUser]
 
+
+class CustomCSRFView(APIView):
+    http_method_names = ['get', ]
+
+    def get_csrf_token(self, request):
+        referrer = request.META.get('HTTP_X_GET_TOKEN_CSRF_FOR_REACT')
+        if not referrer or 'Hkjh98hjk8khj77slkhj' != referrer:
+            return JsonResponse({'error': 'Access denied'}, status=403)
+        token = get_token(request)
+        return JsonResponse({'csrfToken': token})
