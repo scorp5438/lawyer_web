@@ -7,7 +7,8 @@ import ArticleCard from "../Articles/ArticleCard";
 import axios from "axios";
 import './main.scss'
 import CaseList from "../CaseList/CaseList";
-
+import ModalForm from '../ModalForm/ModalForm';
+import lawyerPhoto from '../img/lawyer.jpg';
 
 const Main = () => {
     const [user, setUser] = useState([]);
@@ -15,6 +16,7 @@ const Main = () => {
     const [practices, setPractices] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         axios.defaults.withCredentials = true;
@@ -60,6 +62,14 @@ const Main = () => {
         fetchPractices();
     }, []);
 
+    // const handleOpenModal = () => {
+    //     setShowModal(true);
+    // };
+    //
+    // const handleCloseModal = () => {
+    //     setShowModal(false);
+    // };
+
 
     return (
         <div>
@@ -70,32 +80,37 @@ const Main = () => {
             </div>
             <div className="main__content">
                 <div className="main__content_content">
-                    <div>
-                        <div className="main__content_logo">
-                            <div className="main__content_logo_h1">
-                                <h1>SAProLex</h1>
+                    <blockquote className="main__content_content_blockquote">
+                        <div>
+                            <div className="main__content_content_blockquote_logo">
+                                <div className="main__content_content_blockquote_logo_h1">
+                                    <h1>SAProLex</h1>
+                                </div>
+                            </div>
+                            <div className="main__content_content_blockquote_dis">
+                                <p className="main__content_content_blockquote_dis_p">
+                                    ADVICE THAT MATTERS
+                                </p>
                             </div>
                         </div>
-                        <div className="main__content_dis">
-                            <p className="main__content_dis_p">
-                                ADVICE THAT MATTERS
-                            </p>
+                        <div className="main__content_content_img">
+                            <img className='main__content_content_img_photo' src={lawyerPhoto} alt='photo'></img>
                         </div>
-                    </div>
+                    </blockquote>
                     <div className="main__content_content_info">
-                        <div className="main__content_categary">
-                            {loading && <p>Загрузка категорий...</p>}
-                            {error && <p className="error">Ошибка: {error}</p>}
-                            {categories.length > 0 && (
-                                <ul className="main__content_categary_categories-list">
-                                    {categories.map(category => (
-                                        <li key={category.pk} className="main__content_categary_categories-list_item">
-                                            {category.name}
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
-                        </div>
+                        {/*<div className="main__content_categary">*/}
+                        {/*    {loading && <p>Загрузка категорий...</p>}*/}
+                        {/*    {error && <p className="error">Ошибка: {error}</p>}*/}
+                        {/*    {categories.length > 0 && (*/}
+                        {/*        <ul className="main__content_categary_categories-list">*/}
+                        {/*            {categories.map(category => (*/}
+                        {/*                <li key={category.pk} className="main__content_categary_categories-list_item">*/}
+                        {/*                    {category.name}*/}
+                        {/*                </li>*/}
+                        {/*            ))}*/}
+                        {/*        </ul>*/}
+                        {/*    )}*/}
+                        {/*</div>*/}
                         <div className="main__content_categary_info_blog">
                             <div className="main__content_categary_info_blog_head">
                                 <h2>Моя практика</h2>
@@ -115,7 +130,10 @@ const Main = () => {
                             </div>
                         </div>
                         <p>Вы можете задать свой вопрос мне</p>
-                        <button>Форма обращения</button>
+
+                        {/*<div>*/}
+                        {/*    <ModalForm />*/}
+                        {/*</div>*/}
                     </div>
                 </div>
             </div>
@@ -127,12 +145,6 @@ const Main = () => {
             </section>
 
 
-            {/*<div>*/}
-            {/*    <Footer*/}
-            {/*        user={user}*/}
-            {/*    />*/}
-            {/*</div>*/}
-            {/*<p className="practice-description">{practice.description}</p>*/}
         </div>
     );
 };
