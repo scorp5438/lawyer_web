@@ -98,19 +98,7 @@ const Main = () => {
                         </div>
                     </blockquote>
                     <div className="main__content_content_info">
-                        {/*<div className="main__content_categary">*/}
-                        {/*    {loading && <p>Загрузка категорий...</p>}*/}
-                        {/*    {error && <p className="error">Ошибка: {error}</p>}*/}
-                        {/*    {categories.length > 0 && (*/}
-                        {/*        <ul className="main__content_categary_categories-list">*/}
-                        {/*            {categories.map(category => (*/}
-                        {/*                <li key={category.pk} className="main__content_categary_categories-list_item">*/}
-                        {/*                    {category.name}*/}
-                        {/*                </li>*/}
-                        {/*            ))}*/}
-                        {/*        </ul>*/}
-                        {/*    )}*/}
-                        {/*</div>*/}
+
                         <div className="main__content_categary_info_blog">
                             <div className="main__content_categary_info_blog_head">
                                 <h2>Моя практика</h2>
@@ -131,9 +119,6 @@ const Main = () => {
                         </div>
                         <p>Вы можете задать свой вопрос мне</p>
 
-                        {/*<div>*/}
-                        {/*    <ModalForm />*/}
-                        {/*</div>*/}
                     </div>
                 </div>
             </div>
@@ -150,3 +135,18 @@ const Main = () => {
 };
 
 export default Main;
+
+
+{/*<div className="main__content_categary">*/}
+{/*    {loading && <p>Загрузка категорий...</p>}*/}
+{/*    {error && <p className="error">Ошибка: {error}</p>}*/}
+{/*    {categories.length > 0 && (*/}
+{/*        <ul className="main__content_categary_categories-list">*/}
+{/*            {categories.map(category => (*/}
+{/*                <li key={category.pk} className="main__content_categary_categories-list_item">*/}
+{/*                    {category.name}*/}
+{/*                </li>*/}
+{/*            ))}*/}
+{/*        </ul>*/}
+{/*    )}*/}
+{/*</div>*/}

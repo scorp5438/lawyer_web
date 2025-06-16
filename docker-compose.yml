@@ -1,7 +1,7 @@
 services:
 
   web:
-    build: .
+    build: backend/lawyer_web
     command: gunicorn --config gunicorn.conf.py lawyer_web.wsgi:application
     ports:
       - "8000:8000"
@@ -31,7 +31,7 @@ services:
       - "6379:6379"
 
   celery:
-    build: .
+    build: backend/lawyer_web
     command: celery -A lawyer_web worker --loglevel=info
     depends_on:
       - redis
@@ -44,6 +44,18 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/my-lawyer-app:/app  # Монтирует исходный код
+      - /app/node_modules     # Сохраняет node_modules отдельно
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - web
 
 volumes:
   static_volume:
