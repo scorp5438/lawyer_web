@@ -2,14 +2,17 @@ FROM node:18
 
 WORKDIR /app
 
-# 1. Копируем только package.json сначала
+# Копируем package.json первым для кэширования
 COPY my-app/package.json my-app/package-lock.json ./
 
-# 2. Устанавливаем зависимости (включая react-scripts)
+# Устанавливаем зависимости
 RUN npm install
 
-# 3. Копируем остальные файлы проекта
+# Копируем исходный код
 COPY my-app/ ./
 
-# 4. Запускаем приложение
+# Собираем приложение
+RUN npm run build
+
+# Команда для development-режима
 CMD ["npm", "start"]
