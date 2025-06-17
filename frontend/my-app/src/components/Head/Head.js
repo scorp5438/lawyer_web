@@ -84,20 +84,3 @@ const Head = ({user,  onBlogClick, onMainClick}) => {
 
 
 export default Head;
-
-
-// <details className="blog-menu" onClick={toggleMenu}>
-//     <summary className="head__nav_item">Блог</summary>
-//     {error && <p className="error">Ошибка: {error}</p>}
-//     {isOpen && type.length > 0 && (
-//         <div className="head__nav_item_blog">
-//             <ul className="head__nav_menu_item">
-//                 {type.map(t => (
-//                     <li key={t} className="head__nav_item_blog_category">
-//                         {t}
-//                     </li>
-//                 ))}
-//             </ul>
-//         </div>
-//     )}
-// </details>
