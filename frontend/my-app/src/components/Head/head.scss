@@ -29,6 +29,7 @@
   height: 75px;
   background-color: $headerBackground;
   position: relative;
+  width: auto !important;
   &_item {
     cursor: pointer;
     color:$colorNavigate;

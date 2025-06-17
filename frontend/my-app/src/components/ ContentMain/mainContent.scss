@@ -1,0 +1,179 @@
+@import '../../assets/styles/variables';
+@import '../../assets/styles/mixins';
+
+.main__content {
+  height: auto;
+  width: $widthSite;
+  background: $mainBackground;
+  @include flex-center-top;
+
+  &_content {
+    width: $widthSiteContent;
+    display: flex;
+    @include flex-between;
+    padding: 50px;
+
+    &_block {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+
+      &_logo {
+        box-sizing: border-box;
+        width: 200px;
+        border: none;
+        border-bottom: 3px solid #FFD700FF;
+        background: none;
+        @include flex-center-column;
+        text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+
+        &_h1 {
+          text-align: center;
+          color: #FFD700FF;
+        }
+      }
+
+      &_dis {
+        width: 200px;
+        @include flex-center;
+
+        &_p {
+          color: #FFD700FF;
+          text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
+
+    &_img {
+      position: relative;
+      overflow: hidden;
+      border-radius: 5px;
+      &_photo {
+        width: 500px;
+        height: 500px;
+        object-fit: cover;
+        box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.3);
+        mask-image: radial-gradient(
+                        circle at center,
+                        #f3e5e5 70%,
+                        transparent 100%
+        );
+      }
+
+    }
+
+    &_info {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+
+      &_head {
+        @include grid-2x2-plus-row;
+        margin-top: 30px;
+
+        h2 {
+          color: $colorP;
+          font-size: $sizeContent;
+          border: none;
+          border-bottom: 3px solid $colorP;
+        }
+
+        &_practice {
+          @include grid-2x2-plus-row;
+          width: 500px;
+        }
+      }
+    }
+
+
+
+
+
+    .practice-item {
+      border: 3px solid $headerBackground;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+
+      &:hover {
+        border: 3px solid $colorH1;
+        background-color: $colorP;
+        transition: background 0.3s ease;
+        color: $colorH1;
+        text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+      }
+
+      &:last-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .practice-category {
+      color: $colorP;
+      font-size: $sizeNavigate;
+      cursor: pointer;
+
+      &:hover {
+        color: $colorH1;
+        text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    .loading, .error {
+      font-size: $sizeContent;
+      color: $colorH1;
+      text-align: center;
+      margin: 20px 0;
+    }
+  }
+  &_categary {
+    &_categories-list {
+      @include flex-center-row;
+
+      &_item {
+        list-style-type: none;
+        font-weight: bold;
+        color: $colorP;
+        font-size: $sizeContent;
+        cursor: pointer;
+
+        &:hover {
+          border-bottom: 3px solid $colorH1;
+          color: $colorH1;
+          transition: background 0.3s ease;
+          margin-bottom: -3px;
+        }
+      }
+    }
+
+    &_info {
+      @include flex-center-row;
+      width: 550px;
+
+      &_blog {
+        @include flex-center-column;
+        gap: 30px;
+
+        &_head {
+
+          h2 {
+            color: $colorP;
+            font-size: $sizeContent;
+            border: none;
+            border-bottom: 3px solid $colorP;
+          }
+
+          &_practice {
+            @include grid-2x2-plus-row;
+            width: 550px;
+          }
+        }
+
+      }
+    }
+  }
+}

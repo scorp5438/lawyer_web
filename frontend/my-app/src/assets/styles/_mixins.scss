@@ -32,6 +32,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto auto auto;
+  text-align: center;
   gap: 20px;
 
 }
