@@ -1,0 +1,104 @@
+@import '../../assets/styles/variables';
+@import "../../assets/styles/mixins";
+.main__content {
+  height: auto;
+  width: $widthSite;
+  background: $mainBackground;
+  @include flex-center-top;
+}
+
+.articles_container {
+  @include flex-center-column;
+  margin-top: 50px;
+
+
+  &_article-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &_image-wrapper {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  &_article-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  &_article-content {
+    padding: 15px;
+
+    h3 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .article-date, .article-updated {
+      font-size: 0.8em;
+      color: $colorP;
+    }
+  }
+}
+.article-block {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto auto auto;
+  text-align: center;
+  gap: 30px;
+}
+.loading, .error {
+  padding: 20px;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.error {
+  color: $colorError;
+}
+.articles_navigate {
+  margin-bottom: 20px;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-button {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #f5f5f5;
+  }
+
+  &.active {
+    background: #0066cc;
+    color: white;
+    border-color: #0066cc;
+  }
+}

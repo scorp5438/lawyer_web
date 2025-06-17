@@ -5,7 +5,7 @@ import axios from "axios";
 import IconClose from "../svg/IconClose";
 import {fetchData} from "../utils/api";
 
-const Head = ({user}) => {
+const Head = ({user,  onBlogClick, onMainClick}) => {
     const [type, setType] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const [error, setError] = useState(null);
@@ -63,24 +63,10 @@ const Head = ({user}) => {
 
                    <div className='header__navigate_none'></div>
                    <nav className="head__nav_menu">
-                       <ul className="head__nav_menu_item">Главная</ul>
+                       <ul className="head__nav_menu_item" onClick={onMainClick}>Главная</ul>
                        <ul className="head__nav_menu_item" onClick={handleOpenModal}>Юридическая помощь</ul>
                        <ul className="head__nav_menu_item">Обо мне</ul>
-                       <details className="blog-menu" onClick={toggleMenu}>
-                           <summary className="head__nav_item">Блог</summary>
-                           {error && <p className="error">Ошибка: {error}</p>}
-                           {isOpen && type.length > 0 && (
-                               <div className="head__nav_item_blog">
-                                   <ul className="head__nav_menu_item">
-                                       {type.map(t => (
-                                           <li key={t} className="head__nav_item_blog_category">
-                                               {t}
-                                           </li>
-                                       ))}
-                                   </ul>
-                               </div>
-                           )}
-                       </details>
+                       <ul className="head__nav_menu_item" onClick={onBlogClick}>Блог</ul>
 
                    </nav>
                    </div>
@@ -101,3 +87,20 @@ const Head = ({user}) => {
 
 
 export default Head;
+
+
+// <details className="blog-menu" onClick={toggleMenu}>
+//     <summary className="head__nav_item">Блог</summary>
+//     {error && <p className="error">Ошибка: {error}</p>}
+//     {isOpen && type.length > 0 && (
+//         <div className="head__nav_item_blog">
+//             <ul className="head__nav_menu_item">
+//                 {type.map(t => (
+//                     <li key={t} className="head__nav_item_blog_category">
+//                         {t}
+//                     </li>
+//                 ))}
+//             </ul>
+//         </div>
+//     )}
+// </details>
