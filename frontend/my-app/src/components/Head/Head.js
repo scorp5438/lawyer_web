@@ -35,9 +35,6 @@ const Head = ({user,  onBlogClick, onMainClick}) => {
         setShowModal(false);
     };
 
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
-    };
 
     return (
         <header className="App-header">
