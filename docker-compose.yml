@@ -22,8 +22,10 @@ services:
     volumes:
       - ./backend/lawyer_web/nginx.conf:/etc/nginx/nginx.conf
       - static_volume:/app/static
+      - ./frontend/my-app/build:/usr/share/nginx/html
     depends_on:
       - web
+      - frontend
 
   redis:
     image: redis:alpine
