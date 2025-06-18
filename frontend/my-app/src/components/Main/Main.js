@@ -6,7 +6,7 @@ import {fetchData} from "../utils/api";
 import ArticleCard from "../Articles/ArticleCard";
 import axios from "axios";
 import './main.scss'
-import ContentMain from "../ ContentMain/ContentMain";
+import ContentMain from "../ContentMain/ContentMain";
 import Footer from "../Footer/Footer";
 
 const Main = () => {
@@ -15,6 +15,7 @@ const Main = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [activeSection, setActiveSection] = useState('main');
+    const [selectedType, setSelectedType] = useState(null);
 
     useEffect(() => {
         axios.defaults.withCredentials = true;
@@ -44,22 +45,39 @@ const Main = () => {
         fetchCategories();
     }, []);
 
+    useEffect(() => {
+        const savedSection = localStorage.getItem('activeSection');
+        if (savedSection) {
+            setActiveSection(savedSection);
+        }
+    }, []);
+
     const handleSectionChange = (section) => {
         setActiveSection(section);
+        localStorage.setItem('activeSection', section); // сохраняем выбор
     };
 
+    const handleBlogClick = (type) => {
+        if (selectedType === type) {
+            setSelectedType(null); // сброс — можно заново выбрать
+            setTimeout(() => setSelectedType(type), 0); // принудительный rerender
+        } else {
+            setSelectedType(type);
+        }
+        setActiveSection('blog');
+    };
 
     return (
         <div>
             <div>
                 <Head
                     user={user}
-                    onBlogClick={() => handleSectionChange('blog')}
+                    onBlogClick={handleBlogClick}
                     onMainClick={() => handleSectionChange('main')}
                 />
             </div>
             <div>
-                {activeSection === 'blog' ? <ArticleCard /> : <ContentMain />}
+                {activeSection === 'blog' ? <ArticleCard selectedType={selectedType} /> : <ContentMain />}
             </div>
             <div>
                 {/*<Footer />*/}
