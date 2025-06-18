@@ -101,6 +101,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    gap: 10px;
 
     input[type="checkbox"] {
       appearance: none; // убираем стандартный стиль
@@ -185,4 +186,7 @@
   border-radius: 5px; // скругление
   border: 1px solid #fdfdfd;
 }
-
+.politic {
+  font-size: 12px;
+  width: 100%;
+}
