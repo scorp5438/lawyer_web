@@ -80,7 +80,7 @@ const Main = () => {
                 {activeSection === 'blog' ? <ArticleCard selectedType={selectedType} /> : <ContentMain />}
             </div>
             <div>
-                {/*<Footer />*/}
+                <Footer />
             </div>
     </div>
     );

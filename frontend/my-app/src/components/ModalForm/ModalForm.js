@@ -235,7 +235,7 @@ const ModalForm = ({handleCloseModal}) => {
                             onChange={handleChange}
                         />
                         <p className='politic'>Отправляя информацию, вы даете согласие на обработку персональных данных в соответствии с <a>Пользовательским соглашением и Политикой конфиденциальности</a>.
-                            This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</p>
+                        </p>
                         {errors.consent && <p className="error-message">{errors.consent}</p>}
                     </label>
 

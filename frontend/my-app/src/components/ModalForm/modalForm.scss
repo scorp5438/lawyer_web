@@ -95,6 +95,7 @@
     max-width: 500px;
     max-height: 200px;
     height: 100px;
+    font-size: 16px;
 
   }
   .checkbox {
@@ -174,9 +175,10 @@
   }
 }
 .form-error {
-  color: red;
+  color: $colorError;
   box-shadow: 0 2px 8px rgba(251, 251, 251, 0.5);
 }
+
 .error-message {
   margin-top: 5px;
   color: red;
