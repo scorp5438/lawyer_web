@@ -105,7 +105,7 @@ const Head = ({user, onBlogClick, onMainClick}) => {
                 <div className="modal-overlay">
                     <div className="modal-content">
                         <button className="modal-close" onClick={handleCloseModal}><IconClose/></button>
-                        <ModalForm handleCloseModal={handleCloseModal} />
+                        <ModalForm handleCloseModal={handleCloseModal}/>
                     </div>
                 </div>
             )}
