@@ -8,7 +8,8 @@ const ContentMain = () => {
     const [practices, setPractices] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const [hoveredPractice, setHoveredPractice] = useState(null);
+    const [tooltipPosition, setTooltipPosition] = useState({x: 0, y: 0});
     useEffect(() => {
         const fetchPractices = async () => {
             try {
@@ -25,6 +26,17 @@ const ContentMain = () => {
         fetchPractices();
     }, []);
 
+    const handleMouseEnter = (practice, event) => {
+        setHoveredPractice(practice);
+        setTooltipPosition({
+            x: event.clientX,
+            y: event.clientY
+        });
+    };
+
+    const handleMouseLeave = () => {
+        setHoveredPractice(null);
+    };
     return (
         <div className="main__content">
             <div className="main__content_content">
@@ -62,7 +74,12 @@ const ContentMain = () => {
                                 <div className="error">Ошибка: {error}</div>
                             ) : (
                                 practices.map(practice => (
-                                    <div key={practice.pk} className="practice-item">
+                                    <div
+                                        key={practice.pk}
+                                        className="practice-item"
+                                        onMouseEnter={(e) => handleMouseEnter(practice, e)}
+                                        onMouseLeave={handleMouseLeave}
+                                    >
                                         <h3 className="practice-category">{practice.category}</h3>
                                     </div>
                                 ))
@@ -70,9 +87,27 @@ const ContentMain = () => {
                         </div>
                     </div>
 
+                    {/* Всплывающее окно с описанием */}
+                    {hoveredPractice && (
+                        <div
+                            className="practice-tooltip"
+                            style={{
+                                position: 'fixed',
+                                left: `${tooltipPosition.x + 15}px`,
+                                top: `${tooltipPosition.y + 15}px`,
+                                zIndex: 1000
+                            }}
+                        >
+                            <div className="tooltip-content">
+                                <h4>{hoveredPractice.category}</h4>
+                                <p>{hoveredPractice.description}</p>
+                            </div>
+                        </div>
+                    )}
+
                     <div>
                         <p>Вы можете задать свой вопрос мне</p>
-                        <ModalForm />
+                        <ModalForm/>
                     </div>
                 </div>
             </div>

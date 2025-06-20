@@ -3,9 +3,8 @@ import './head.scss'
 import ModalForm from "../ModalForm/ModalForm";
 import axios from "axios";
 import IconClose from "../svg/IconClose";
-import {fetchData} from "../utils/api";
 
-const Head = ({user,  onBlogClick, onMainClick}) => {
+const Head = ({user, onBlogClick, onMainClick}) => {
     const [type, setType] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const [error, setError] = useState(null);
@@ -35,46 +34,78 @@ const Head = ({user,  onBlogClick, onMainClick}) => {
         setShowModal(false);
     };
 
+    const handleTypeSelect = (selectedType) => {
+        onBlogClick(selectedType); // Передаём выбранный тип в родительский компонент
+    };
+    const scrollToProfile = () => {
+        const profileSection = document.getElementById('profile-section');
+        if (profileSection) {
+            profileSection.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    };
 
     return (
         <header className="App-header">
             <div className='header__navigate'>
-               <div className='header__navigate_width'>
-                   <div className="header__navigate_head">
-                       <nav className="head__nav">
-                           <ul className="head__nav_item">
-                               {user.length > 0 ? (
-                                   <>
-                                       <li className="head__nav_item"><span></span>
-                                           Телефон: <a href={`tel:${user[0].phone}`}>{user[0].phone}</a></li>
-                                       <li className="head__nav_item">
-                                           EMAIL: <a href={`mailto:${user[0].email}`}>{user[0].email}</a></li>
-                                   </>
-                               ) : (
-                                   <li className="nav-item">Загрузка данных...</li>
-                               )}
-                           </ul>
+                <div className='header__navigate_width'>
+                    <div className="header__navigate_head">
+                        <nav className="head__nav">
+                            <ul className="head__nav_item">
+                                {user.length > 0 ? (
+                                    <>
+                                        <li className="head__nav_item">
+                                            Телефон: <a href={`tel:${user[0].phone}`}>{user[0].phone}</a></li>
+                                        <li className="head__nav_item">
+                                            EMAIL: <a href={`mailto:${user[0].email}`}>{user[0].email}</a></li>
+                                    </>
+                                ) : (
+                                    <li className="nav-item">Загрузка данных...</li>
+                                )}
+                            </ul>
 
 
-                       </nav>
+                        </nav>
 
-                   <div className='header__navigate_none'></div>
-                   <nav className="head__nav_menu">
-                       <ul className="head__nav_menu_item" onClick={onMainClick}>Главная</ul>
-                       <ul className="head__nav_menu_item" onClick={handleOpenModal}>Юридическая помощь</ul>
-                       <ul className="head__nav_menu_item">Обо мне</ul>
-                       <ul className="head__nav_menu_item" onClick={onBlogClick}>Блог</ul>
+                        <nav className="head__nav_menu">
+                            <ul className="head__nav_menu_item" onClick={onMainClick}>Главная</ul>
+                            <ul className="head__nav_menu_item" onClick={handleOpenModal}>Юридическая помощь</ul>
+                            <ul className="head__nav_menu_item" onClick={scrollToProfile}>Обо мне</ul>
+                            {/* Меняем здесь "Блог" на выпадающее меню */}
+                            <li className="head__nav_menu_item" onClick={() => setIsOpen(!isOpen)}>Блог
+                                {isOpen && (
+                                    <div className="head__nav_item_blog">
+                                        {error && <p className="error">Ошибка: {error}</p>}
+                                        <ul className="head__nav_menu_item">
+                                            {type.map(t => (
+                                                <li
+                                                    key={t}
+                                                    className="head__nav_item_blog_category"
+                                                    onClick={() => {
+                                                        handleTypeSelect(t);
+                                                        setIsOpen(false); // Закрыть меню после выбора
+                                                    }}
+                                                >
+                                                    {t}
+                                                </li>
+                                            ))}
 
-                   </nav>
-                   </div>
-               </div>
+                                        </ul>
+
+                                    </div>
+                                )}
+                            </li>
+                        </nav>
+                    </div>
+                </div>
             </div>
             {/* Модальное окно с формой */}
             {showModal && (
                 <div className="modal-overlay">
                     <div className="modal-content">
-                        <button className="modal-close" onClick={handleCloseModal}><IconClose /></button>
-                        <ModalForm onClose={handleCloseModal} />
+                        <button className="modal-close" onClick={handleCloseModal}><IconClose/></button>
+                        <ModalForm onClose={handleCloseModal}/>
                     </div>
                 </div>
             )}
@@ -84,20 +115,3 @@ const Head = ({user,  onBlogClick, onMainClick}) => {
 
 
 export default Head;
-
-
-// <details className="blog-menu" onClick={toggleMenu}>
-//     <summary className="head__nav_item">Блог</summary>
-//     {error && <p className="error">Ошибка: {error}</p>}
-//     {isOpen && type.length > 0 && (
-//         <div className="head__nav_item_blog">
-//             <ul className="head__nav_menu_item">
-//                 {type.map(t => (
-//                     <li key={t} className="head__nav_item_blog_category">
-//                         {t}
-//                     </li>
-//                 ))}
-//             </ul>
-//         </div>
-//     )}
-// </details>

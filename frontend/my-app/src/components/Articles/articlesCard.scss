@@ -5,11 +5,14 @@
   width: $widthSite;
   background: $mainBackground;
   @include flex-center-top;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .articles_container {
   @include flex-center-column;
   margin-top: 50px;
+  width: $widthSiteContent;
+  font-family: 'Open Sans', sans-serif;
 
 
   &_article-card {
@@ -17,6 +20,7 @@
     border-radius: 8px;
     overflow: hidden;
     transition: transform 0.3s ease;
+    height: 500px;
 
     &:hover {
       transform: translateY(-5px);
@@ -51,16 +55,13 @@
 
     .article-date, .article-updated {
       font-size: 0.8em;
-      color: $colorP;
+      color: $textColor;
     }
   }
 }
 .article-block {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: auto auto auto;
-  text-align: center;
-  gap: 30px;
+  @include grid-2x2-plus-row;
+  width: 100%;
 }
 .loading, .error {
   padding: 20px;
@@ -97,8 +98,8 @@
   }
 
   &.active {
-    background: #0066cc;
-    color: white;
-    border-color: #0066cc;
+    background: $textColor;
+    color: $colorH1;
+    border-color: $headerBackground;
   }
 }

@@ -1,18 +1,36 @@
 import './App.scss';
 import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Logo from "./components/Logo/Logo";
 import Main from "./components/Main/Main";
+import ArticleCard from './components/Articles/ArticleCard';
+import ArticleDetails from './components/ArticleDetails/ArticleDetails';
+
+//Импорт шрифтов
+import '@fontsource/lora';
+import '@fontsource/lora/700.css';
+import '@fontsource/open-sans';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
+
+
 
 function App() {
-    const [showLogo, setShowLogo] = useState(true); // Состояние для показа Logo
+    const [showLogo, setShowLogo] = useState(() => {
+        const storedValue = localStorage.getItem('showLogo');
+        return storedValue === null ? true : storedValue === 'true';
+    });
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setShowLogo(false); // Через 3 секунды Logo исчезает
-        }, 2000);
+        if (showLogo) {
+            const timer = setTimeout(() => {
+                setShowLogo(false);
+                localStorage.setItem('showLogo', 'false'); // сохраняем состояние
+            }, 2000);
 
-        return () => clearTimeout(timer); // Очистка таймера на размонтирование
-    }, []);
+            return () => clearTimeout(timer);
+        }
+    }, [showLogo]);
 
     return (
         <div className="App">
@@ -22,7 +40,16 @@ function App() {
                 </div>
             ) : (
                 <div className="form-wrapper">
-                    <Main />
+                    <Router>
+                        <Routes>
+                            {/* Главная страница — в Main компонент добавляем ArticleCard */}
+                            <Route path="/" element={<Main />} />
+                            {/* Страница со статьями */}
+                            <Route path="/articles" element={<ArticleCard selectedType={null} />} />
+                            {/* Страница полной статьи */}
+                            <Route path="/article-details" element={<ArticleDetails />} />
+                        </Routes>
+                    </Router>
                 </div>
             )}
         </div>

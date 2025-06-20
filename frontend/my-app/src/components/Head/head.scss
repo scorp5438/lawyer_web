@@ -9,82 +9,98 @@
   justify-content: space-around;
   background-color: $headerBackground;
   height: 75px;
+  font-family: 'Lora', serif;
+
   &_width {
     width: $widthSiteContent;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    @include flex-center;
   }
-  &_none {
-    width: 200px;
-  }
+
   &_head {
     @include flex-center-row;
+    justify-content: space-between;
+    width: 100%;
   }
-
-
 }
+
 .head__nav {
   @include flex-center-row;
   height: 75px;
   background-color: $headerBackground;
   position: relative;
   width: auto !important;
+  font-family: 'Open Sans', sans-serif;
+
   &_item {
     cursor: pointer;
-    color:$colorNavigate;
+    color: $colorNavigate;
     font-size: $sizeNavigate;
     list-style-type: none;
+
     &_blog {
       position: absolute;
-      top: 75px; // появится под пунктом меню
-
-      background-color: rgba(40, 44, 52, 0.5);
+      top: 75px;
+      background-color: rgba(40, 44, 52, 0.8);
       border: 1px solid #FFD700;
       border-radius: 5px;
       padding: 10px;
-      min-width: 150px;
+      width: auto;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      z-index: 10;
+      z-index: 1;
     }
+
     &_blog li {
       text-align: center;
     }
+
+    &_blog li:hover {
+      color: $colorH1;
+      box-shadow: 0 4px 8px rgb(255, 255, 255);
+      border: 1px solid #FFD700;
+      border-radius: 5px;
+      padding: 5px;
+    }
   }
+
   &_item a {
     text-decoration: none;
     color: $colorNavigate;
   }
+
   &_menu {
     display: flex;
     justify-content: space-between;
     gap: 30px;
-    width: 500px;
+    width: auto !important;
+
     &_item {
       cursor: pointer;
-      color:$colorNavigate;
+      color: $colorNavigate;
       font-size: $sizeNavigate;
       list-style-type: none;
     }
+
     &_item a {
       text-decoration: none;
       color: $colorNavigate;
     }
 
-      &_category {
+    &_category {
 
 
     }
   }
 }
+
 .modal-overlay {
   position: absolute;
-  background-color: rgba(205, 172, 89, 0.51);
+  background-color: $colorBack;
   width: 100%;
   height: 100%;
   z-index: 1;
   @include flex-center-column;
 }
+
 .modal-content {
   text-align: right;
   border: 2px solid $headerBackground;
@@ -92,14 +108,18 @@
   padding: 10px;
   background-color: $headerBackground;
 }
+
 .modal-close {
   border: none;
   background: none;
   padding-right: 10px;
-
 }
+
 .modal-close svg {
   cursor: pointer;
-  stroke: red;
-  fill: #ff0303;
+  fill: $colorError;
+}
+
+.modal-close svg:hover {
+  fill: $colorH1;
 }

@@ -234,7 +234,8 @@ const ModalForm = ({handleCloseModal}) => {
                             checked={formData.consent}
                             onChange={handleChange}
                         />
-                        <p>Я соглашаюсь на обработку персональных данных</p>
+                        <p className='politic'>Отправляя информацию, вы даете согласие на обработку персональных данных в соответствии с <a>Пользовательским соглашением и Политикой конфиденциальности</a>.
+                        </p>
                         {errors.consent && <p className="error-message">{errors.consent}</p>}
                     </label>
 
