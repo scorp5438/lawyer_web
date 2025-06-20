@@ -128,7 +128,9 @@ const ModalForm = ({handleCloseModal}) => {
                     consent: false
                 });
                 setTimeout(() => {
-                    handleCloseModal();
+                    if (typeof handleCloseModal === 'function') {
+                        handleCloseModal();
+                    }
                 }, 2000);
             } else {
                 const data = await response.json();
@@ -143,6 +145,7 @@ const ModalForm = ({handleCloseModal}) => {
         }
 
     };
+
 
 
     return (
