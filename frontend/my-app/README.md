@@ -68,7 +68,17 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
+### `npm install react-router-dom`
 * Установка шрифтов
 
 ### `npm install @fontsource/lora @fontsource/open-sans`
+
+* Для юнит тестов
+1. Установка зависимостей
+  Если у тебя еще не установлены Jest и React Testing Library, вот как это сделать:
+
+### `npm install --save-dev jest @testing-library/react @testing-library/jest-dom`
+
+Также стоит установить пакет для работы с асинхронными запросами, если нужно будет тестировать, например, загрузку данных:
+
+### `npm install --save-dev @testing-library/user-event`

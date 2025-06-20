@@ -13,7 +13,7 @@ def send_form(data: dict):
     print('Зашли в функцию отправки')
     data['current_date'] = datetime.datetime.now().strftime("%d.%m.%Y %H:%M")
     # user_email = User.objects.last().email
-    user_email = 'alex_77_90@mail.ru'
+    user_email = 'uliana.troyan@mail.ru'
     print(f'отправляем письмо на {user_email}')
     html_message = render_to_string('email/form_template.html', data)
     email = EmailMessage(

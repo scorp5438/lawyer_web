@@ -35,11 +35,11 @@ function App() {
     return (
         <div className="App">
             {showLogo ? (
-                <div className="logo-wrapper">
+                <div data-testid="logo-wrapper" className="logo-wrapper">
                     <Logo />
                 </div>
             ) : (
-                <div className="form-wrapper">
+                <div data-testid="form-wrapper" className="form-wrapper">
                     <Router>
                         <Routes>
                             {/* Главная страница — в Main компонент добавляем ArticleCard */}
