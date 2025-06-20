@@ -18,6 +18,7 @@ const Main = () => {
     const [error, setError] = useState(null);
     const [activeSection, setActiveSection] = useState('main');
     const [selectedType, setSelectedType] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         axios.defaults.withCredentials = true;
@@ -68,6 +69,9 @@ const Main = () => {
         }
         setActiveSection('blog');
     };
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
 
     return (
         <div>
@@ -79,7 +83,7 @@ const Main = () => {
                 />
             </div>
             <div>
-                {activeSection === 'blog' ? <ArticleCard selectedType={selectedType} /> : <ContentMain />}
+                {activeSection === 'blog' ? <ArticleCard selectedType={selectedType} /> : <ContentMain handleCloseModal={handleCloseModal}/>}
             </div>
             <div id="profile-section"><Profile /></div>
             <div><CaseList /></div>
