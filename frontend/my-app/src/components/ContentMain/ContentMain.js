@@ -112,7 +112,7 @@ const ContentMain = () => {
 
                     <div>
                         <p>Вы можете задать свой вопрос мне</p>
-                        <ModalForm handleCloseModal={this.handleCloseModal} />
+                        <ModalForm handleCloseModal={handleCloseModal} />
                     </div>
                 </div>
             </div>
