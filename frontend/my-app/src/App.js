@@ -6,6 +6,15 @@ import Main from "./components/Main/Main";
 import ArticleCard from './components/Articles/ArticleCard';
 import ArticleDetails from './components/ArticleDetails/ArticleDetails';
 
+//Импорт шрифтов
+import '@fontsource/lora';
+import '@fontsource/lora/700.css';
+import '@fontsource/open-sans';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
+
+
+
 function App() {
     const [showLogo, setShowLogo] = useState(() => {
         const storedValue = localStorage.getItem('showLogo');

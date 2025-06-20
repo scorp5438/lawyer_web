@@ -3,7 +3,6 @@ import './head.scss'
 import ModalForm from "../ModalForm/ModalForm";
 import axios from "axios";
 import IconClose from "../svg/IconClose";
-import {fetchData} from "../utils/api";
 
 const Head = ({user, onBlogClick, onMainClick}) => {
     const [type, setType] = useState([]);
@@ -38,6 +37,14 @@ const Head = ({user, onBlogClick, onMainClick}) => {
     const handleTypeSelect = (selectedType) => {
         onBlogClick(selectedType); // Передаём выбранный тип в родительский компонент
     };
+    const scrollToProfile = () => {
+        const profileSection = document.getElementById('profile-section');
+        if (profileSection) {
+            profileSection.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    };
 
     return (
         <header className="App-header">
@@ -48,7 +55,7 @@ const Head = ({user, onBlogClick, onMainClick}) => {
                             <ul className="head__nav_item">
                                 {user.length > 0 ? (
                                     <>
-                                        <li className="head__nav_item"><span></span>
+                                        <li className="head__nav_item">
                                             Телефон: <a href={`tel:${user[0].phone}`}>{user[0].phone}</a></li>
                                         <li className="head__nav_item">
                                             EMAIL: <a href={`mailto:${user[0].email}`}>{user[0].email}</a></li>
@@ -61,11 +68,10 @@ const Head = ({user, onBlogClick, onMainClick}) => {
 
                         </nav>
 
-                        <div className='header__navigate_none'></div>
                         <nav className="head__nav_menu">
                             <ul className="head__nav_menu_item" onClick={onMainClick}>Главная</ul>
                             <ul className="head__nav_menu_item" onClick={handleOpenModal}>Юридическая помощь</ul>
-                            <ul className="head__nav_menu_item">Обо мне</ul>
+                            <ul className="head__nav_menu_item" onClick={scrollToProfile}>Обо мне</ul>
                             {/* Меняем здесь "Блог" на выпадающее меню */}
                             <li className="head__nav_menu_item" onClick={() => setIsOpen(!isOpen)}>Блог
                                 {isOpen && (

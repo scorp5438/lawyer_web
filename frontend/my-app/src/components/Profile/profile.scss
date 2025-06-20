@@ -1,0 +1,50 @@
+@import '../../assets/styles/variables';
+@import "../../assets/styles/mixins";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.about__content {
+  width: $widthSite;
+  height: auto;
+  @include flex-center-top;
+  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
+  background-color: $mainBackground;
+  padding: 20px;
+  //border: 2px solid $colorNavigate;
+
+  &_container {
+    width: $widthSiteContent;
+    color: $textColor;
+    font-family: 'Open Sans', sans-serif;
+    border-top: 2px solid $colorBack;
+    border-bottom: 2px solid $colorBack;
+    padding: 10px;
+    //box-shadow:
+    //        inset 0 0 15px $colorNavigate,    // мягкая тень
+    //        inset 0 0 20px $colorH1;   // более размытая тень
+    //padding: 25px;                          // чтобы тень не накладывалась на контент
+
+    border-radius: 8px;
+    h1, h2 {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 700;
+      text-align: center;
+
+    }
+    h1 {
+      font-size: 34px;
+      text-shadow: 2px 2px 4px #000000;
+    }
+    li {
+      list-style-type: none;
+    }
+    p {
+      text-align: justify;
+      font-size: 16px;
+    }
+  }
+}

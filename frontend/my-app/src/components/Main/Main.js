@@ -8,6 +8,8 @@ import axios from "axios";
 import './main.scss'
 import ContentMain from "../ContentMain/ContentMain";
 import Footer from "../Footer/Footer";
+import Profile from "../Profile/Profile";
+import CaseList from "../CaseList/CaseList";
 
 const Main = () => {
     const [user, setUser] = useState([]);
@@ -79,6 +81,8 @@ const Main = () => {
             <div>
                 {activeSection === 'blog' ? <ArticleCard selectedType={selectedType} /> : <ContentMain />}
             </div>
+            <div id="profile-section"><Profile /></div>
+            <div><CaseList /></div>
             <div>
                 <Footer />
             </div>

@@ -6,32 +6,33 @@
   width: $widthSite;
   background: $mainBackground;
   @include flex-center-top;
+  font-family: 'Open Sans', sans-serif;
 
   &_content {
     width: $widthSiteContent;
     display: flex;
     @include flex-between;
-    padding: 20px;
+    padding: 10px;
 
     &_block {
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 30px;
+      gap: 45px;
 
       &_logo {
         box-sizing: border-box;
         width: 200px;
         border: none;
-        border-bottom: 3px solid #FFD700FF;
+        border-bottom: 3px solid $colorH1;
         background: none;
         @include flex-center-column;
-        text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+        text-shadow: 0 2px 2px rgba(9, 9, 9, 0.7);
 
         &_h1 {
           text-align: center;
-          color: #FFD700FF;
+          color: $colorH1;
         }
       }
 
@@ -40,7 +41,7 @@
         @include flex-center;
 
         &_p {
-          color: #FFD700FF;
+          color: $colorH1;
           text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
         }
       }
@@ -51,8 +52,8 @@
       overflow: hidden;
       border-radius: 5px;
       &_photo {
-        width: 500px;
-        height: 500px;
+        width: 700px;
+        height: 700px;
         object-fit: cover;
         box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.3);
         mask-image: radial-gradient(
@@ -72,12 +73,11 @@
       &_head {
         @include grid-2x2-plus-row;
         margin-top: 20px;
-
         h2 {
-          color: $colorP;
+          color: $textColor;
           font-size: $sizeContent;
           border: none;
-          border-bottom: 3px solid $colorP;
+          border-bottom: 3px solid $textColor;
         }
 
         &_practice {
@@ -98,13 +98,13 @@
       justify-content: center;
       align-items: center;
       height: 40px;
-      color: $colorP;
+      color: $textColor;
       font-size: 16px;
       cursor: pointer;
 
       &:hover {
         border: 3px solid $colorH1;
-        background-color: $colorP;
+        background-color: $textColor;
         transition: background 0.3s ease;
         color: $colorH1;
         text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
@@ -131,7 +131,7 @@
       &_item {
         list-style-type: none;
         font-weight: bold;
-        color: $colorP;
+        color: $textColor;
         font-size: $sizeContent;
         cursor: pointer;
 
@@ -155,10 +155,10 @@
         &_head {
 
           h2 {
-            color: $colorP;
+            color: $textColor;
             font-size: $sizeContent;
             border: none;
-            border-bottom: 3px solid $colorP;
+            border-bottom: 3px solid $textColor;
           }
 
           &_practice {

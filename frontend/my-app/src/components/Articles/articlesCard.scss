@@ -5,12 +5,14 @@
   width: $widthSite;
   background: $mainBackground;
   @include flex-center-top;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .articles_container {
   @include flex-center-column;
   margin-top: 50px;
   width: $widthSiteContent;
+  font-family: 'Open Sans', sans-serif;
 
 
   &_article-card {
@@ -53,7 +55,7 @@
 
     .article-date, .article-updated {
       font-size: 0.8em;
-      color: $colorP;
+      color: $textColor;
     }
   }
 }
@@ -96,7 +98,7 @@
   }
 
   &.active {
-    background: $colorP;
+    background: $textColor;
     color: $colorH1;
     border-color: $headerBackground;
   }
