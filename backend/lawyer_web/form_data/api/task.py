@@ -10,9 +10,11 @@ from django.contrib.auth.models import User
 
 @shared_task
 def send_form(data: dict):
-
+    print('Зашли в функцию отправки')
     data['current_date'] = datetime.datetime.now().strftime("%d.%m.%Y %H:%M")
-    user_email = User.objects.last().email
+    # user_email = User.objects.last().email
+    user_email = 'alex_77_90@mail.ru'
+    print(f'отправляем письмо на {user_email}')
     html_message = render_to_string('email/form_template.html', data)
     email = EmailMessage(
         subject=f"Новое обращение от {data.get('first_name')} {data.get('last_name')}",
@@ -23,6 +25,7 @@ def send_form(data: dict):
     email.content_subtype = "html"
     try:
         email.send()
+        print('После отправки письма')
         # logger_console.info(f'Заказ № {order_pk} создан')
     except SMTPException as e:
         print(f"Ошибка отправки: {str(e)}")  # Логирование

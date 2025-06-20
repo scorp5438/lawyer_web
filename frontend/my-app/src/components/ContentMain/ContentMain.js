@@ -9,8 +9,9 @@ const ContentMain = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [hoveredPractice, setHoveredPractice] = useState(null);
-    const [showModal, setShowModal] = useState(false);
     const [tooltipPosition, setTooltipPosition] = useState({x: 0, y: 0});
+    const [showModal, setShowModal] = useState(false);
+
     useEffect(() => {
         const fetchPractices = async () => {
             try {
@@ -42,6 +43,7 @@ const ContentMain = () => {
     const handleCloseModal = () => {
         setShowModal(false);
     };
+
     return (
         <div className="main__content">
             <div className="main__content_content">
@@ -112,7 +114,7 @@ const ContentMain = () => {
 
                     <div>
                         <p>Вы можете задать свой вопрос мне</p>
-                        <ModalForm handleCloseModal={handleCloseModal} />
+                        <ModalForm handleCloseModal={handleCloseModal}/>
                     </div>
                 </div>
             </div>
