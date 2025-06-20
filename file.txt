@@ -27,14 +27,6 @@ http {
     # Защита от DDOS (лимиты запросов)
     limit_req_zone $binary_remote_addr zone=one:10m rate=30r/s;
 
-    upstream frontend {
-        server frontend:3000;
-    }
-
-    upstream backend {
-        server web:8000;
-    }
-
     server {
         listen 80;
         server_name localhost;
@@ -52,7 +44,7 @@ http {
         # Ограничение запросов для всех URL
         location / {
             limit_req zone=one burst=5;  # Ограничение: 10 запросов в секунду с burst=5
-            proxy_pass http://frontend:3000;
+            proxy_pass http://web:8000;
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
