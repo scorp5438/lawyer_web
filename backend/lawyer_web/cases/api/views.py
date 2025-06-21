@@ -1,4 +1,11 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_spectacular.utils import (
+    extend_schema,
+    extend_schema_view,
+    OpenApiParameter,
+    OpenApiExample,
+    OpenApiTypes, OpenApiResponse
+)
 from rest_framework import filters
 from rest_framework.permissions import IsAdminUser
 from rest_framework.viewsets import ModelViewSet
@@ -7,6 +14,57 @@ from .serializers import CaseSerializer, PracticeSerializer
 from ..models import Cases, Practice
 
 
+@extend_schema_view(
+    list=extend_schema(
+        summary='Список кейсов',
+        description="""
+        Получение списка кейсов с возможностью:
+        - Фильтрации по категории
+        - Поиска по названию и описанию
+        - Сортировки по различным полям
+
+        Доступно всем пользователям.
+        """,
+        tags=['Кейсы'],
+        parameters=[
+            OpenApiParameter(
+                name='case_category',
+                type=OpenApiTypes.INT,
+            ),
+            OpenApiParameter(
+                name='search',
+                type=OpenApiTypes.STR,
+                description='Поиск по названию и описанию (регистронезависимый)',
+                examples=[
+                    OpenApiExample('Пример поиска', value='важный кейс'),
+                ]
+            ),
+            OpenApiParameter(
+                name='ordering',
+                type=OpenApiTypes.STR,
+                description='Сортировка (по умолчанию: новые первыми)',
+                examples=[
+                    OpenApiExample('По умолчанию', value='-pk'),
+                    OpenApiExample('По дате начала', value='-start_date'),
+                    OpenApiExample('По названию (А-Я)', value='name_case'),
+                ]
+            ),
+        ],
+        responses={
+            200: CaseSerializer(many=True),
+            400: OpenApiResponse(description='Некорректные параметры запроса')
+        }
+    ),
+    retrieve=extend_schema(
+        summary='Детали кейса',
+        description='Получение детальной информации о конкретном кейсе',
+        tags=['Кейсы'],
+        responses={
+            200: CaseSerializer,
+            404: OpenApiResponse(description='Кейс не найден')
+        }
+    )
+)
 class CaseViewSet(ModelViewSet):
     """
     ViewSet для операций с кейсами (модель Cases).
@@ -51,6 +109,27 @@ class CaseViewSet(ModelViewSet):
             return []
         return [IsAdminUser()]
 
+
+@extend_schema_view(
+    list=extend_schema(
+        summary='Список практик',
+        description='Получение списка всех практик (только для чтения)',
+        tags=['Кейсы'],
+        responses={
+            200: PracticeSerializer(many=True),
+            400: OpenApiResponse(description='Некорректный запрос')
+        }
+    ),
+    retrieve=extend_schema(
+        summary='Детали практики',
+        description='Получение детальной информации о конкретной практике',
+        tags=['Кейсы'],
+        responses={
+            200: PracticeSerializer,
+            404: OpenApiResponse(description='Практика не найдена')
+        }
+    )
+)
 class PracticeViewSet(ModelViewSet):
     """
     ViewSet для работы с моделью Practice

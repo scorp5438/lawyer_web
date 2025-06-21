@@ -1,8 +1,29 @@
+from drf_spectacular.utils import (
+    extend_schema_serializer,
+    OpenApiExample
+)
 from rest_framework import serializers
 
 from ..models import Article, Category
 
 
+@extend_schema_serializer(
+    examples=[
+        OpenApiExample(
+            "Пример статьи",
+            value={
+                "title": "Заголовок статьи",
+                "type": "news",
+                "category_name": "Технологии",
+                "content": "Текст статьи...",
+                "creation_date": "2023-01-01T00:00:00Z",
+                "update_date": "2023-01-02T00:00:00Z",
+                "image": "http://example.com/image.jpg",
+            },
+            response_only=True,
+        )
+    ]
+)
 class ArticleSerializer(serializers.ModelSerializer):
     """
     Сериализатор для статей (Article)
@@ -48,6 +69,18 @@ class ArticleSerializer(serializers.ModelSerializer):
         return obj.category.name
 
 
+@extend_schema_serializer(
+    examples=[
+        OpenApiExample(
+            "Пример категории",
+            value={
+                "pk": 1,
+                "name": "Технологии"
+            },
+            response_only=True,
+        )
+    ]
+)
 class CategorySerializer(serializers.ModelSerializer):
     """
     Сериализатор для модели Category
@@ -65,6 +98,15 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = 'pk', 'name',
 
 
+@extend_schema_serializer(
+    examples=[
+        OpenApiExample(
+            'Пример структуры ответа',
+            value={'types': ['заметка', 'статья', 'новое в праве']},
+            response_only=True
+        )
+    ]
+)
 class TypeSerializer(serializers.Serializer):
     """
     Сериализатор для работы с типами статей (choices поле type модели Article)

@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
@@ -5,7 +6,7 @@ from rest_framework.viewsets import ViewSet
 from .serializers import DataSerializer
 from .task import send_form
 
-
+@extend_schema(exclude=True)
 class FormDataViewSet(ViewSet):
     """
     ViewSet для обработки и валидации данных формы перед отправкой.
