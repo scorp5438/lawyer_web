@@ -1,31 +1,48 @@
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import axios from "axios";
 import { motion } from 'framer-motion';
 import './articleDetails.scss';
 
 const ArticleDetails = () => {
-    const location = useLocation();
     const navigate = useNavigate();
-    const { article } = location.state || {};
+    const location = useLocation(); // <-- добавлено
+    const { id } = useParams(); // достаём id из URL
 
-    if (!article) {
-        return (
-            <motion.div
-                className="article-not-found"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-            >
-                <h2>Статья не найдена</h2>
-                <button
-                    className="back-button"
-                    onClick={() => navigate(-1)}
-                >
-                    Вернуться назад
-                </button>
-            </motion.div>
-        );
-    }
+    // Получаем query параметры из location.search
+    const queryParams = new URLSearchParams(location.search);
+    const page = queryParams.get('page') || 1;
+    const [article, setArticle] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    const handleBack = () => {
+        const page = queryParams.get('page');
+        const category = queryParams.get('category');
+        const type = queryParams.get('type');
+        navigate(`/articles?page=${page}&category=${category}&type=${type}`);
+    };
+
+    useEffect(() => {
+        const fetchArticle = async () => {
+            setLoading(true);
+            setError(null);
+            try {
+                const response = await axios.get(`http://127.0.0.1:8000/api/article/${id}/`);
+                setArticle(response.data);
+            } catch (err) {
+                setError(err.response?.data?.detail || err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchArticle();
+    }, [id]);
+
+    if (loading) return <div>Загрузка...</div>;
+    if (error) return <div>Ошибка: {error}</div>;
+    if (!article) return <div>Статья не найдена</div>;
 
     return (
         <motion.div
@@ -38,7 +55,7 @@ const ArticleDetails = () => {
             <div className="article-details">
                 <button
                     className="back-button"
-                    onClick={() => navigate(-1)}
+                    onClick={handleBack}
                 >
                     ← Назад к списку статей
                 </button>
