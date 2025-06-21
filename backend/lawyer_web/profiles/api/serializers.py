@@ -1,7 +1,32 @@
 from django.contrib.auth.models import User
+from drf_spectacular.utils import extend_schema_serializer, OpenApiExample
 from rest_framework import serializers
 
 
+@extend_schema_serializer(
+    examples=[
+        OpenApiExample(
+            "Пример данных пользователя",
+            value={
+                "username": "ivanov",
+                "first_name": "Иван",
+                "last_name": "Иванов",
+                "email": "ivanov@example.com",
+                "is_staff": False,
+                "phone": "+79001234567",
+                "fb": "https://fb.com/ivanov",
+                "x": "https://x.com/ivanov",
+                "tg": "@ivanov_tg",
+                "wa": "79001234567",
+                "viber": "79001234567",
+                "inst": "ivanov_inst",
+                "site": "https://ivanov.ru",
+                "bio": "Разработчик Python с 5-летним опытом"
+            },
+            response_only=True
+        )
+    ]
+)
 class UserSerializer(serializers.ModelSerializer):
     """
     Сериализатор для моделей User и связанного Profile.
