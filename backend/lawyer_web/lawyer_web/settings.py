@@ -90,14 +90,21 @@ WSGI_APPLICATION = 'lawyer_web.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('POSTGRES_NAME_DB', 'test_lawyer_db'),
-        'USER': os.getenv('POSTGRES_USER_NAME', 'test_lawyer_user'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'test_lawyer_password'),
-        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
-        'PORT': os.getenv('POSTGRES_PORT', 5001)
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db/db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv('POSTGRES_NAME_DB', 'test_lawyer_db'),
+#         'USER': os.getenv('POSTGRES_USER_NAME', 'test_lawyer_user'),
+#         'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'test_lawyer_password'),
+#         'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
+#         'PORT': os.getenv('POSTGRES_PORT', 5001)
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
