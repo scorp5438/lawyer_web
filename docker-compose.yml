@@ -5,6 +5,8 @@ services:
     command: gunicorn --config gunicorn.conf.py lawyer_web.wsgi:application
     ports:
       - "8000:8000"
+    depends_on:
+      - db
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8000/health/" ]
       interval: 30s
@@ -14,6 +16,22 @@ services:
       - PYTHONPATH=/app
     volumes:
       - static_volume:/app/static
+
+  db:
+    image: postgres:17
+#    env_file:
+#      - ./backend/lawyer_web/.env
+    environment:
+      POSTGRES_DB: ${POSTGRES_NAME_DB}
+      POSTGRES_USER: ${POSTGRES_USER_NAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER_NAME} -d ${POSTGRES_NAME_DB}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   nginx:
     image: nginx:latest
@@ -37,6 +55,7 @@ services:
     command: celery -A lawyer_web worker --loglevel=info
     depends_on:
       - redis
+      - db
     environment:
       - PYTHONPATH=/app
     volumes:
@@ -60,4 +79,5 @@ services:
       - web
 
 volumes:
+  postgres_data:
   static_volume:
