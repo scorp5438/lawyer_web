@@ -1,8 +1,25 @@
+from drf_spectacular.utils import extend_schema_serializer, OpenApiExample
 from rest_framework import serializers
 
 from ..models import Cases, Practice
 
 
+@extend_schema_serializer(
+    examples=[
+        OpenApiExample(
+            'Пример кейса',
+            value={
+                'name_case': 'Успешный проект для крупного банка',
+                'description': 'Разработка системы онлайн-банкинга...',
+                'case_category_name': 'Финансовые системы',
+                'tart_date': '2023-01-15',
+                'end_date': '2023-06-20',
+                'review': 'Отличное сотрудничество, высокое качество работ'
+            },
+            response_only=True
+        )
+    ]
+)
 class CaseSerializer(serializers.ModelSerializer):
     """
     Сериализатор для модели Cases.

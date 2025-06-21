@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'lawyer_web.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db/db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -158,6 +158,7 @@ SPECTACULAR_SETTINGS = {
     'TITLE': 'Lawyer web API',
     'DESCRIPTION': 'Lawyer API description',
     'VERSION': '0.0.1',
+    'SERVE_INCLUDE_SCHEMA': False,  # Полностью отключает эндпоинт /schema/
 }
 
 CELERY_BROKER_URL = f'redis://{os.getenv("REDIS_HOST", "localhost")}:6379/0'

@@ -1,6 +1,14 @@
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import (
+    extend_schema,
+    extend_schema_view,
+    OpenApiParameter,
+    OpenApiExample,
+    OpenApiResponse
+)
 from rest_framework.permissions import IsAdminUser
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
@@ -9,6 +17,43 @@ from .permissions import HasHeaderReact
 from .serializers import UserSerializer
 
 
+@extend_schema_view(
+    list=extend_schema(
+        summary='Список пользователей',
+        description="""
+        Получение списка пользователей с расширенными данными профиля.
+
+        Требования доступа:
+        - Заголовок 'X-React' должен присутствовать в запросе
+        ИЛИ
+        - Пользователь должен быть администратором
+        """,
+        tags=['Пользователи'],
+        parameters=[
+            OpenApiParameter(
+                name='X-React',
+                type=OpenApiTypes.STR,
+                location=OpenApiParameter.HEADER,
+                required=False,
+                description='Кастомный заголовок для доступа (альтернатива admin-правам)'
+            )
+        ],
+        responses={
+            200: UserSerializer(many=True),
+            403: OpenApiResponse(
+                description='Доступ запрещен (нет заголовка X-React или прав администратора)',
+                examples=[
+                    OpenApiExample(
+                        'Пример ошибки',
+                        value={'detail': 'У вас нет прав для выполнения этого действия.'},
+                        status_codes=['403']
+                    )
+                ]
+            )
+        }
+    ),
+    retrieve=extend_schema(exclude=True),
+)
 class UserViewSet(ModelViewSet):
     """
     ViewSet для операций с пользователями (User model).
@@ -32,7 +77,14 @@ class UserViewSet(ModelViewSet):
     http_method_names = ['get',]
     permission_classes = [HasHeaderReact | IsAdminUser]
 
+    @extend_schema(
+        exclude=True
+    )
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
 
+
+@extend_schema(exclude=True)
 class CustomCSRFView(APIView):
 
     def get(self, request):

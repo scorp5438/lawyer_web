@@ -1,4 +1,11 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import (
+    extend_schema,
+    extend_schema_view,
+    OpenApiParameter,
+    OpenApiExample, OpenApiResponse,
+)
 from rest_framework import filters
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAdminUser
@@ -27,6 +34,59 @@ class CustomPagination(PageNumberPagination):
     max_page_size = 100
 
 
+@extend_schema_view(
+    list=extend_schema(
+        summary='Список статей',
+        tags=['Статьи'],
+        description="""
+        Получение списка статей с возможностью:
+        - Фильтрации по 'type' и 'category'
+        - Поиска по 'title' и 'content'
+        - Сортировки по полям ('pk', 'title', 'type', 'category', 'update_date')
+        - Пагинации ('page', 'page_size')
+        """,
+        parameters=[
+            OpenApiParameter(
+                name='type',
+                type=OpenApiTypes.STR,
+                description='Фильтрация по типу статьи',
+            ),
+            OpenApiParameter(
+                name='category',
+                type=OpenApiTypes.INT,
+                description='Фильтрация по ID категории',
+            ),
+            OpenApiParameter(
+                name='search',
+                type=OpenApiTypes.STR,
+                description='Поиск по заголовку и содержимому',
+            ),
+            OpenApiParameter(
+                name='ordering',
+                type=OpenApiTypes.STR,
+                description="Сортировка (например: '-pk', 'title')",
+                examples=[
+                    OpenApiExample('По умолчанию', value='-pk'),
+                    OpenApiExample('По заголовку (A-Z)', value='title'),
+                    OpenApiExample('По дате обновления (новые)', value='-update_date'),
+                ],
+            ),
+        ],
+        responses={
+            200: ArticleSerializer(many=True),
+            400: OpenApiTypes.OBJECT,  # Ошибки валидации
+        },
+    ),
+    retrieve=extend_schema(
+        summary='Детали статьи',
+        tags=['Статьи'],
+        description='Получение одной статьи по ID',
+        responses={
+            200: ArticleSerializer,
+            404: OpenApiTypes.OBJECT,
+        },
+    ),
+)
 class ArticleViewSet(ModelViewSet):
     """
     ViewSet для работы со статьями (Article)
@@ -72,6 +132,31 @@ class ArticleViewSet(ModelViewSet):
         return [IsAdminUser()]
 
 
+@extend_schema_view(
+    list=extend_schema(
+        summary='Список категорий',
+        description="""
+        Получение списка всех категорий.
+        Доступно всем пользователям только для чтения.
+        """,
+        tags=['Статьи'],
+        responses={
+            200: CategorySerializer(many=True),
+        }
+    ),
+    retrieve=extend_schema(
+        summary='Детали категории',
+        description="""
+        Получение детальной информации о конкретной категории по её ID.
+        Доступно всем пользователям только для чтения.
+        """,
+        tags=['Статьи'],
+        responses={
+            200: CategorySerializer,
+            404: OpenApiTypes.OBJECT,
+        }
+    )
+)
 class CategoryApiViewSet(ModelViewSet):
     """
     ViewSet для работы с категориями (модель Category)
@@ -92,6 +177,30 @@ class CategoryApiViewSet(ModelViewSet):
     http_method_names = ['get']
 
 
+@extend_schema(
+    summary='Получение типов статей',
+    description="""
+    Возвращает список возможных типов статей, определенных в Article.ARTICLE_TYPES.
+
+    Особенности:
+    - Возвращает только первый элемент каждого choices-значения
+    - Доступен только GET-запрос
+    """,
+    tags=['Статьи'],
+    responses={
+        200: OpenApiResponse(
+            response=TypeSerializer,
+            description='Список типов статей',
+            examples=[
+                OpenApiExample(
+                    'Пример успешного ответа',
+                    value={'types': ['заметка', 'статья', 'новое в праве']},
+                    status_codes=['200']
+                )
+            ]
+        )
+    }
+)
 class TypeApiViewSet(ViewSet):
     """
     ViewSet для получения типов статей
