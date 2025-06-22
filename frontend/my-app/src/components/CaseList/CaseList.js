@@ -10,7 +10,8 @@ const CaseList = () => {
     useEffect(() => {
         const fetchCases = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/case/');
+//                const response = await axios.get('http://127.0.0.1:8000/api/case/');
+                const response = await axios.get('/api/case/');
                 setCases(response.data);
                 setLoading(false);
             } catch (err) {

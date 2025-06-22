@@ -1,0 +1,20 @@
+FROM node:18 AS builder
+
+WORKDIR /app
+
+# Копируем package.json первым для кэширования
+COPY my-app/package*.json ./
+
+# Устанавливаем зависимости
+RUN npm install
+
+# Копируем исходный код
+COPY my-app/ ./
+
+# Собираем приложение
+RUN npm run build
+
+# Стадия результата
+FROM alpine:latest
+COPY --from=builder /app/build /static
+

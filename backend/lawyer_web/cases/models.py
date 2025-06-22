@@ -14,6 +14,7 @@ class Cases(models.Model):
         max_length=3000,
         blank=False,
         null=False,
+        db_index=True,
         verbose_name='Описание процесса'
     )
     case_category = models.ForeignKey(
@@ -25,10 +26,13 @@ class Cases(models.Model):
     )
     start_date = models.DateTimeField(
         auto_now_add=True,
-        verbose_name='начало процесса'
+        verbose_name='начало процесса',
+        db_index=True,
     )
     end_date = models.DateTimeField(
-        verbose_name='окончание процесса'
+        verbose_name='окончание процесса',
+        null = True,
+        db_index=True,
     )
     review = models.CharField(
         max_length=200,
