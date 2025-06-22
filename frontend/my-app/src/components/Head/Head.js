@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './head.scss';
 import ModalForm from "../ModalForm/ModalForm";
 import IconClose from "../svg/IconClose";
+import axios from 'axios';
 import { fetchTypes, fetchUserData } from '../utils/api';
 
 const Head = ({ onBlogClick, onMainClick }) => {
@@ -10,20 +11,31 @@ const Head = ({ onBlogClick, onMainClick }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [error, setError] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const getTypes = async () => {
+        const loadData = async () => {
+            setLoading(true);
+            setError(null);
+
             try {
-//                const response = await axios.get('http://127.0.0.1:8000/api/type/');
-                const response = await axios.get('/api/type/');
-                setType(response.data.types);
-                const types = await fetchTypes();
-                setType(types);
+                // Параллельная загрузка типов и пользователя
+                const [typesData, userData] = await Promise.all([
+                    fetchTypes(),
+                    fetchUserData()
+                ]);
+
+                setType(typesData);
+                setUser(userData);
             } catch (err) {
                 setError(err.message);
+                console.error('Ошибка загрузки данных:', err);
+            } finally {
+                setLoading(false);
             }
         };
-        getTypes();
+
+        loadData();
     }, []);
 
     useEffect(() => {
@@ -49,7 +61,9 @@ const Head = ({ onBlogClick, onMainClick }) => {
             profileSection.scrollIntoView({ behavior: 'smooth' });
         }
     };
-
+    if (loading) {
+        return <header className="App-header">Загрузка...</header>;
+    }
     return (
         <header className="App-header">
             <div className='header__navigate'>

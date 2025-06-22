@@ -15,10 +15,6 @@ const ContentMain = () => {
     useEffect(() => {
         const getPractices = async () => {
             try {
-//                const response = await axios.get('http://127.0.0.1:8000/api/practice/');
-                const response = await axios.get('/api/practice/');
-                setPractices(response.data);
-                setLoading(false);
                 const data = await fetchPractices();
                 setPractices(data);
             } catch (err) {

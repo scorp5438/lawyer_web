@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
 import {useNavigate} from 'react-router-dom';
-import {fetchArticlesAPI, fetchCategoriesAPI} from '../utils/api';
+import {fetchArticles, fetchCategories} from '../utils/api';
 import './articlesCard.scss';
 
 const ArticleCard = ({selectedType}) => {
@@ -21,7 +21,7 @@ const ArticleCard = ({selectedType}) => {
         setError(null);
 
         try {
-            const data = await fetchArticlesAPI({
+            const data = await fetchArticles({
                 category,
                 page,
                 pageSize,
@@ -48,7 +48,7 @@ const ArticleCard = ({selectedType}) => {
             return;
         }
         try {
-            const data = await fetchCategoriesAPI(selectedType);
+            const data = await fetchCategories(selectedType);
             setCategories(data);
         } catch (err) {
             console.error("Ошибка загрузки категорий:", err);
