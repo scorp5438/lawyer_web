@@ -96,7 +96,7 @@ class CaseViewSet(ModelViewSet):
     filterset_fields = ['case_category']
     search_fields = ['$name_case', '$description']
     ordering_fields = ['pk', 'name_case', 'start_date', 'end_date'] #'case_category__name',
-    ordering = ['-pk']
+    ordering = ['pk']
 
     def get_permissions(self):
         """

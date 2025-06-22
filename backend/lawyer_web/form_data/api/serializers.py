@@ -34,19 +34,16 @@ class DataSerializer(serializers.Serializer):
         """Проверяет, что имя содержит только кириллицу и дефис."""
         if re.match(NAME_PATTERN, value):
             return value
-        print(value)
         raise serializers.ValidationError('Имя содержит недопустимые символы.\nДопустимые символы a-я и "-"')
 
     def validate_last_name(self, value):
         """Проверяет, что фамилия содержит только кириллицу и дефис."""
         if re.match(NAME_PATTERN, value):
             return value
-        print(value)
         raise serializers.ValidationError('Фамилия содержит недопустимые символы.\nДопустимые символы a-я и "-"')
 
     def validate_phone(self, value):
         """Проверяет корректность номера телефона (Российские форматы)."""
         if re.match(PHONE_PATTERN, value):
             return value
-        print(value)
         raise serializers.ValidationError('Неверно указан номер')

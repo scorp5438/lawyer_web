@@ -86,7 +86,7 @@ const ArticleDetails = () => {
                     </div>
                 </motion.div>
 
-                {article.image && (
+                {article.image_url && (
                     <motion.div
                         className="article-image-container"
                         initial={{ opacity: 0, scale: 0.9 }}
@@ -95,7 +95,7 @@ const ArticleDetails = () => {
                     >
                         <img
                             className="article-image"
-                            src={article.image}
+                            src={article.image_url}
                             alt={article.title}
                             onError={(e) => {
                                 e.target.onerror = null;

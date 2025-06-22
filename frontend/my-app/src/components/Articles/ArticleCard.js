@@ -139,10 +139,10 @@ const ArticleCard = ({selectedType}) => {
                     {articles.length > 0 ? (
                         articles.map((article, index) => (
                             <div key={index} className="articles_container_article-card" style={{position: 'relative'}}>
-                                {article.image && (
+                                {article.image_url && (
                                     <div className="articles_container_image-wrapper">
                                         <img
-                                            src={article.image}
+                                            src={article.image_url}
                                             alt={article.title}
                                             className="articles_container_article-image"
                                             onError={(e) => {

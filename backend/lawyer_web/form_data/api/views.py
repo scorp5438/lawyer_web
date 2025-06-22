@@ -6,6 +6,7 @@ from rest_framework.viewsets import ViewSet
 from .serializers import DataSerializer
 from .task import send_form
 
+
 @extend_schema(exclude=True)
 class FormDataViewSet(ViewSet):
     """
@@ -61,8 +62,8 @@ class FormDataViewSet(ViewSet):
             {
                 'message': 'Invalid data',
                 'errors': serializer.errors,
-                'status': status.HTTP_400_BAD_REQUEST
-            }
+            },
+            status=status.HTTP_400_BAD_REQUEST
         )
 
 

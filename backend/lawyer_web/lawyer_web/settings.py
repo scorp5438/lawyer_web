@@ -1,4 +1,5 @@
 import os
+import sys
 from pathlib import Path
 
 from corsheaders.defaults import default_headers
@@ -55,6 +56,8 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "http://localhost:80",
+    "http://127.0.0.1:80",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -85,30 +88,27 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'lawyer_web.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# Database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('POSTGRES_NAME_DB', 'test_lawyer_db'),
+        'USER': os.getenv('POSTGRES_USER_NAME', 'test_lawyer_user'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'test_lawyer_password'),
+        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
+        'PORT': os.getenv('POSTGRES_PORT', 5001),
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.getenv('POSTGRES_NAME_DB', 'test_lawyer_db'),
-#         'USER': os.getenv('POSTGRES_USER_NAME', 'test_lawyer_user'),
-#         'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'test_lawyer_password'),
-#         'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
-#         'PORT': os.getenv('POSTGRES_PORT', 5001)
-#     }
-# }
+# Автоматически переключаться на SQLite при запуске тестов
+if 'test' in sys.argv or 'test_coverage' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:',
+    }
 
 # Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',

@@ -21,7 +21,8 @@ const ModalForm = ({handleCloseModal}) => {
         axios.defaults.withCredentials = true;
 
 
-        const url = "http://127.0.0.1:8000/api/get-csrf-token/";
+//        const url = "http://127.0.0.1:8000/api/get-csrf-token/";
+        const url = "/api/get-csrf-token/";
         const headers = {
             'X-Get-Token-Csrf-For-React': 'Hkjh98hjk8khj77slkhj'
         };
@@ -102,7 +103,8 @@ const ModalForm = ({handleCloseModal}) => {
         setIsSubmitting(true);
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/data/', {
+//            const response = await fetch('http://127.0.0.1:8000/api/data/', {
+            const response = await fetch('/api/data/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

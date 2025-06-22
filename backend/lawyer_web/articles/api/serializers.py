@@ -41,6 +41,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         - 'get_category_name': возвращает название категории статьи
     """
     category_name = serializers.SerializerMethodField()
+    image_url = serializers.SerializerMethodField()
 
     class Meta:
         model = Article
@@ -52,7 +53,7 @@ class ArticleSerializer(serializers.ModelSerializer):
             'content',
             'creation_date',
             'update_date',
-            'image'
+            'image_url'
 
         )
 
@@ -67,6 +68,9 @@ class ArticleSerializer(serializers.ModelSerializer):
             Название категории (str)
         """
         return obj.category.name
+
+    def get_image_url(self, obj):
+        return obj.get_image_url()
 
 
 @extend_schema_serializer(
@@ -93,6 +97,7 @@ class CategorySerializer(serializers.ModelSerializer):
         'model': Category - модель, с которой работает сериализатор
         'fields': Кортеж полей для сериализации (pk, name)
     """
+
     class Meta:
         model = Category
         fields = 'pk', 'name',
