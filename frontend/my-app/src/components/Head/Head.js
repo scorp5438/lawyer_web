@@ -1,30 +1,31 @@
-import React, {useEffect, useState} from 'react';
-import './head.scss'
+import React, { useEffect, useState } from 'react';
+import './head.scss';
 import ModalForm from "../ModalForm/ModalForm";
-import axios from "axios";
 import IconClose from "../svg/IconClose";
+import { fetchTypes, fetchUserData } from '../utils/api';
 
-const Head = ({user, onBlogClick, onMainClick}) => {
+const Head = ({ onBlogClick, onMainClick }) => {
+    const [user, setUser] = useState([]);
     const [type, setType] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
     const [error, setError] = useState(null);
     const [showModal, setShowModal] = useState(false);
 
-
     useEffect(() => {
-        const fetchTypes = async () => {
+        const getTypes = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/type/');
-                setType(response.data.types);
+                const types = await fetchTypes();
+                setType(types);
             } catch (err) {
                 setError(err.message);
-                console.error('Ошибка при загрузке практик:', err);
             }
         };
-
-        fetchTypes();
+        getTypes();
     }, []);
 
+    useEffect(() => {
+        fetchUserData(setUser, setError);
+    }, []);
 
     const handleOpenModal = () => {
         setShowModal(true);
@@ -35,14 +36,14 @@ const Head = ({user, onBlogClick, onMainClick}) => {
     };
 
     const handleTypeSelect = (selectedType) => {
-        onBlogClick(selectedType); // Передаём выбранный тип в родительский компонент
+        onBlogClick(selectedType);
+        setIsOpen(false);
     };
+
     const scrollToProfile = () => {
         const profileSection = document.getElementById('profile-section');
         if (profileSection) {
-            profileSection.scrollIntoView({
-                behavior: 'smooth'
-            });
+            profileSection.scrollIntoView({ behavior: 'smooth' });
         }
     };
 
@@ -56,23 +57,22 @@ const Head = ({user, onBlogClick, onMainClick}) => {
                                 {user.length > 0 ? (
                                     <>
                                         <li className="head__nav_item">
-                                            Телефон: <a href={`tel:${user[0].phone}`}>{user[0].phone}</a></li>
+                                            Телефон: <a href={`tel:${user[0].phone}`}>{user[0].phone}</a>
+                                        </li>
                                         <li className="head__nav_item">
-                                            EMAIL: <a href={`mailto:${user[0].email}`}>{user[0].email}</a></li>
+                                            EMAIL: <a href={`mailto:${user[0].email}`}>{user[0].email}</a>
+                                        </li>
                                     </>
                                 ) : (
                                     <li className="nav-item">Загрузка данных...</li>
                                 )}
                             </ul>
-
-
                         </nav>
 
                         <nav className="head__nav_menu">
                             <ul className="head__nav_menu_item" onClick={onMainClick}>Главная</ul>
                             <ul className="head__nav_menu_item" onClick={handleOpenModal}>Юридическая помощь</ul>
                             <ul className="head__nav_menu_item" onClick={scrollToProfile}>Обо мне</ul>
-                            {/* Меняем здесь "Блог" на выпадающее меню */}
                             <li className="head__nav_menu_item" onClick={() => setIsOpen(!isOpen)}>Блог
                                 {isOpen && (
                                     <div className="head__nav_item_blog">
@@ -82,17 +82,12 @@ const Head = ({user, onBlogClick, onMainClick}) => {
                                                 <li
                                                     key={t}
                                                     className="head__nav_item_blog_category"
-                                                    onClick={() => {
-                                                        handleTypeSelect(t);
-                                                        setIsOpen(false); // Закрыть меню после выбора
-                                                    }}
+                                                    onClick={() => handleTypeSelect(t)}
                                                 >
                                                     {t}
                                                 </li>
                                             ))}
-
                                         </ul>
-
                                     </div>
                                 )}
                             </li>
@@ -100,18 +95,17 @@ const Head = ({user, onBlogClick, onMainClick}) => {
                     </div>
                 </div>
             </div>
-            {/* Модальное окно с формой */}
+
             {showModal && (
                 <div className="modal-overlay">
                     <div className="modal-content">
-                        <button className="modal-close" onClick={handleCloseModal}><IconClose/></button>
-                        <ModalForm handleCloseModal={handleCloseModal}/>
+                        <button className="modal-close" onClick={handleCloseModal}><IconClose /></button>
+                        <ModalForm handleCloseModal={handleCloseModal} />
                     </div>
                 </div>
             )}
         </header>
     );
 };
-
 
 export default Head;

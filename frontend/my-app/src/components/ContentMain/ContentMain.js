@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
+import { fetchPractices } from '../utils/api';
 import lawyerPhoto from '../img/lawyer.jpg';
 import './mainContent.scss';
 import ModalForm from "../ModalForm/ModalForm";
@@ -13,19 +13,17 @@ const ContentMain = () => {
     const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
-        const fetchPractices = async () => {
+        const getPractices = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/practice/');
-                setPractices(response.data);
-                setLoading(false);
+                const data = await fetchPractices();
+                setPractices(data);
             } catch (err) {
                 setError(err.message);
+            } finally {
                 setLoading(false);
-                console.error('Ошибка при загрузке практик:', err);
             }
         };
-
-        fetchPractices();
+        getPractices();
     }, []);
 
     const handleMouseEnter = (practice, event) => {

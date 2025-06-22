@@ -5,6 +5,8 @@ import Logo from "./components/Logo/Logo";
 import Main from "./components/Main/Main";
 import ArticleCard from './components/Articles/ArticleCard';
 import ArticleDetails from './components/ArticleDetails/ArticleDetails';
+import Head from "./components/Head/Head";
+import Footer from "./components/Footer/Footer";
 
 //Импорт шрифтов
 import '@fontsource/lora';
@@ -15,11 +17,31 @@ import '@fontsource/open-sans/700.css';
 
 
 
+
 function App() {
     const [showLogo, setShowLogo] = useState(() => {
         const storedValue = localStorage.getItem('showLogo');
         return storedValue === null ? true : storedValue === 'true';
     });
+
+    const [user, setUser] = useState([]);
+    const [selectedType, setSelectedType] = useState(null);
+    const [activeSection, setActiveSection] = useState('main');
+
+    const handleBlogClick = (type) => {
+        if (selectedType === type) {
+            setSelectedType(null);
+            setTimeout(() => setSelectedType(type), 0);
+        } else {
+            setSelectedType(type);
+        }
+        setActiveSection('blog');
+    };
+
+    const handleMainClick = () => {
+        setSelectedType(null);
+        setActiveSection('main'); // вот этого не хватало
+    };
 
     useEffect(() => {
         if (showLogo) {
@@ -41,14 +63,25 @@ function App() {
             ) : (
                 <div data-testid="form-wrapper" className="form-wrapper">
                     <Router>
+                        <Head
+                            user={user}
+                            onBlogClick={handleBlogClick}
+                            onMainClick={handleMainClick}
+                        />
                         <Routes>
                             {/* Главная страница — в Main компонент добавляем ArticleCard */}
-                            <Route path="/" element={<Main />} />
+                            <Route path="/" element={
+                                <Main
+                                    activeSection={activeSection}
+                                    selectedType={selectedType}
+                                />
+                            } />
                             {/* Страница со статьями */}
                             <Route path="/articles" element={<ArticleCard selectedType={null} />} />
                             {/* Страница полной статьи */}
-                            <Route path="/article-details" element={<ArticleDetails />} />
+                            <Route path="/article/:id" element={<ArticleDetails />} />
                         </Routes>
+                        <Footer />
                     </Router>
                 </div>
             )}

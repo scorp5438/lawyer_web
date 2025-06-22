@@ -105,3 +105,13 @@
     border-color: $headerBackground;
   }
 }
+.read-more-button {
+  width: auto;
+  height: 30px;
+  font-size: 18px;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  background: $headerBackground;
+  color: $colorNavigate;
+}
