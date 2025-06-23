@@ -27,7 +27,7 @@ services:
     volumes:
       - ./backend/lawyer_web/nginx.prod.conf:/etc/nginx/nginx.conf
       - static_volume:/app/static
-      - static_react:/usr/share/nginx/html
+      - static_react:/usr/share/nginx/html/static_react
       - media:/media
     depends_on:
       - web
@@ -54,7 +54,7 @@ services:
     depends_on:
       - web
     volumes:
-      - static_react:/static
+      - static_react:/static_react
 
 volumes:
   postgres_data:

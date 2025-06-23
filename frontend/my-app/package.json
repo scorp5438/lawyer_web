@@ -2,6 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/static_react/",
   "dependencies": {
     "@fontsource/lora": "^5.2.6",
     "@fontsource/open-sans": "^5.2.6",
