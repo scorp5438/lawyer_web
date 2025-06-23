@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import {fetchData} from "../utils/api";
+// import {fetchData} from "../utils/api";
 import './modalForm.scss';
+import {fetchUserData} from "../utils/api";
 const ModalForm = ({handleCloseModal}) => {
     const [formData, setFormData] = useState({
         first_name: '',
@@ -20,14 +21,12 @@ const ModalForm = ({handleCloseModal}) => {
     useEffect(() => {
         axios.defaults.withCredentials = true;
 
-
-//        const url = "http://127.0.0.1:8000/api/get-csrf-token/";
         const url = "/api/get-csrf-token/";
         const headers = {
             'X-Get-Token-Csrf-For-React': 'Hkjh98hjk8khj77slkhj'
         };
 
-        fetchData(url, headers, setToken);
+        fetchUserData(url, headers, setToken);
     }, []);
 
     const handleChange = (e) => {

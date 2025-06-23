@@ -28,7 +28,7 @@ const ArticleDetails = () => {
             setLoading(true);
             setError(null);
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/api/article/${id}/`);
+                const response = await axios.get(`/api/article/${id}/`);
                 setArticle(response.data);
             } catch (err) {
                 setError(err.response?.data?.detail || err.message);

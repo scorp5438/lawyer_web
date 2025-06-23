@@ -17,4 +17,3 @@ RUN npm run build
 # Стадия результата
 FROM alpine:latest
 COPY --from=builder /app/build /static
-

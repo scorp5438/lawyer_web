@@ -1,93 +1,51 @@
 import axios from "axios";
 
-const API_BASE_URL = 'http://127.0.0.1:8000/api/';
-
-export const fetchData = async (url, headers = {}, setData, defaultValue = []) => {
+const api = axios.create({
+    baseURL: process.env.REACT_APP_API_BASE_URL || '/api/',
+    withCredentials: true,
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-Superuser-Access': process.env.REACT_APP_SUPERUSER_KEY
+    }
+});
+// Базовые методы API
+export const get = async (url, params = {}) => {
     try {
-        const response = await axios.get(url, { headers });
-        setData(response.data || defaultValue);
-        console.log("Ответ сервера:", response.data);
+        const response = await api.get(url, { params });
+        return response.data;
     } catch (error) {
-        console.error("Ошибка при загрузке данных:", error);
-        setData(defaultValue);
+        console.error(`GET ${url} error:`, error);
+        throw error;
     }
 };
 
-export const fetchUserData = async (setUser, setError) => {
-    try {
-        axios.defaults.withCredentials = true;
-        const url = `${API_BASE_URL}user/`;
-        const headers = {
-            'X-Superuser-Access': 'hjflSdhjlkSDfjo79sdffs009fs87s0df09s8d'
-        };
-        const response = await axios.get(url, { headers });
-        setUser(response.data);
-    } catch (err) {
-        setError(err.message);
-        console.error('Ошибка загрузки пользователя:', err);
-    }
+// Специфичные методы API
+export const fetchUserData = async () => {
+    return get('user/');
 };
 
 export const fetchTypes = async () => {
-    try {
-        const response = await axios.get(`${API_BASE_URL}type/`);
-        return response.data.types;
-    } catch (error) {
-        console.error('Ошибка при загрузке типов:', error);
-        throw error;
-    }
+    const data = await get('type/');
+    return data.types || [];
 };
 
-export const fetchCategoriesData = async (setCategories, setError, setLoading) => {
-    setLoading(true);
-    try {
-        const response = await axios.get(`${API_BASE_URL}category/`);
-        setCategories(response.data);
-        setError(null);
-    } catch (err) {
-        setError(err.message);
-        console.error('Ошибка загрузки категорий:', err);
-    } finally {
-        setLoading(false);
-    }
+export const fetchCategories = async (params = {}) => {
+    return get('category/', params);
 };
 
 export const fetchPractices = async () => {
-    try {
-        const response = await axios.get(`${API_BASE_URL}practice/`);
-        return response.data;
-    } catch (error) {
-        throw error;
-    }
+    return get('practice/');
 };
 
-export const fetchArticlesAPI = async ({ category, page, pageSize, selectedType }) => {
+export const fetchArticles = async ({ category, page, pageSize, selectedType }) => {
     const params = {
         page,
-        page_size: pageSize
+        page_size: pageSize,
+        ...(category === 'all' ? { category: 'all' } :
+            category ? { category: category.pk } : {}),
+        ...(selectedType ? { type: selectedType } : {})
     };
 
-    if (category === 'all') {
-        params.category = 'all';
-    } else if (category) {
-        params.category = category.pk;
-    }
-
-    if (selectedType) {
-        params.type = selectedType;
-    }
-
-    const response = await axios.get(`${API_BASE_URL}article/`, {
-        params,
-        headers: {'Accept': 'application/json'}
-    });
-
-    return response.data; // { results, count }
-};
-
-export const fetchCategoriesAPI = async (selectedType) => {
-    const response = await axios.get(`${API_BASE_URL}category/`, {
-        params: { type: selectedType }
-    });
-    return response.data;
+    return get('article/', params);
 };
