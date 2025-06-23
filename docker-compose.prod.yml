@@ -54,7 +54,7 @@ services:
     depends_on:
       - web
     volumes:
-      - static_react:/static
+      - static_react:/static_react
 
 volumes:
   postgres_data:
