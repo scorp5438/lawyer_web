@@ -6,7 +6,8 @@ const api = axios.create({
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'X-Superuser-Access': process.env.REACT_APP_SUPERUSER_KEY
+//        'X-Superuser-Access': process.env.REACT_APP_SUPERUSER_KEY
+        'X-Superuser-Access': 'hjflSdhjlkSDfjo79sdffs009fs87s0df09s8d'
     }
 });
 // Базовые методы API
