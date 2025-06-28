@@ -30,12 +30,14 @@ class Article(models.Model):
         on_delete=CASCADE,
         related_name='сategory',
         related_query_name='сategory',
-        verbose_name='категория'
+        verbose_name='категория',
+        db_index=True,
     )
     content = models.TextField(
         max_length=3000,
         blank=False,
         null=False,
+        db_index=True,
         verbose_name='текст статьи'
     )
     creation_date = models.DateTimeField(
@@ -44,7 +46,8 @@ class Article(models.Model):
     )
     update_date = models.DateTimeField(
         auto_now=True,
-        verbose_name='дата изменения'
+        verbose_name='дата изменения',
+        db_index=True,
     )
     image = ProcessedImageField(
         upload_to='images/',
@@ -59,6 +62,10 @@ class Article(models.Model):
     class Meta:
         verbose_name = 'Статью'
         verbose_name_plural = 'Статья'
+
+    def get_image_url(self):
+        """Возвращает относительный URL изображения или None если изображения нет"""
+        return f'/media/{self.image.name}' if self.image else None
 
     def __str__(self):
         return self.title

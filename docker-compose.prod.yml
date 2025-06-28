@@ -1,0 +1,63 @@
+services:
+
+  web:
+    build: backend/lawyer_web
+    command: gunicorn --config gunicorn.conf.py lawyer_web.wsgi:application
+    depends_on:
+      - db
+    environment:
+      - PYTHONPATH=/app
+    volumes:
+      - static_volume:/app/static
+      - media:/app/media
+
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: ${POSTGRES_NAME_DB}
+      POSTGRES_USER: ${POSTGRES_USER_NAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./backend/lawyer_web/nginx.prod.conf:/etc/nginx/nginx.conf
+      - static_volume:/app/static
+      - static_react:/usr/share/nginx/html/static_react
+      - media:/media
+    depends_on:
+      - web
+      - frontend
+
+  redis:
+    image: redis:alpine
+
+  celery:
+    build: backend/lawyer_web
+    command: celery -A lawyer_web worker --loglevel=info
+    depends_on:
+      - redis
+      - db
+    environment:
+      - PYTHONPATH=/app
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - web
+    volumes:
+      - static_react:/static_react
+
+volumes:
+  postgres_data:
+  static_volume:
+  static_react:
+  media:

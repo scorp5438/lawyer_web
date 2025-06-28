@@ -1,0 +1,117 @@
+@import '../../assets/styles/variables';
+@import "../../assets/styles/mixins";
+.main__content {
+  height: auto;
+  width: $widthSite;
+  background: $mainBackground;
+  @include flex-center-top;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.articles_container {
+  @include flex-center-column;
+  margin-top: 50px;
+  width: $widthSiteContent;
+  font-family: 'Open Sans', sans-serif;
+
+
+  &_article-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    height: 500px;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &_image-wrapper {
+    padding: 10px;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  &_article-image {
+    width: 300px;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    border-radius: 50%;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  &_article-content {
+    padding: 15px;
+
+    h3 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .article-date, .article-updated {
+      font-size: 0.8em;
+      color: $textColor;
+    }
+  }
+}
+.article-block {
+  @include grid-2x2-plus-row;
+  width: 100%;
+}
+.loading, .error {
+  padding: 20px;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.error {
+  color: $colorError;
+}
+.articles_navigate {
+  margin-bottom: 20px;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-button {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #f5f5f5;
+  }
+
+  &.active {
+    background: $textColor;
+    color: $colorH1;
+    border-color: $headerBackground;
+  }
+}
+.read-more-button {
+  width: auto;
+  height: 30px;
+  font-size: 18px;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  background: $headerBackground;
+  color: $colorNavigate;
+}

@@ -1,0 +1,81 @@
+services:
+
+  web:
+    build: backend/lawyer_web
+    command: gunicorn --config gunicorn.conf.py lawyer_web.wsgi:application
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/health/" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    environment:
+      - PYTHONPATH=/app
+    volumes:
+      - static_volume:/app/static
+
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: ${POSTGRES_NAME_DB}
+      POSTGRES_USER: ${POSTGRES_USER_NAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER_NAME} -d ${POSTGRES_NAME_DB}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./backend/lawyer_web/nginx.conf:/etc/nginx/nginx.conf
+      - static_volume:/app/static
+      - ./frontend/my-app/build:/usr/share/nginx/html
+    depends_on:
+      - web
+      - frontend
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
+  celery:
+    build: backend/lawyer_web
+    command: celery -A lawyer_web worker --loglevel=info
+    depends_on:
+      - redis
+      - db
+    environment:
+      - PYTHONPATH=/app
+    volumes:
+      - ./backend/lawyer_web:/app/
+    healthcheck:
+      test: [ "CMD", "celery", "-A", "lawyer_web", "status" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/my-app:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
+  static_volume:

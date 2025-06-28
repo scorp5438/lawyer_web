@@ -1,12 +1,14 @@
-from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from django.urls import path, include
 
-from profiles.api.views import UserViewSet
 from articles.api.views import ArticleViewSet, CategoryApiViewSet, TypeApiViewSet
 from cases.api.views import CaseViewSet, PracticeViewSet
+from profiles.api.views import UserViewSet, CustomCSRFView
 from form_data.api.views import FormDataViewSet
 
+
 app_name = 'api-root'
+
 
 router = DefaultRouter()
 
@@ -19,5 +21,7 @@ router.register(r'practice', PracticeViewSet, basename='practice')
 router.register(r'data', FormDataViewSet, basename='data')
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('get-csrf-token/', CustomCSRFView.as_view(), name='get-csrf-token'),
 ]
+

@@ -1,0 +1,206 @@
+@import '../../assets/styles/variables';
+@import '../../assets/styles/mixins';
+
+.main__content {
+  height: auto;
+  width: $widthSite;
+  background: $mainBackground;
+  @include flex-center-top;
+  font-family: 'Open Sans', sans-serif;
+
+  &_content {
+    width: $widthSiteContent;
+    display: flex;
+    @include flex-between;
+    padding: 10px;
+
+    &_block {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 45px;
+
+      &_logo {
+        box-sizing: border-box;
+        width: 200px;
+        border: none;
+        border-bottom: 3px solid $colorH1;
+        background: none;
+        @include flex-center-column;
+        text-shadow: 0 2px 2px rgba(9, 9, 9, 0.7);
+
+        &_h1 {
+          text-align: center;
+          color: $colorH1;
+        }
+      }
+
+      &_dis {
+        width: 200px;
+        @include flex-center;
+
+        &_p {
+          color: $colorH1;
+          text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
+
+    &_img {
+      position: relative;
+      overflow: hidden;
+      border-radius: 5px;
+      &_photo {
+        width: 700px;
+        height: 700px;
+        object-fit: cover;
+        box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.3);
+        mask-image: radial-gradient(
+                        circle at center,
+                        #f3e5e5 70%,
+                        transparent 100%
+        );
+      }
+
+    }
+
+    &_info {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+
+      &_head {
+        @include grid-2x2-plus-row;
+        margin-top: 20px;
+        h2 {
+          color: $textColor;
+          font-size: $sizeContent;
+          border: none;
+          border-bottom: 3px solid $textColor;
+        }
+
+        &_practice {
+          @include grid-2x2-plus-row;
+          width: 500px;
+        }
+      }
+    }
+
+
+
+
+
+    .practice-item {
+      border: 2px solid $headerBackground;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+      color: $textColor;
+      font-size: 16px;
+      cursor: pointer;
+
+      &:hover {
+        border: 3px solid $colorH1;
+        background-color: $textColor;
+        transition: background 0.3s ease;
+        color: $colorH1;
+        text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+
+      }
+
+      &:last-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+
+    .loading, .error {
+      font-size: $sizeContent;
+      color: $colorH1;
+      text-align: center;
+      margin: 20px 0;
+    }
+  }
+  &_categary {
+    &_categories-list {
+      @include flex-center-row;
+
+      &_item {
+        list-style-type: none;
+        font-weight: bold;
+        color: $textColor;
+        font-size: $sizeContent;
+        cursor: pointer;
+
+        &:hover {
+          border-bottom: 3px solid $colorH1;
+          color: $colorH1;
+          transition: background 0.3s ease;
+          margin-bottom: -3px;
+        }
+      }
+    }
+
+    &_info {
+      @include flex-center-row;
+      width: 550px;
+
+      &_blog {
+        @include flex-center-column;
+        gap: 30px;
+
+        &_head {
+
+          h2 {
+            color: $textColor;
+            font-size: $sizeContent;
+            border: none;
+            border-bottom: 3px solid $textColor;
+          }
+
+          &_practice {
+            @include grid-2x2-plus-row;
+            width: 550px;
+          }
+        }
+
+      }
+    }
+  }
+}
+.practice-item {
+  position: relative;
+  cursor: pointer;
+  margin: 10px 0;
+  padding: 8px 12px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #e0e0e0;
+  }
+}
+
+.practice-tooltip {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  pointer-events: none;
+
+  h4 {
+    margin-top: 0;
+    color: #333;
+  }
+
+  p {
+    margin-bottom: 0;
+    color: #666;
+  }
+}

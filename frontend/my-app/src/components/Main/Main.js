@@ -1,53 +1,37 @@
-import React, { useState, useEffect } from "react";
-import Head from "../Head/Head";
-import Footer from "../Footer/Footer";
-
-import {fetchData} from "../utils/api";
+import React from "react";
 import ArticleCard from "../Articles/ArticleCard";
-import axios from "axios";
-import './main.scss'
-import Logo from "../Logo/Logo";
+import './main.scss';
+import ContentMain from "../ContentMain/ContentMain";
+import Profile from "../Profile/Profile";
+import CaseList from "../CaseList/CaseList";
 
 
+const Main = ({ activeSection, selectedType }) => {
 
 
-const Main = () => {
-    const [user, setUser] = useState([]);
-
-    useEffect(() => {
-        axios.defaults.withCredentials = true;
-
-        const url = "http://127.0.0.1:8000/api/user/";
-        const headers = {
-            'X-Superuser-Access': 'hjflSdhjlkSDfjo79sdffs009fs87s0df09s8d'
-        };
-
-        fetchData(url, headers, setUser, []);
-    }, []);
     return (
         <div>
+
             <div>
-                <Head
-                    user={user}
-                />
+                {activeSection === 'blog' ? (
+                    <ArticleCard selectedType={selectedType} />
+                ) : (
+                    <ContentMain />
+                )}
             </div>
-            <div className="main__content">
-                <div className="main__content_logo">
-                    <div className="main__content_logo_h1">
-                        <h1>SAProLex</h1>
-                    </div>
-                    <div className="main__content_logo">
-                        <p className="main__content_logo_p">
-                            ADVICE THAT MATTERS
-                        </p>
-                    </div>
-                </div>
-                <ArticleCard />
+            <div>{activeSection === 'blog' ||
+                <div id="profile-section"><Profile /></div>
+            }
             </div>
             <div>
-                <Footer
-                    user={user}
-                />
+                {activeSection === 'blog' &&
+                    <div></div>
+                }
+            </div>
+            <div>
+                {activeSection === 'blog' ||
+                    <CaseList />
+                }
             </div>
         </div>
     );

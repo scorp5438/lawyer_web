@@ -12,7 +12,8 @@ const Start = () => {
     useEffect(() => {
         axios.defaults.withCredentials = true;
 
-        const url = "http://127.0.0.1:8000/api/user/";
+//        const url = "http://127.0.0.1:8000/api/user/";
+        const url = "/api/user/";
         const headers = {
             'X-Superuser-Access': 'hjflSdhjlkSDfjo79sdffs009fs87s0df09s8d'
         };

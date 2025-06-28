@@ -1,22 +1,3 @@
 @import '../../assets/styles/variables';
 @import "../../assets/styles/mixins";
 
-.main__content {
-  height: 820px;
-  width: $widthSite;
-  background: $mainBackground;
-  &_logo {
-    box-sizing: border-box;
-    width: 200px;
-    border: none;
-    border-bottom: 3px solid #FFD700FF;
-    @include flex-center-column;
-    &_h1 {
-      text-align: center;
-      border: none;
-      border-bottom: 2px solid #282c34;
-      color: #FFD700FF;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-  }
-}
