@@ -1,0 +1,25 @@
+name: CI Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Compose
+        run: |
+          docker-compose -f docker-compose.prod.yml up -d --build
+
+      - name: Run tests
+        run: |
+          docker-compose -f docker-compose.prod.yml exec web python manage.py test
+        # Или, если тесты запускаются через pytest:
+        # docker-compose -f docker-compose.ci.yml exec web pytest
+
+      - name: Stop containers
+        if: always()
+        run: docker-compose -f docker-compose.ci.yml down
