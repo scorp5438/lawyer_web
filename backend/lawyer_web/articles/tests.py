@@ -67,7 +67,16 @@ class ProfileApiViewTestCase(TestCase):
         self.assertEqual(response_data[1].get('category_name'), 'category_two')
         self.assertEqual(response_data[0].get('content'), 'content_four')
 
+    def test_api_one_article_on_id(self):
+        response = self.client.get(
+            reverse('api-root:article-detail', kwargs={'pk': 1}))
+        response_data = response.json()
 
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response_data.get('title'), 'article_one')
+        self.assertEqual(response_data.get('type'), 'заметка')
+        self.assertEqual(response_data.get('category_name'), 'category_one')
+        self.assertEqual(response_data.get('content'), 'content_one')
 
     def test_articles_api_with_ordering(self):
         query_params = {'ordering': 'pk'}
@@ -86,7 +95,6 @@ class ProfileApiViewTestCase(TestCase):
         self.assertEqual(response_data[2].get('category_name'), 'category_two')
         self.assertEqual(response_data[3].get('content'), 'content_four')
 
-
     def test_articles_api_with_filter_on_type(self):
         query_params = {'type': 'статья'}
 
@@ -101,7 +109,6 @@ class ProfileApiViewTestCase(TestCase):
         self.assertEqual(len(response_data), 2)
         self.assertEqual(response_data[0].get('title'), 'article_three')
         self.assertEqual(response_data[1].get('content'), 'content_two')
-
 
     def test_articles_api_with_filter_on_category(self):
         category = Category.objects.filter(name='category_one').last()
@@ -119,7 +126,6 @@ class ProfileApiViewTestCase(TestCase):
         self.assertEqual(response_data[0].get('title'), 'article_two')
         self.assertEqual(response_data[1].get('content'), 'content_one')
 
-
     def test_articles_api_with_search_on_title(self):
         query_params = {'search': 'article_four'}
 
@@ -135,7 +141,6 @@ class ProfileApiViewTestCase(TestCase):
         self.assertEqual(response_data[0].get('title'), 'article_four')
         self.assertEqual(response_data[0].get('type'), 'новое в праве')
         self.assertEqual(response_data[0].get('content'), 'content_four')
-
 
     def test_articles_api_with_search_on_content(self):
         query_params = {'search': 'content_three'}
