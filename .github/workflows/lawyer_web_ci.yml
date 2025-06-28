@@ -1,25 +1,30 @@
-name: CI Tests
+name: Lawyer_web check
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - dev_back
 
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
 
-      - name: Set up Docker Compose
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.12
+
+
+      - name: Install dependencies
         run: |
-          docker-compose -f docker-compose.prod.yml up -d --build
+          cd backend
+          pip install -r requirements.txt
 
       - name: Run tests
         run: |
-          docker-compose -f docker-compose.prod.yml exec web python manage.py test
-        # Или, если тесты запускаются через pytest:
-        # docker-compose -f docker-compose.ci.yml exec web pytest
-
-      - name: Stop containers
-        if: always()
-        run: docker-compose -f docker-compose.ci.yml down
+          cd backend
+          python manage.py test
