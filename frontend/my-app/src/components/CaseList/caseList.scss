@@ -1,0 +1,161 @@
+@import '../../assets/styles/variables';
+@import "../../assets/styles/mixins";
+
+.case-list-wrapper {
+  width: 100%;
+}
+
+.case-list {
+  @include flex-center-column;
+  height: 250px;
+
+  &_head {
+    font-size: 34px;
+    text-shadow: 2px 2px 4px #000000;
+    color: $textColor;
+    font-weight: lighter;
+  }
+
+  &_container {
+    @include flex-center-column;
+
+    width: calc(100% - 80px); // Оставляем место для стрелок
+    overflow: hidden;
+
+    &_card {
+
+      width: 1020px;
+      height: 200px;
+
+      &_head {
+        font-size: 24px;
+        color: $textColor;
+        font-weight: revert;
+        text-align: center;
+        margin-bottom: 15px;
+
+      }
+
+      &_description {
+        color: $textColor;
+        font-weight: lighter;
+        font-size: 18px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        width: 100%;
+      }
+
+      &_details {
+        @include flex-center-column;
+        width: auto;
+        position: relative;
+        padding-bottom: 25px;
+        border-bottom: 1px solid $logoBackground;
+
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: -1px;
+          width: calc(50% - 40px);
+          height: 1px;
+          background-color: $logoBackground;
+        }
+
+        &::before {
+          left: 0;
+        }
+
+        &::after {
+          right: 0;
+
+          position: absolute;
+          bottom: -10px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 40px;
+          height: 20px;
+          background-image: url('../svg/infinity.svg');
+          background-repeat: no-repeat;
+          background-position: center;
+          background-color: $mainBackground;
+          padding: 0 10px;
+        }
+      }
+
+      &_category {
+        color: $textColor;
+
+        &_name {
+          color: $logoBackground;
+          font-size: 14px;
+        }
+
+        &_date-on {
+          color: $textColor;
+          font-size: 14px;
+        }
+
+        &_date-off {
+          color: $textColor;
+          font-size: 14px;
+        }
+      }
+    }
+
+  }
+}
+
+.case-list-header {
+  text-align: center;
+}
+
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+
+}
+
+.carousel-arrow {
+  &_left {
+    border: none;
+    background: none;
+
+  }
+
+  &_left svg {
+    cursor: pointer;
+  }
+
+  &_left {
+    &:hover {
+      svg path {
+
+        fill: $mainBackground;
+        stroke: $colorBack;
+      }
+    }
+  }
+
+  &_right {
+    border: none;
+    background: none;
+  }
+
+  &_right svg {
+    cursor: pointer;
+  }
+  &_right {
+    &:hover {
+      svg path {
+
+        fill: $mainBackground;
+        stroke: $colorBack;
+      }
+    }
+  }
+}
+
+

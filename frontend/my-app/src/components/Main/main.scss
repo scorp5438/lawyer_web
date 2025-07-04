@@ -1,3 +1,20 @@
 @import '../../assets/styles/variables';
 @import "../../assets/styles/mixins";
-
+.main-section {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  background: $mainBackground;
+  height: auto;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.case {
+  width: $widthSite;
+  height: 350px;
+  @include flex-center;
+  margin: 0 auto;
+  padding: 0;
+  background: $mainBackground;
+}

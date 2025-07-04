@@ -1,9 +1,12 @@
 @import '../../assets/styles/variables';
 @import "../../assets/styles/mixins";
+
 .main__content {
   height: auto;
   width: $widthSite;
   background: $mainBackground;
+  margin: 0 auto;
+  padding: 0;
   @include flex-center-top;
   font-family: 'Open Sans', sans-serif;
 }
@@ -13,14 +16,22 @@
   margin-top: 50px;
   width: $widthSiteContent;
   font-family: 'Open Sans', sans-serif;
+  gap: 30px;
 
 
   &_article-card {
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
-    transition: transform 0.3s ease;
     height: 500px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transfopm 0.5s ease;
+
+    &.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     &:hover {
       transform: translateY(-5px);
@@ -61,10 +72,12 @@
     }
   }
 }
+
 .article-block {
   @include grid-2x2-plus-row;
   width: 100%;
 }
+
 .loading, .error {
   padding: 20px;
   text-align: center;
@@ -74,10 +87,9 @@
 .error {
   color: $colorError;
 }
+
 .articles_navigate {
-  margin-bottom: 20px;
-  padding: 15px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 2px solid #cbc8c8;
 }
 
 .category-filter {
@@ -105,13 +117,51 @@
     border-color: $headerBackground;
   }
 }
+
 .read-more-button {
-  width: auto;
-  height: 30px;
+  width: 100px;
+  height: 40px;
   font-size: 18px;
-  padding: 5px;
+  border: none;
   cursor: pointer;
   border-radius: 5px;
-  background: $headerBackground;
+  background: $colorBack;
   color: $colorNavigate;
+  &:hover {
+    background: $colorH1;
+    color: $textColor;
+    box-shadow: 0 4px 8px rgb(108, 107, 107);
+  }
+}
+
+@for $i from 1 through 10 {
+  .articles_container_article-card:nth-child(#{$i}) {
+    transition-delay: $i * 0.1s;
+  }
+}
+
+.pagination-carts {
+  width: $widthSiteContent;
+  height: 40px;
+  margin-top: 20px;
+  @include flex-center-top;
+  justify-content: space-around;
+  font-family: 'Open Sans', sans-serif;
+  font-size: $sizePage;
+  &_toPage {
+    border-radius: 5px;
+    height: 40px;
+    width: 80px;
+    font-size: 20px;
+    text-align: center;
+    background: $colorBack;
+    color: $colorNavigate;
+    border: none;
+    cursor: pointer;
+    &:hover {
+      background: $colorH1;
+      color: $textColor;
+      box-shadow: 0 4px 8px rgb(108, 107, 107);
+    }
+  }
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from "axios";
 import { motion } from 'framer-motion';
+import { fetchArticleById } from '../utils/api';
 import './articleDetails.scss';
 
 const ArticleDetails = () => {
@@ -17,10 +18,13 @@ const ArticleDetails = () => {
     const [error, setError] = useState(null);
 
     const handleBack = () => {
-        const page = queryParams.get('page');
-        const category = queryParams.get('category');
-        const type = queryParams.get('type');
-        navigate(`/articles?page=${page}&category=${category}&type=${type}`);
+        navigate(location.state?.from || '/static_react/articles', {
+            state: {
+                page: location.state?.page,
+                category: location.state?.category,
+                type: location.state?.type
+            }
+        });
     };
 
     useEffect(() => {
@@ -28,8 +32,8 @@ const ArticleDetails = () => {
             setLoading(true);
             setError(null);
             try {
-                const response = await axios.get(`/api/article/${id}/`);
-                setArticle(response.data);
+                const data = await fetchArticleById(id);
+                setArticle(data);
             } catch (err) {
                 setError(err.response?.data?.detail || err.message);
             } finally {
@@ -95,7 +99,7 @@ const ArticleDetails = () => {
                     >
                         <img
                             className="article-image"
-                            src={article.image_url}
+                            src={`${article.image_url}`}
                             alt={article.title}
                             onError={(e) => {
                                 e.target.onerror = null;

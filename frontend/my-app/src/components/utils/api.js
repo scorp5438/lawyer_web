@@ -31,10 +31,11 @@ export const fetchTypes = async () => {
     return data.types || [];
 };
 
-export const fetchCategories = async (params = {}) => {
+export const fetchCategories = async (type = null) => {
+    const params = {};
+    if (type) params.type = type;
     return get('category/', params);
 };
-
 export const fetchPractices = async () => {
     return get('practice/');
 };
@@ -49,4 +50,10 @@ export const fetchArticles = async ({ category, page, pageSize, selectedType }) 
     };
 
     return get('article/', params);
+};
+export const fetchArticleById = async (id) => {
+    return get(`article/${id}/`);
+};
+export const fetchSortedCases = async (ordering = '-pk') => {
+    return get('case/', {ordering});
 };

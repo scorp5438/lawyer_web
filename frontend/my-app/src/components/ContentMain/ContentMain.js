@@ -78,16 +78,21 @@ const ContentMain = () => {
                             ) : error ? (
                                 <div className="error">Ошибка: {error}</div>
                             ) : (
-                                practices.map(practice => (
-                                    <div
-                                        key={practice.pk}
-                                        className="practice-item"
-                                        onMouseEnter={(e) => handleMouseEnter(practice, e)}
-                                        onMouseLeave={handleMouseLeave}
-                                    >
-                                        <h3 className="practice-category">{practice.category}</h3>
-                                    </div>
-                                ))
+                                practices.map((practice, index) => {
+                                    const isLastOdd =
+                                        practices.length % 2 === 1 && index === practices.length - 1;
+
+                                    return (
+                                        <div
+                                            key={practice.pk}
+                                            className={`practice-item ${isLastOdd ? 'full-width' : ''}`}
+                                            onMouseEnter={(e) => handleMouseEnter(practice, e)}
+                                            onMouseLeave={handleMouseLeave}
+                                        >
+                                            <h3 className="practice-category">{practice.category}</h3>
+                                        </div>
+                                    );
+                                })
                             )}
                         </div>
                     </div>

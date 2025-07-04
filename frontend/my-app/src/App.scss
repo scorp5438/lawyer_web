@@ -7,7 +7,9 @@
   padding: 0;
 }
 
-body {
+html, body, #root {
+  height: 100%;
+
   font-family: 'Open Sans', sans-serif;
 }
 h1, h2, h3 {
@@ -26,4 +28,54 @@ h1, h2, h3 {
   to {
     transform: rotate(360deg);
   }
+}
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  background: $mainBackground;
+}
+
+//скрытая анимация для логотипа
+//.logo-wrapper {
+//  object-fit: cover;
+//  transition: scale 2s ease;
+//}
+//.logo-wrapper.hidden {
+// scale: 0;
+//}
+
+.layout {
+  display: flex;
+  width: $widthSite;
+  flex-direction: column;
+  position: relative;
+  margin: 0 auto;
+}
+.Head {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 75px;
+  z-index: 100;
+}
+.content {
+  overflow-y: auto;
+  height: calc(100vh - 75px - 75px);
+
+}
+.App-footer {
+  position: fixed;
+  bottom: 0;
+  width: $widthSite;
+  height: 75px; // высота футера
+  background-color: $headerBackground;
+  color: white;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

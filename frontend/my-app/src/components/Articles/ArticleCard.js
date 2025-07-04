@@ -1,9 +1,9 @@
 import React, {useState, useEffect, useRef} from "react";
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useLocation} from 'react-router-dom';
 import {fetchArticles, fetchCategories} from '../utils/api';
 import './articlesCard.scss';
 
-const ArticleCard = ({selectedType}) => {
+const ArticleCard = ({selectedType, setSelectedType }) => {
     const navigate = useNavigate();
     const [articles, setArticles] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -13,8 +13,68 @@ const ArticleCard = ({selectedType}) => {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [expandedCards, setExpandedCards] = useState({});
+    const location = useLocation();
+    const [initialStateApplied, setInitialStateApplied] = useState(false);
+    const articleRefs = useRef([]);
 
     const pageSize = 10;
+
+    useEffect(() => {
+        if (!initialStateApplied && location.state) {
+            if (location.state.type) {
+                setSelectedType(location.state.type);
+            }
+
+            if (location.state.page) {
+                setPage(location.state.page);
+            }
+        }
+    }, [location.state, initialStateApplied]);
+
+    useEffect(() => {
+        if (!initialStateApplied && location.state && categories.length > 0) {
+            if (location.state.category) {
+                const foundCategory = categories.find(cat => cat.pk === location.state.category);
+                if (foundCategory) {
+                    setSelectedCategory(foundCategory);
+                }
+            }
+
+            setInitialStateApplied(true); // переносим сюда
+        }
+    }, [categories, location.state, initialStateApplied]);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Можно отключить наблюдение после появления
+                        // observer.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                threshold: 0.1, // Срабатывает когда 10% элемента видно
+                rootMargin: '0px 0px -50px 0px' // Небольшой отступ снизу
+            }
+        );
+
+        if (articleRefs.current) {
+            articleRefs.current.forEach((ref) => {
+                if (ref) observer.observe(ref);
+            });
+        }
+
+        return () => {
+            if (observer) {
+                articleRefs.current.forEach((ref) => {
+                    if (ref) observer.unobserve(ref);
+                });
+            }
+        };
+    }, [articles]);
 
     const loadArticles = async (category = null, page = 1) => {
         setLoading(true);
@@ -28,7 +88,7 @@ const ArticleCard = ({selectedType}) => {
                 selectedType
             });
 
-            const { results, count } = data;
+            const {results, count} = data;
 
             const sortedArticles = [...results].sort((a, b) =>
                 new Date(b.creation_date) - new Date(a.creation_date)
@@ -138,11 +198,16 @@ const ArticleCard = ({selectedType}) => {
                 <section className='article-block'>
                     {articles.length > 0 ? (
                         articles.map((article, index) => (
-                            <div key={index} className="articles_container_article-card" style={{position: 'relative'}}>
+                            <div key={index}
+                                 className="articles_container_article-card"
+                                 ref={(el) => {
+                                     articleRefs.current[index] = el;
+                                     contentRefs.current[index] = el;}}
+                                 style={{position: 'relative'}}>
                                 {article.image_url && (
                                     <div className="articles_container_image-wrapper">
                                         <img
-                                            src={article.image_url}
+                                            src={`${article.image_url}`}
                                             alt={article.title}
                                             className="articles_container_article-image"
                                             onError={(e) => {
@@ -164,11 +229,17 @@ const ArticleCard = ({selectedType}) => {
                                 </div>
 
                                 {expandedCards[index] && (
-                                    <button className="read-more-button"
-                                            onClick={() => {
-                                                const categoryPk = selectedCategory?.pk || '';
-                                                navigate(`/article/${article.id}?page=${page}`);
-                                            }}>
+                                    <button
+                                        className="read-more-button"
+                                        onClick={() => navigate(`/static_react/article/${article.id}`, {
+                                            state: {
+                                                from: '/static_react/articles',
+                                                page,
+                                                category: selectedCategory?.pk,
+                                                type: selectedType
+                                            }
+                                        })}
+                                    >
                                         Далее...
                                     </button>
                                 )}
@@ -190,10 +261,10 @@ const ArticleCard = ({selectedType}) => {
                     )}
                 </section>
 
-                <div className="pagination">
-                    <button onClick={() => goToPage(page - 1)} disabled={page === 1}>Назад</button>
+                <div className="pagination-carts">
+                    <button className="pagination-carts_toPage" onClick={() => goToPage(page - 1)} disabled={page === 1}>Назад</button>
                     <span>Страница {page} из {totalPages}</span>
-                    <button onClick={() => goToPage(page + 1)} disabled={page === totalPages}>Вперёд</button>
+                    <button className="pagination-carts_toPage" onClick={() => goToPage(page + 1)} disabled={page === totalPages}>Вперёд</button>
                 </div>
             </div>
         </div>

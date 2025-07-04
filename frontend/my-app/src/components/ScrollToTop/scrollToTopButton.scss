@@ -1,0 +1,18 @@
+@import '../../assets/styles/variables';
+@import "../../assets/styles/mixins";
+
+.up {
+  height: 50px;
+  width: $widthSite;
+  margin: 0 auto;
+  border: none;
+  background: $mainBackground;
+  cursor: pointer;
+  &:hover {
+    svg path {
+      fill: $mainBackground;
+      stroke: $colorBack;
+      stroke-width: 2
+    }
+  }
+}
