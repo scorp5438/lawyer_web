@@ -207,7 +207,7 @@ const ArticleCard = ({selectedType, setSelectedType }) => {
                                 {article.image_url && (
                                     <div className="articles_container_image-wrapper">
                                         <img
-                                            src={`${article.image_url}`}
+                                            src={article.image_url}
                                             alt={article.title}
                                             className="articles_container_article-image"
                                             onError={(e) => {

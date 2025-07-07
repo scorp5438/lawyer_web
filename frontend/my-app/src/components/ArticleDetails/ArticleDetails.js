@@ -99,7 +99,7 @@ const ArticleDetails = () => {
                     >
                         <img
                             className="article-image"
-                            src={`${article.image_url}`}
+                            src={article.image_url}
                             alt={article.title}
                             onError={(e) => {
                                 e.target.onerror = null;

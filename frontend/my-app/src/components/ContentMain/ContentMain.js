@@ -46,7 +46,7 @@ const ContentMain = () => {
         <div className="main__content">
             <div className="main__content_content">
                 <div className="main__content_content_block">
-                    <div>
+                    <div className="main__content_content_block_center">
                         <div className="main__content_content_block_logo">
                             <div className="main__content_content_block_logo_h1">
                                 <h1>SAProLex</h1>
@@ -103,8 +103,8 @@ const ContentMain = () => {
                             className="practice-tooltip"
                             style={{
                                 position: 'fixed',
-                                left: `${tooltipPosition.x + 15}px`,
-                                top: `${tooltipPosition.y + 15}px`,
+                                left: `${tooltipPosition.x + 10}px`,
+                                top: `${tooltipPosition.y + 10}px`,
                                 zIndex: 1000
                             }}
                         >
@@ -115,7 +115,7 @@ const ContentMain = () => {
                         </div>
                     )}
 
-                    <div>
+                    <div className="modal-center">
                         <p>Вы можете задать свой вопрос мне</p>
                         <ModalForm handleCloseModal={handleCloseModal}/>
                     </div>

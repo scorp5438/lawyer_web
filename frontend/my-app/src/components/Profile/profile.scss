@@ -6,6 +6,7 @@
   margin: 0;
   padding: 0;
 }
+
 .about__content {
   width: $widthSite;
   height: auto;
@@ -14,8 +15,8 @@
   box-sizing: border-box;
   background-color: $mainBackground;
   padding: 20px;
-  //border: 2px solid $colorNavigate;
-
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 10px;
   &_container {
     width: $widthSiteContent;
     color: $textColor;
@@ -23,28 +24,219 @@
     border-top: 2px solid $colorBack;
     border-bottom: 2px solid $colorBack;
     padding: 10px;
-    //box-shadow:
-    //        inset 0 0 15px $colorNavigate,    // мягкая тень
-    //        inset 0 0 20px $colorH1;   // более размытая тень
-    //padding: 25px;                          // чтобы тень не накладывалась на контент
-
     border-radius: 8px;
+
+    &_description {
+      width: 100%;
+    }
+
     h1, h2 {
       font-family: 'Open Sans', sans-serif;
-      font-weight: 700;
       text-align: center;
+      font-weight: lighter;
 
     }
-    h1 {
+
+    &_head {
       font-size: 34px;
       text-shadow: 2px 2px 4px #000000;
     }
+
+    &_hello {
+      font-size: 24px;
+    }
+
     li {
       list-style-type: none;
     }
+
     p {
       text-align: justify;
       font-size: 16px;
+    }
+  }
+}
+
+@media (min-width: 375px) and (max-width: 575px) {
+  .about__content {
+    width: 375px;
+
+    &_container {
+      width: 375px;
+
+
+      &_head {
+        font-size: 20px;
+        text-shadow: 1px 1px 2px #000000;
+      }
+
+      &_hello {
+        font-size: 16px;
+      }
+
+      li {
+        list-style-type: none;
+        font-size: 11px;
+      }
+
+      p {
+        text-align: justify;
+        font-size: 11px;
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .about__content {
+    width: 576px;
+
+    &_container {
+      width: 576px;
+
+      &_head {
+        font-size: 24px;
+        text-shadow: 2px 2px 4px #000000;
+      }
+
+      &_hello {
+        font-size: 18px;
+      }
+
+      li {
+        list-style-type: none;
+        font-size: 12px;
+      }
+
+      p {
+        text-align: justify;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .about__content {
+    width: 768px;
+
+    &_container {
+      width: 768px;
+
+      &_head {
+        font-size: 26px;
+        text-shadow: 2px 2px 4px #000000;
+      }
+
+      &_hello {
+        font-size: 20px;
+      }
+
+      li {
+        list-style-type: none;
+        font-size: 12px;
+      }
+
+      p {
+        text-align: justify;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .about__content {
+    width: 992px;
+
+    &_container {
+      width: 992px;
+
+      h1, h2 {
+        font-family: 'Open Sans', sans-serif;
+        text-align: center;
+        font-weight: lighter;
+
+
+      }
+
+      &_head {
+        font-size: 28px;
+        text-shadow: 2px 2px 4px #000000;
+      }
+
+      &_hello {
+        font-size: 22px;
+      }
+
+      li {
+        list-style-type: none;
+        font-size: 14px;
+      }
+
+      p {
+        text-align: justify;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .about__content {
+    width: 1200px;
+
+    &_container {
+      width: 1200px;
+      padding: 10px;
+      border-radius: 8px;
+    }
+  }
+
+  @media (min-width: 1440px) and (max-width: 1600px) {
+    .about__content {
+      width: $widthSite;
+      height: auto;
+      @include flex-center-top;
+      font-family: 'Open Sans', sans-serif;
+      box-sizing: border-box;
+      background-color: $mainBackground;
+      padding: 20px;
+
+      &_container {
+        width: $widthSiteContent;
+        color: $textColor;
+        font-family: 'Open Sans', sans-serif;
+        border-top: 2px solid $colorBack;
+        border-bottom: 2px solid $colorBack;
+        padding: 10px;
+        border-radius: 8px;
+
+        h1, h2 {
+          font-family: 'Open Sans', sans-serif;
+          text-align: center;
+          font-weight: lighter;
+
+        }
+
+        &_head {
+          font-size: 34px;
+          text-shadow: 2px 2px 4px #000000;
+        }
+
+        &_hello {
+          font-size: 24px;
+        }
+
+        li {
+          list-style-type: none;
+        }
+
+        p {
+          text-align: justify;
+          font-size: 16px;
+        }
+      }
     }
   }
 }

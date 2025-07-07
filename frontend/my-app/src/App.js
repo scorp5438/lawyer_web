@@ -51,6 +51,7 @@ function App({user}) {
         setActiveSection('blog');
     };
 
+
     const handleMainClick = () => {
         setSelectedType(null);
         setActiveSection('main'); // вот этого не хватало
@@ -70,10 +71,8 @@ function App({user}) {
                                 user={user}
                                 onBlogClick={handleBlogClick}
                                 onMainClick={handleMainClick}
-                                // setForceShowProfile={setForceShowProfile}
                                 setShowOnlyProfile={setShowOnlyProfile}
                             />
-
 
 
                             <main className="content">
@@ -84,10 +83,7 @@ function App({user}) {
                                             activeSection={activeSection}
                                             selectedType={selectedType}
                                             setSelectedType={setSelectedType}
-                                            // forceShowProfile={forceShowProfile}
-                                            // setForceShowProfile={setForceShowProfile}
                                             showOnlyProfile={showOnlyProfile}
-                                            // setShowOnlyProfile={setShowOnlyProfile}
                                         />
 
                                     }/>
@@ -104,8 +100,8 @@ function App({user}) {
                                     {/* Страница полной статьи */}
                                     <Route path="/static_react/article/:id" element={<ArticleDetails/>}/>
                                 </Routes>
-                                <div>
-                                    <ScrollToTop />
+                                <div className="button-scroll">
+                                    <ScrollToTop/>
                                 </div>
                             </main>
 

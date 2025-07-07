@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
+
 import axios from "axios";
-// import {fetchData} from "../utils/api";
 import './modalForm.scss';
 import {fetchUserData} from "../utils/api";
+import Politic from "../Politic/Politic";
 const ModalForm = ({handleCloseModal}) => {
     const [formData, setFormData] = useState({
         first_name: '',
@@ -17,7 +18,15 @@ const ModalForm = ({handleCloseModal}) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState(null);
     const [token, setToken] = useState('');
+    const [showPolitic, setShowPolitic] = useState(false);
+    const openPolitic = (e) => {
+        e.preventDefault();
+        setShowPolitic(true);
+    };
 
+    const closePolitic = () => {
+        setShowPolitic(false);
+    };
     useEffect(() => {
         axios.defaults.withCredentials = true;
 
@@ -30,7 +39,7 @@ const ModalForm = ({handleCloseModal}) => {
     }, []);
 
     const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
+        const {name, value, type, checked} = e.target;
         setFormData(prevState => ({
             ...prevState,
             [name]: type === 'checkbox' ? checked : value
@@ -38,7 +47,7 @@ const ModalForm = ({handleCloseModal}) => {
 
         // Очищаем ошибку при изменении поля
         if (errors[name]) {
-            setErrors(prev => ({ ...prev, [name]: '' }));
+            setErrors(prev => ({...prev, [name]: ''}));
         }
     };
 
@@ -135,11 +144,11 @@ const ModalForm = ({handleCloseModal}) => {
                 }, 2000);
             } else {
                 const data = await response.json();
-                setErrors(data.errors || { general: 'Ошибка при отправке формы' });
+                setErrors(data.errors || {general: 'Ошибка при отправке формы'});
                 setSubmitStatus('error');
             }
         } catch (error) {
-            setErrors({ general: 'Ошибка сети или сервера' });
+            setErrors({general: 'Ошибка сети или сервера'});
             setSubmitStatus('error');
         } finally {
             setIsSubmitting(false);
@@ -147,10 +156,9 @@ const ModalForm = ({handleCloseModal}) => {
 
     };
 
-
-
     return (
-        <section  className='form-center'>
+        <section className='form-center'>
+            {showPolitic && <Politic onClose={closePolitic} />}
             <div className='form-center_content'>
                 <form className="form" onSubmit={handleSubmit}>
                     <h2>Форма заявки</h2>
@@ -198,6 +206,11 @@ const ModalForm = ({handleCloseModal}) => {
                                 name="phone"
                                 value={formData.phone}
                                 placeholder=" "
+                                onFocus={() => {
+                                    if (!formData.phone.startsWith('+7')) {
+                                        setFormData(prev => ({...prev, phone: '+7'}));
+                                    }
+                                }}
                                 onChange={handleChange}
                                 required
                             />
@@ -238,14 +251,20 @@ const ModalForm = ({handleCloseModal}) => {
                             checked={formData.consent}
                             onChange={handleChange}
                         />
-                        <p className='politic'>Отправляя информацию, вы даете согласие на обработку персональных данных в соответствии с <a>Пользовательским соглашением и Политикой конфиденциальности</a>.
-                        </p>
-                        {errors.consent && <p className="error-message">{errors.consent}</p>}
+                        <div className='politic'>
+                            <p>Отправляя информацию, вы даете согласие на обработку персональных данных
+                                в соответствии с <span  onClick={openPolitic}
+                                                        className="politic-link">
+                                    Пользовательским соглашением и Политикой конфиденциальности</span>.
+                            </p>
+                            {errors.consent && <p className="error-message">{errors.consent}</p>}
+                        </div>
+
                     </label>
 
-                    <button
-                        type="submit"
-                        disabled={!formData.consent || isSubmitting}
+                    <button className="submit"
+                            type="submit"
+                            disabled={!formData.consent || isSubmitting}
                     >
                         {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
                     </button>

@@ -1,23 +1,97 @@
 @import "../../assets/styles/mixins";
 @import "../../assets/styles/variables";
-.logo{
+
+.logo {
   @include flex-center-column;
-  height: $heightSite;
-  width: $widthSite;
+  width: 100%;
+  height: 100vh;
   background-color: $logoBackground;
+  text-shadow: 2px 2px 8px $colorH1;
+
   .logo__h1 {
     background: none;
     box-sizing: border-box;
-    width: 200px;
+    width: auto;
     border: none;
-    border-bottom: 3px solid #FFD700FF;
-    h1 {
-      text-align: center;
-      color: #FFD700FF;
+    border-bottom: 3px solid $colorH1;
+    padding: 5px;
+  }
+
+  .head-h1 {
+    text-align: center;
+    color: $colorH1;
+    font-size: 6em;
+  }
+
+  .logo__p .text {
+    color: $colorH1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-size: 2.5em;
+    padding: 5px;
+  }
+}
+@media (min-width: 375px) and (max-width: 575px) {
+  .logo {
+    .head-h1 {
+      font-size: 1.5em;
+    }
+    .logo__p .text {
+      font-size: 0.7em;
     }
   }
-  .logo__p p{
-    color: #FFD700FF;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .logo {
+    .head-h1 {
+      font-size: 2em;
+    }
+    .logo__p .text {
+      font-size: 0.9em;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .logo {
+    .head-h1 {
+      font-size: 3em;
+    }
+    .logo__p .text {
+      font-size: 1.3em;
+    }
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .logo {
+    .head-h1 {
+      font-size: 4em;
+    }
+    .logo__p .text {
+      font-size: 1.6em;
+    }
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .logo {
+    .head-h1 {
+      font-size: 5em;
+    }
+    .logo__p .text {
+      font-size: 2em;
+    }
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 1600px) {
+  .logo {
+    .head-h1 {
+      font-size: 6em;
+    }
+    .logo__p .text {
+      font-size: 2.5em;
+    }
   }
 }

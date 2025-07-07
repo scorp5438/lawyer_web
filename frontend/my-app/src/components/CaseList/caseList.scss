@@ -20,7 +20,7 @@
     @include flex-center-column;
 
     width: calc(100% - 80px); // Оставляем место для стрелок
-    overflow: hidden;
+
 
     &_card {
 
@@ -147,6 +147,7 @@
   &_right svg {
     cursor: pointer;
   }
+
   &_right {
     &:hover {
       svg path {
@@ -154,6 +155,244 @@
         fill: $mainBackground;
         stroke: $colorBack;
       }
+    }
+  }
+}
+
+@media (min-width: 375px) and (max-width: 575px) {
+  .margin {
+    margin-bottom: 10px;
+  }
+  .case-list-wrapper {
+    width: 375px;
+  }
+
+  .case-list {
+    width: 375px;
+    height: auto;
+
+    &_head {
+      font-size: 20px;
+      text-shadow: 1px 1px 2px #000000;
+    }
+
+    &_container {
+      &_card {
+        width: 280px;
+        height: auto;
+
+        &_head {
+          font-size: 16px;
+        }
+
+        &_description {
+          font-size: 11px;
+        }
+
+        &_category {
+          color: $textColor;
+          font-size: 11px;
+
+          &_name {
+            color: $logoBackground;
+            font-size: 11px;
+          }
+
+          &_date-on {
+            color: $textColor;
+            font-size: 11px;
+            p {
+              font-size: 12px;
+            }
+          }
+
+          &_date-off {
+            color: $textColor;
+            font-size: 11px;
+          }
+        }
+      }
+
+    }
+  }
+
+  .carousel-arrow {
+    &_left svg {
+      cursor: pointer;
+      width: 20px;
+    }
+
+    &_right svg {
+      cursor: pointer;
+      width: 20px;
+    }
+
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+
+  .case-list-wrapper {
+    width: 576px;
+  }
+
+  .case-list {
+    width: 576px;
+    height: auto;
+
+    &_head {
+      font-size: 24px;
+      text-shadow: 1px 1px 2px #000000;
+    }
+
+    &_container {
+      &_card {
+        width: 460px;
+
+        &_head {
+          font-size: 18px;
+        }
+
+        &_description {
+          font-size: 12px;
+        }
+
+        &_category {
+          color: $textColor;
+          font-size: 12px;
+
+          &_name {
+            color: $logoBackground;
+            font-size: 12px;
+          }
+
+          &_date-on {
+            color: $textColor;
+            font-size: 12px;
+            p {
+              font-size: 12px;
+            }
+          }
+
+          &_date-off {
+            color: $textColor;
+            font-size: 12px;
+          }
+        }
+      }
+
+    }
+  }
+
+  .carousel-arrow {
+    &_left svg {
+      cursor: pointer;
+      width: 30px;
+    }
+
+    &_right svg {
+      cursor: pointer;
+      width: 30px;
+    }
+
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .case-list-wrapper {
+    width: 768px;
+  }
+
+  .case-list {
+    width: 768px;
+    height: auto;
+
+    &_head {
+      font-size: 26px;
+      text-shadow: 1px 1px 2px #000000;
+    }
+
+    &_container {
+      &_card {
+        width: 600px;
+
+        &_head {
+          font-size: 20px;
+        }
+
+        &_description {
+          font-size: 12px;
+        }
+
+        &_category {
+          color: $textColor;
+          font-size: 12px;
+
+          &_name {
+            color: $logoBackground;
+            font-size: 12px;
+          }
+
+          &_date-on {
+            color: $textColor;
+            font-size: 12px;
+            p {
+              font-size: 12px;
+            }
+          }
+
+          &_date-off {
+            color: $textColor;
+            font-size: 12px;
+          }
+        }
+      }
+
+    }
+  }
+
+  .carousel-arrow {
+    &_left svg {
+      cursor: pointer;
+      width: 30px;
+    }
+
+    &_right svg {
+      cursor: pointer;
+      width: 30px;
+    }
+
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .case-list-wrapper {
+    width: 992px;
+  }
+  .case-list {
+    width: 992px;
+    height: auto;
+
+    &_head {
+      font-size: 28px;
+      text-shadow: 1px 1px 2px #000000;
+    }
+
+    &_container {
+      &_card {
+        width: 800px;
+
+        &_head {
+          font-size: 22px;
+          color: $textColor;
+        }
+
+        &_description {
+          font-size: 14px;
+        }
+
+      }
+
     }
   }
 }

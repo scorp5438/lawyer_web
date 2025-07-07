@@ -54,7 +54,7 @@ const CaseList = () => {
     };
 
     return (
-        <div>
+        <div className='margin'>
             <div className="case-list-wrapper">
                 <div className="case-list-header">
                     <h1 className="case-list_head">Список дел</h1>

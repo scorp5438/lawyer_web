@@ -11,9 +11,9 @@ const api = axios.create({
     }
 });
 // Базовые методы API
-export const get = async (url, params = {}) => {
+const get = async (url, params = {}) => {
     try {
-        const response = await api.get(url, { params });
+        const response = await api.get(url, {params});
         return response.data;
     } catch (error) {
         console.error(`GET ${url} error:`, error);
@@ -36,17 +36,18 @@ export const fetchCategories = async (type = null) => {
     if (type) params.type = type;
     return get('category/', params);
 };
+
 export const fetchPractices = async () => {
     return get('practice/');
 };
 
-export const fetchArticles = async ({ category, page, pageSize, selectedType }) => {
+export const fetchArticles = async ({category, page, pageSize, selectedType}) => {
     const params = {
         page,
         page_size: pageSize,
-        ...(category === 'all' ? { category: 'all' } :
-            category ? { category: category.pk } : {}),
-        ...(selectedType ? { type: selectedType } : {})
+        ...(category === 'all' ? {category: 'all'} :
+            category ? {category: category.pk} : {}),
+        ...(selectedType ? {type: selectedType} : {})
     };
 
     return get('article/', params);

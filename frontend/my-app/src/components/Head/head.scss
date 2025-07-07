@@ -105,7 +105,6 @@
     display: none;
     position: absolute;
     top: 100%;
-    right: -20px;
     background-color: $headerBackground;
     flex-direction: column;
     gap: 5px;
@@ -144,17 +143,19 @@
 }
 
 .modal-content {
-  text-align: right;
   border: 2px solid $headerBackground;
   border-radius: 5px;
   padding: 10px;
   background-color: $headerBackground;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-close {
   border: none;
   background: none;
   padding-right: 10px;
+  text-align: right;
 }
 
 .modal-close svg {
@@ -166,80 +167,126 @@
   fill: $colorH1;
 }
 
-@media (min-width: 375px) and (max-width: 576px) {
+@media (min-width: 375px) and (max-width: 575px) {
   .header__navigate {
-    width: 375px;
+    min-width: 375px;
+    max-width: 575px;
 
-    &_width {
-      width: 375px;
-      padding-right: 20px;
-      padding-left: 20px;
+    &_head {
+      min-width: 375px;
+      max-width: 575px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
     }
   }
   .head__nav {
     &_item {
       font-size: 12px !important;
+
       & a {
         font-size: 12px;
       }
     }
+
     &_menu_item {
       font-size: 14px;
 
     }
+
     &_item_blog {
       width: 100px;
       padding: 5px;
-      top: 150px;
-      right: 110px;
+      right: 112px;
+      margin-top: 95px;
+
       & li {
         font-size: 12px;
       }
     }
+  }
+  .modal-close svg:active {
+    fill: $colorH1;
   }
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
   .header__navigate {
-    width: 576px;
+    min-width: 576px;
+    max-width: 767px;
 
-    &_width {
-      width: 576px;
-      padding-right: 20px;
-      padding-left: 20px;
+    &_head {
+      min-width: 576px;
+      max-width: 767px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
     }
   }
   .head__nav {
     &_item {
       font-size: 14px !important;
+
       & a {
         font-size: 14px;
       }
     }
+
     &_menu_item {
       font-size: 14px;
 
     }
+
     &_item_blog {
       width: 140px;
       padding: 10px;
-      top: 180px;
-      right: 125px;
+      right: 115px;
+      margin-top: 95px;
+
       & li {
         font-size: 14px;
       }
     }
   }
+
+  .modal-content {
+    text-align: right;
+    border: 2px solid $headerBackground;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: $headerBackground;
+  }
+
+  .modal-close {
+    border: none;
+    background: none;
+    padding-right: 10px;
+  }
+
+  .modal-close svg {
+    cursor: pointer;
+    fill: $colorError;
+  }
+
+  .modal-close svg:active {
+    fill: $colorH1;
+  }
+  .modal-close svg:active {
+    fill: $colorH1;
+  }
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 768px) and (max-width: 992px) {
   .header__navigate {
-    width: 768px;
+    min-width: 768px;
+    max-width: 991px;
 
-    &_width {
-      width: 768px;
-      padding-right: 20px;
-      padding-left: 20px;
+    &_head {
+      min-width: 768px;
+      max-width: 991px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
     }
   }
   .head__nav {
@@ -250,30 +297,46 @@
         font-size: 16px;
       }
     }
+
     &_menu_item {
       font-size: 16px;
 
     }
+
     &_item_blog {
       width: 140px;
       padding: 10px;
-      top: 180px;
-      right: 140px;
+      right: 125px;
+      margin-top: 100px;
+
       & li {
         font-size: 16px;
       }
     }
   }
+  .modal-content {
+    width: 570px;
+  }
+  .modal-close svg:active {
+    fill: $colorH1;
+  }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
   .header__navigate {
-    width: 992px;
+    min-width: 992px;
+    max-width: 1200px;
 
     &_width {
-      width: 992px;
-      padding-right: 20px;
-      padding-left: 20px;
+      min-width: 992px;
+      max-width: 1200px;
+    }
+    &_head {
+      min-width: 992px;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
     }
   }
   .head__nav {
@@ -284,53 +347,50 @@
         font-size: 16px;
       }
     }
+
     &_menu_item {
       font-size: 16px;
 
     }
+
     &_item_blog {
       width: 140px;
       padding: 10px;
-      top: 180px;
-      right: 140px;
+
       & li {
         font-size: 16px;
       }
     }
+
   }
-
-
+  .modal-close svg:active {
+    fill: $colorH1;
+  }
+  .modal-content {
+    width: 450px;
+  }
 }
 
-@media (min-width: 1200px) and (max-width: 1399px) {
+@media (min-width: 1200px) and (max-width: 1600px) {
   .header__navigate {
-    width: 1200px;
+    min-width: 1200px;
+    max-width: 1600px;
 
-    &_width {
-      width: 1200px;
-      padding-right: 20px;
-      padding-left: 20px;
+    &_head {
+      min-width: 1200px;
+      max-width: 1600px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
     }
-  }
-  .head__nav {
-    &_item li{
-      font-size: 18px;
+    &_item_blog {
+      width: 140px;
+      padding: 10px;
+      right: 0;
 
-      & a {
-        font-size: 18px;
+      & li {
+        font-size: 16px;
       }
-    }
-  }
-}
-
-@media (min-width: 1400px) and (max-width: 1440px) {
-  .header__navigate {
-    width: 1400px;
-
-    &_width {
-      width: 1400px;
-      padding-right: 20px;
-      padding-left: 20px;
     }
   }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './head.scss';
 import ModalForm from "../ModalForm/ModalForm";
 import IconClose from "../svg/IconClose";
@@ -14,6 +14,8 @@ const Head = ({ onBlogClick, onMainClick, setShowOnlyProfile }) => {
     const [loading, setLoading] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
+    const blogMenuRef = useRef(null);
+
 
     const handleClick = () => {
         onMainClick();
@@ -21,6 +23,22 @@ const Head = ({ onBlogClick, onMainClick, setShowOnlyProfile }) => {
         navigate('/static_react/');
         setMobileMenuOpen(false);
     };
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (blogMenuRef.current && !blogMenuRef.current.contains(event.target)) {
+                // Проверяем, что клик был не по элементу меню "Блог"
+                const blogMenuItem = document.querySelector('.head__nav_menu_item:last-child');
+                if (blogMenuItem && !blogMenuItem.contains(event.target)) {
+                    setIsOpen(false);
+                }
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     const handleProfileClick = () => {
         setShowOnlyProfile(true);
@@ -112,7 +130,7 @@ const Head = ({ onBlogClick, onMainClick, setShowOnlyProfile }) => {
                                 <li className="head__nav_menu_item" onClick={() => setIsOpen(!isOpen)}>
                                     Блог
                                     {isOpen && (
-                                        <div className="head__nav_item_blog">
+                                        <div className="head__nav_item_blog" ref={blogMenuRef}>
                                             {error && <p className="error">Ошибка: {error}</p>}
                                             <ul className="head__nav_menu_item">
                                                 {type.map(t => (
