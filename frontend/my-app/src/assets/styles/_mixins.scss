@@ -22,10 +22,15 @@
   justify-content: center;
   align-items: center;
 }
+@mixin flex-space-around {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 
 @mixin flex-between {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 @mixin grid-2x2-plus-row {
@@ -34,5 +39,10 @@
   grid-template-rows: auto auto auto;
   text-align: center;
   gap: 10px;
-
+}
+@mixin grid-2x2-plus-column {
+  display: grid;
+  justify-items: center;
+  justify-content: center;
+  grid-template-columns: 2fr 1fr;
 }
