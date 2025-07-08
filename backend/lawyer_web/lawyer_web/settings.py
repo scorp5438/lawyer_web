@@ -101,6 +101,14 @@ DATABASES = {
     }
 }
 
+# Database для локального запуска на винде
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 # Автоматически переключаться на SQLite при запуске тестов
 if 'test' in sys.argv or 'test_coverage' in sys.argv:
     DATABASES['default'] = {
