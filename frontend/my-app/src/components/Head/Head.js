@@ -16,7 +16,7 @@ const Head = ({ onBlogClick, onMainClick, setShowOnlyProfile }) => {
     const navigate = useNavigate();
     const blogMenuRef = useRef(null);
 
-
+    const location = useLocation();
     const handleClick = () => {
         onMainClick();
         setShowOnlyProfile(false);
@@ -83,6 +83,13 @@ const Head = ({ onBlogClick, onMainClick, setShowOnlyProfile }) => {
         onBlogClick(selectedType);
         setIsOpen(false);
         setMobileMenuOpen(false);
+
+        // Всегда перенаправляем на страницу со статьями
+        navigate('articles/', {
+            state: {
+                type: selectedType
+            }
+        });
     };
 
     if (loading) {

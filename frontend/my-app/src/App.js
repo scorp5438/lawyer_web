@@ -28,6 +28,7 @@ function App({user}) {
     const [showOnlyProfile, setShowOnlyProfile] = useState(false);
 
 
+
     useEffect(() => {
         if (showLogo) {
             const timer = setTimeout(() => {
@@ -50,6 +51,20 @@ function App({user}) {
         }
         setActiveSection('blog');
     };
+    // const handleBlogClick = (type) => {
+    //     if (selectedType === type) {
+    //         setSelectedType(null);
+    //         setTimeout(() => setSelectedType(type), 0);
+    //     } else {
+    //         setSelectedType(type);
+    //     }
+    //
+    //     // Если мы на странице статьи, перенаправляем на список статей
+    //     if (location.pathname.includes('/article/')) {
+    //         navigate('/static_react/articles');
+    //     }
+    //     setActiveSection('blog');
+    // };
 
 
     const handleMainClick = () => {
