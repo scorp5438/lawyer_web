@@ -28,7 +28,6 @@ function App({user}) {
     const [showOnlyProfile, setShowOnlyProfile] = useState(false);
 
 
-
     useEffect(() => {
         if (showLogo) {
             const timer = setTimeout(() => {
@@ -51,20 +50,6 @@ function App({user}) {
         }
         setActiveSection('blog');
     };
-    // const handleBlogClick = (type) => {
-    //     if (selectedType === type) {
-    //         setSelectedType(null);
-    //         setTimeout(() => setSelectedType(type), 0);
-    //     } else {
-    //         setSelectedType(type);
-    //     }
-    //
-    //     // Если мы на странице статьи, перенаправляем на список статей
-    //     if (location.pathname.includes('/article/')) {
-    //         navigate('/static_react/articles');
-    //     }
-    //     setActiveSection('blog');
-    // };
 
 
     const handleMainClick = () => {
@@ -90,19 +75,20 @@ function App({user}) {
                             />
 
 
+
                             <main className="content">
                                 <Routes>
-                                    {/* Главная страница — в Main компонент добавляем ArticleCard */}
-                                    <Route path="/" element={
+                                    <Route path="/static_react/" element={
                                         <Main
                                             activeSection={activeSection}
                                             selectedType={selectedType}
                                             setSelectedType={setSelectedType}
+
                                             showOnlyProfile={showOnlyProfile}
+
                                         />
 
                                     }/>
-                                    {/* Страница со статьями */}
                                     <Route
                                         path="/static_react/articles"
                                         element={
@@ -116,7 +102,7 @@ function App({user}) {
                                     <Route path="/static_react/article/:id" element={<ArticleDetails/>}/>
                                 </Routes>
                                 <div className="button-scroll">
-                                    <ScrollToTop/>
+                                    <ScrollToTop />
                                 </div>
                             </main>
 
