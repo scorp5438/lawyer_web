@@ -58,3 +58,13 @@ export const fetchArticleById = async (id) => {
 export const fetchSortedCases = async (ordering = '-pk') => {
     return get('case/', {ordering});
 };
+export const fetchToken = async (headers, setToken) => {
+    try {
+        const response = await api.get('get-csrf-token/', { headers });
+        setToken(response.data);  // Предполагается, что сервер возвращает {csrfToken: "значение"}
+        return response.data;
+    } catch (error) {
+        console.error("Ошибка при получении CSRF-токена:", error);
+        throw error;
+    }
+};

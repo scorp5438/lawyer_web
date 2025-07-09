@@ -75,19 +75,20 @@ function App({user}) {
                             />
 
 
+
                             <main className="content">
                                 <Routes>
-                                    {/* Главная страница — в Main компонент добавляем ArticleCard */}
-                                    <Route path="/" element={
+                                    <Route path="/static_react/" element={
                                         <Main
                                             activeSection={activeSection}
                                             selectedType={selectedType}
                                             setSelectedType={setSelectedType}
+
                                             showOnlyProfile={showOnlyProfile}
+
                                         />
 
                                     }/>
-                                    {/* Страница со статьями */}
                                     <Route
                                         path="/static_react/articles"
                                         element={
@@ -101,7 +102,7 @@ function App({user}) {
                                     <Route path="/static_react/article/:id" element={<ArticleDetails/>}/>
                                 </Routes>
                                 <div className="button-scroll">
-                                    <ScrollToTop/>
+                                    <ScrollToTop />
                                 </div>
                             </main>
 

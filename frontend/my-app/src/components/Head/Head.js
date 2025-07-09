@@ -20,7 +20,7 @@ const Head = ({ onBlogClick, onMainClick, setShowOnlyProfile }) => {
     const handleClick = () => {
         onMainClick();
         setShowOnlyProfile(false);
-        navigate('/');
+        navigate('/static_react/');
         setMobileMenuOpen(false);
     };
     useEffect(() => {
@@ -42,7 +42,7 @@ const Head = ({ onBlogClick, onMainClick, setShowOnlyProfile }) => {
 
     const handleProfileClick = () => {
         setShowOnlyProfile(true);
-        navigate('/');
+        navigate('/static_react/');
         setMobileMenuOpen(false);
     };
 
@@ -83,6 +83,13 @@ const Head = ({ onBlogClick, onMainClick, setShowOnlyProfile }) => {
         onBlogClick(selectedType);
         setIsOpen(false);
         setMobileMenuOpen(false);
+
+        // Всегда перенаправляем на страницу со статьями
+        navigate('/static_react/articles', {
+            state: {
+                type: selectedType
+            }
+        });
     };
 
     if (loading) {

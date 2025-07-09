@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 
 import axios from "axios";
 import './modalForm.scss';
-import {fetchUserData} from "../utils/api";
+import {fetchToken } from "../utils/api";
 import Politic from "../Politic/Politic";
 const ModalForm = ({handleCloseModal}) => {
     const [formData, setFormData] = useState({
@@ -28,14 +28,20 @@ const ModalForm = ({handleCloseModal}) => {
         setShowPolitic(false);
     };
     useEffect(() => {
-        axios.defaults.withCredentials = true;
-
-        const url = "/api/get-csrf-token/";
+        return () => {
+            // Очищаем все таймеры при размонтировании компонента
+            Object.values(errors).forEach(error => {
+                if (error.timer) {
+                    clearTimeout(error.timer);
+                }
+            });
+        };
+    }, [errors]);
+    useEffect(() => {
         const headers = {
             'X-Get-Token-Csrf-For-React': 'Hkjh98hjk8khj77slkhj'
         };
-
-        fetchUserData(url, headers, setToken);
+        fetchToken(headers, setToken);
     }, []);
 
     const handleChange = (e) => {
@@ -45,9 +51,26 @@ const ModalForm = ({handleCloseModal}) => {
             [name]: type === 'checkbox' ? checked : value
         }));
 
-        // Очищаем ошибку при изменении поля
+        // Очищаем ошибку и таймер при изменении поля
         if (errors[name]) {
-            setErrors(prev => ({...prev, [name]: ''}));
+            if (errors[name].timer) {
+                clearTimeout(errors[name].timer);
+            }
+            setErrors(prev => {
+                const updated = {...prev};
+                delete updated[name];
+                return updated;
+            });
+        }
+        if (errors.general) {
+            if (errors.general.timer) {
+                clearTimeout(errors.general.timer);
+            }
+            setErrors(prev => {
+                const updated = {...prev};
+                delete updated.general;
+                return updated;
+            });
         }
     };
 
@@ -83,19 +106,41 @@ const ModalForm = ({handleCloseModal}) => {
     const validateForm = () => {
         const newErrors = {};
         let isValid = true;
-
+        Object.keys(errors).forEach(key => {
+            if (errors[key].timer) {
+                clearTimeout(errors[key].timer);
+            }
+        });
         Object.keys(formData).forEach(key => {
             if (key !== 'consent') {
                 const error = validateField(key, formData[key]);
                 if (error) {
-                    newErrors[key] = error;
+                    newErrors[key] = {
+                        message: error,
+                        timer: setTimeout(() => {
+                            setErrors(prev => {
+                                const updated = {...prev};
+                                delete updated[key];
+                                return updated;
+                            });
+                        }, 5000) // 5 секунд
+                    };
                     isValid = false;
                 }
             }
         });
 
         if (!formData.consent) {
-            newErrors.consent = 'Необходимо дать согласие';
+            newErrors.consent = {
+                message: 'Необходимо дать согласие',
+                timer: setTimeout(() => {
+                    setErrors(prev => {
+                        const updated = {...prev};
+                        delete updated.consent;
+                        return updated;
+                    });
+                }, 5000)
+            };
             isValid = false;
         }
 
@@ -111,7 +156,6 @@ const ModalForm = ({handleCloseModal}) => {
         setIsSubmitting(true);
 
         try {
-//            const response = await fetch('http://127.0.0.1:8000/api/data/', {
             const response = await fetch('/api/data/', {
                 method: 'POST',
                 headers: {
@@ -137,23 +181,48 @@ const ModalForm = ({handleCloseModal}) => {
                     text: '',
                     consent: false
                 });
+
                 setTimeout(() => {
+                    setSubmitStatus(null);
                     if (typeof handleCloseModal === 'function') {
                         handleCloseModal();
                     }
                 }, 2000);
             } else {
                 const data = await response.json();
-                setErrors(data.errors || {general: 'Ошибка при отправке формы'});
+                setErrors(prev => ({
+                    ...prev,
+                    general: {
+                        message: data.errors?.general || 'Ошибка при отправке формы',
+                        timer: setTimeout(() => {
+                            setErrors(prev => {
+                                const updated = {...prev};
+                                delete updated.general;
+                                return updated;
+                            });
+                        }, 5000)
+                    }
+                }));
                 setSubmitStatus('error');
             }
         } catch (error) {
-            setErrors({general: 'Ошибка сети или сервера'});
+            setErrors(prev => ({
+                ...prev,
+                general: {
+                    message: 'Ошибка сети или сервера',
+                    timer: setTimeout(() => {
+                        setErrors(prev => {
+                            const updated = {...prev};
+                            delete updated.general;
+                            return updated;
+                        });
+                    }, 5000)
+                }
+            }));
             setSubmitStatus('error');
         } finally {
             setIsSubmitting(false);
         }
-
     };
 
     return (
@@ -170,7 +239,7 @@ const ModalForm = ({handleCloseModal}) => {
                     )}
 
                     {errors.general && (
-                        <div className="form-error">{errors.general}</div>
+                        <div className="form-error">{errors.general.message}</div>
                     )}
 
                     <div className="form-row">
@@ -184,7 +253,7 @@ const ModalForm = ({handleCloseModal}) => {
                                 required
                             />
                             <label>Имя *</label>
-                            {errors.first_name && <p className="error-message">{errors.first_name}</p>}
+                            {errors.first_name && <p className="error-message">{errors.first_name.message}</p>}
                         </div>
 
                         <div className={`form-row__label ${errors.last_name ? 'has-error' : ''}`}>
@@ -197,7 +266,7 @@ const ModalForm = ({handleCloseModal}) => {
                                 required
                             />
                             <label>Фамилия *</label>
-                            {errors.last_name && <p className="error-message">{errors.last_name}</p>}
+                            {errors.last_name && <p className="error-message">{errors.last_name.message}</p>}
                         </div>
 
                         <div className={`form-row__label ${errors.phone ? 'has-error' : ''}`}>
@@ -215,7 +284,7 @@ const ModalForm = ({handleCloseModal}) => {
                                 required
                             />
                             <label>Телефон *</label>
-                            {errors.phone && <p className="error-message">{errors.phone}</p>}
+                            {errors.phone && <p className="error-message">{errors.phone.message}</p>}
                         </div>
 
                         <div className={`form-row__label ${errors.email ? 'has-error' : ''}`}>
@@ -228,7 +297,7 @@ const ModalForm = ({handleCloseModal}) => {
                                 required
                             />
                             <label>Email *</label>
-                            {errors.email && <p className="error-message">{errors.email}</p>}
+                            {errors.email && <p className="error-message">{errors.email.message}</p>}
                         </div>
                     </div>
 
@@ -241,7 +310,7 @@ const ModalForm = ({handleCloseModal}) => {
               placeholder="Напишите мне о своей проблеме"
               required
           />
-                        {errors.text && <p className="error-message">{errors.text}</p>}
+                        {errors.text && <p className="error-message">{errors.text.message}</p>}
                     </div>
 
                     <label className={`checkbox ${errors.consent ? 'has-error' : ''}`}>
@@ -257,7 +326,7 @@ const ModalForm = ({handleCloseModal}) => {
                                                         className="politic-link">
                                     Пользовательским соглашением и Политикой конфиденциальности</span>.
                             </p>
-                            {errors.consent && <p className="error-message">{errors.consent}</p>}
+                            {errors.consent && <p className="error-message">{errors.consent.message}</p>}
                         </div>
 
                     </label>

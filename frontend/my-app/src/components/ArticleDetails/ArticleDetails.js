@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import axios from "axios";
 import { motion } from 'framer-motion';
 import { fetchArticleById } from '../utils/api';
 import './articleDetails.scss';
