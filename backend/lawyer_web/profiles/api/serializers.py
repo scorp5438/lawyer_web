@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from drf_spectacular.utils import extend_schema_serializer, OpenApiExample
 from rest_framework import serializers
 
+from ..models import Address
+
 
 @extend_schema_serializer(
     examples=[
@@ -107,3 +109,14 @@ class UserSerializer(serializers.ModelSerializer):
     def get_bio(self, obj):
         """Возвращает биографию из профиля."""
         return obj.profile.bio
+
+
+class AddressSerializer(serializers.ModelSerializer):
+    coordinates = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Address
+        fields = 'region', 'city', 'street', 'house', 'coordinates'
+
+    def get_coordinates(self, obj):
+        return obj.coordinates

@@ -14,7 +14,8 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
 from .permissions import HasHeaderReact
-from .serializers import UserSerializer
+from .serializers import UserSerializer, AddressSerializer
+from ..models import Address
 
 
 @extend_schema_view(
@@ -74,7 +75,7 @@ class UserViewSet(ModelViewSet):
     """
     queryset = User.objects.select_related('profile').all()
     serializer_class = UserSerializer
-    http_method_names = ['get',]
+    http_method_names = ['get', ]
     permission_classes = [HasHeaderReact | IsAdminUser]
 
     @extend_schema(
@@ -82,6 +83,12 @@ class UserViewSet(ModelViewSet):
     )
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
+
+
+class AddressViewSet(ModelViewSet):
+    queryset = Address.objects.all()
+    serializer_class = AddressSerializer
+    http_method_names = ['get', ]
 
 
 @extend_schema(exclude=True)

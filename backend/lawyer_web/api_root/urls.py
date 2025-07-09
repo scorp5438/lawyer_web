@@ -5,7 +5,7 @@ from articles.api.views import ArticleViewSet, CategoryApiViewSet, TypeApiViewSe
 from cases.api.views import CaseViewSet, PracticeViewSet
 from profiles.api.views import UserViewSet, CustomCSRFView
 from form_data.api.views import FormDataViewSet
-
+from profiles.api.views import AddressViewSet
 
 app_name = 'api-root'
 
@@ -19,6 +19,7 @@ router.register(r'category', CategoryApiViewSet, basename='category')
 router.register(r'type', TypeApiViewSet, basename='type')
 router.register(r'practice', PracticeViewSet, basename='practice')
 router.register(r'data', FormDataViewSet, basename='data')
+router.register(r'address', AddressViewSet, basename='address')
 
 urlpatterns = [
     path('', include(router.urls)),
