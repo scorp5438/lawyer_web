@@ -15,5 +15,5 @@ COPY my-app/ ./
 RUN npm run build
 
 # Стадия результата
-FROM alpine:latest
-COPY --from=builder /app/build /static_react
+FROM nginx:alpine
+COPY --from=builder /app/build /usr/share/nginx/html/static_react

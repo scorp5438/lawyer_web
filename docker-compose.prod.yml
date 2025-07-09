@@ -21,17 +21,20 @@ services:
       - postgres_data:/var/lib/postgresql/data/
 
   nginx:
-    image: nginx:latest
+#    image: nginx:latest
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
     ports:
       - "80:80"
     volumes:
       - ./backend/lawyer_web/nginx.prod.conf:/etc/nginx/nginx.conf
       - static_volume:/app/static
-      - static_react:/usr/share/nginx/html/static_react
+#      - static_react:/usr/share/nginx/html/static_react
       - media:/media
     depends_on:
       - web
-      - frontend
+#      - frontend
 
   redis:
     image: redis:alpine
@@ -45,19 +48,19 @@ services:
     environment:
       - PYTHONPATH=/app
 
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile.prod
-    environment:
-      - NODE_ENV=production
-    depends_on:
-      - web
-    volumes:
-      - static_react:/static_react
+#  frontend:
+#    build:
+#      context: ./frontend
+#      dockerfile: Dockerfile.prod
+#    environment:
+#      - NODE_ENV=production
+#    depends_on:
+#      - web
+#    volumes:
+#      - static_react:/static_react
 
 volumes:
   postgres_data:
   static_volume:
-  static_react:
+#  static_react:
   media:
