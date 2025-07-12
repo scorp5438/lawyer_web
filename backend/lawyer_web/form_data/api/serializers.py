@@ -1,6 +1,10 @@
+import logging
 import re
 
 from rest_framework import serializers
+
+console_logger = logging.getLogger('console_logger')
+file_logger = logging.getLogger('file_logger')
 
 NAME_PATTERN = r'(?i)^[a-яё]*(-[a-яё]*)?$'
 PHONE_PATTERN = r'^(\+?7|8)\s?-?\(?\d{3}-?\)?-?\s?\d{3}[-\s]?\d{2}[-\s]?\d{2}$'
@@ -33,17 +37,23 @@ class DataSerializer(serializers.Serializer):
     def validate_first_name(self, value):
         """Проверяет, что имя содержит только кириллицу и дефис."""
         if re.match(NAME_PATTERN, value):
+            console_logger.info(f'first name {value} is valid')
             return value
+        file_logger.error(f'Имя {value} содержит недопустимые символы. Допустимые символы a-я и "-"')
         raise serializers.ValidationError('Имя содержит недопустимые символы.\nДопустимые символы a-я и "-"')
 
     def validate_last_name(self, value):
         """Проверяет, что фамилия содержит только кириллицу и дефис."""
         if re.match(NAME_PATTERN, value):
+            console_logger.info(f'last name {value} is valid')
             return value
+        file_logger.error(f'Фамилия {value} содержит недопустимые символы. Допустимые символы a-я и "-"')
         raise serializers.ValidationError('Фамилия содержит недопустимые символы.\nДопустимые символы a-я и "-"')
 
     def validate_phone(self, value):
         """Проверяет корректность номера телефона (Российские форматы)."""
         if re.match(PHONE_PATTERN, value):
+            console_logger.info(f'phone {value} is valid')
             return value
+        file_logger.error(f'Неверно указан номер {value}')
         raise serializers.ValidationError('Неверно указан номер')

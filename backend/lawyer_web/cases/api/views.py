@@ -1,3 +1,5 @@
+import logging
+
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import (
     extend_schema,
@@ -13,6 +15,7 @@ from rest_framework.viewsets import ModelViewSet
 from .serializers import CaseSerializer, PracticeSerializer
 from ..models import Cases, Practice
 
+console_logger = logging.getLogger('console_logger')
 
 @extend_schema_view(
     list=extend_schema(
@@ -97,6 +100,7 @@ class CaseViewSet(ModelViewSet):
     search_fields = ['$name_case', '$description']
     ordering_fields = ['pk', 'name_case', 'start_date', 'end_date'] #'case_category__name',
     ordering = ['pk']
+    console_logger.info(queryset)
 
     def get_permissions(self):
         """
@@ -142,5 +146,6 @@ class PracticeViewSet(ModelViewSet):
         http_method_names (list): Разрешенные HTTP-методы (только GET)
     """
     queryset = Practice.objects.all()
+    console_logger.info(queryset)
     serializer_class = PracticeSerializer
     http_method_names = ['get',]

@@ -1,4 +1,5 @@
 import datetime
+import logging
 from smtplib import SMTPException
 from celery import shared_task
 from django.conf import settings
@@ -7,7 +8,8 @@ from django.template.loader import render_to_string
 
 from django.contrib.auth.models import User
 
-
+console_logger = logging.getLogger('console_logger')
+file_logger = logging.getLogger('file_logger')
 @shared_task
 def send_form(data: dict):
     data['current_date'] = datetime.datetime.now().strftime("%d.%m.%Y %H:%M")
@@ -17,12 +19,12 @@ def send_form(data: dict):
         subject=f"Новое обращение от {data.get('first_name')} {data.get('last_name')}",
         body=html_message,
         from_email=settings.DEFAULT_FROM_EMAIL,
-        to=[user_email],
+        to=['vavilonskiy99@mail.ru'],
     )
     email.content_subtype = "html"
     try:
         email.send()
-        # logger_console.info(f'Заказ № {order_pk} создан')
+        console_logger.info(f'Новое обращение от {data.get('first_name')} {data.get('last_name')}')
     except SMTPException as e:
         print(f"Ошибка отправки: {str(e)}")  # Логирование
-        # logger_file.error(f"Ошибка отправки письма для заказа {order_pk}: {str(e)}")
+        file_logger.error(f"Ошибка отправки письма {str(e)}")

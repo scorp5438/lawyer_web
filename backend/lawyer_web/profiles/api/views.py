@@ -1,3 +1,5 @@
+import logging
+
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
@@ -17,6 +19,8 @@ from .permissions import HasHeaderReact
 from .serializers import UserSerializer, AddressSerializer
 from ..models import Address
 
+console_logger = logging.getLogger("console_logger")
+file_logger = logging.getLogger("file_logger")
 
 @extend_schema_view(
     list=extend_schema(
@@ -77,7 +81,7 @@ class UserViewSet(ModelViewSet):
     serializer_class = UserSerializer
     http_method_names = ['get', ]
     permission_classes = [HasHeaderReact | IsAdminUser]
-
+    console_logger.info(queryset)
     @extend_schema(
         exclude=True
     )
@@ -89,7 +93,7 @@ class AddressViewSet(ModelViewSet):
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
     http_method_names = ['get', ]
-
+    console_logger.info(queryset)
 
 @extend_schema(exclude=True)
 class CustomCSRFView(APIView):
@@ -97,6 +101,8 @@ class CustomCSRFView(APIView):
     def get(self, request):
         referrer = request.META.get('HTTP_X_GET_TOKEN_CSRF_FOR_REACT')
         if not referrer or 'Hkjh98hjk8khj77slkhj' != referrer:
+            file_logger.error('Access denied')
             return JsonResponse({'error': 'Access denied'}, status=403)
         token = get_token(request)
+        console_logger.info('csrfToken sent')
         return JsonResponse({'csrfToken': token})

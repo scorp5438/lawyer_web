@@ -8,6 +8,7 @@ services:
     environment:
       - PYTHONPATH=/app
     volumes:
+      - ./logs/django:/app/logs/django  # Логи Django
       - static_volume:/app/static
       - media:/app/media
 
@@ -28,6 +29,7 @@ services:
     ports:
       - "80:80"
     volumes:
+      - ./logs/nginx:/var/log/nginx  # Логи Nginx
       - ./backend/lawyer_web/nginx.prod.conf:/etc/nginx/nginx.conf
       - static_volume:/app/static
 #      - static_react:/usr/share/nginx/html/static_react
@@ -47,6 +49,7 @@ services:
       - db
     environment:
       - PYTHONPATH=/app
+
 
 #  frontend:
 #    build:

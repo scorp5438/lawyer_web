@@ -1,3 +1,5 @@
+import logging
+
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.response import Response
@@ -6,6 +8,8 @@ from rest_framework.viewsets import ViewSet
 from .serializers import DataSerializer
 from .task import send_form
 
+console_logger = logging.getLogger('console_logger')
+file_logger = logging.getLogger('file_logger')
 
 @extend_schema(exclude=True)
 class FormDataViewSet(ViewSet):
@@ -50,14 +54,14 @@ class FormDataViewSet(ViewSet):
         if serializer.is_valid():
             data_dict = dict(serializer.validated_data)
             send_form.delay(data_dict)
-
+            console_logger.info(data_dict)
             return Response(
                 {
                     'message': 'Successfully',
                     'status': status.HTTP_200_OK
                 }
             )
-
+        file_logger.error(serializer.errors)
         return Response(
             {
                 'message': 'Invalid data',

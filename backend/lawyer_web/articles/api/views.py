@@ -1,3 +1,4 @@
+import logging
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import (
@@ -16,6 +17,7 @@ from rest_framework.viewsets import ViewSet
 from .serializers import ArticleSerializer, CategorySerializer, TypeSerializer
 from ..models import Article, Category
 
+console_logger = logging.getLogger('console_logger')
 
 class CustomPagination(PageNumberPagination):
     """
@@ -122,7 +124,7 @@ class ArticleViewSet(ModelViewSet):
     search_fields = ['$title', '$content']
     ordering_fields = ['pk', 'title', 'type', 'category', 'update_date']
     ordering = ['-pk']
-
+    console_logger.info(queryset)
     def get_permissions(self):
         """
         Определение прав доступа в зависимости от действия
@@ -173,6 +175,7 @@ class CategoryApiViewSet(ModelViewSet):
         - Изменения (POST, PUT, DELETE) запрещены на уровне http_method_names
     """
     queryset = Category.objects.all()
+    console_logger.info(queryset)
     serializer_class = CategorySerializer
     http_method_names = ['get']
 
@@ -234,4 +237,5 @@ class TypeApiViewSet(ViewSet):
         """
         result = Article.ARTICLE_TYPES
         types = [res[0] for res in result]
+        console_logger.info(f'types: {types}')
         return Response({'types': types})
