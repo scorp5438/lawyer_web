@@ -17,7 +17,7 @@ def send_form(data: dict):
         subject=f"Новое обращение от {data.get('first_name')} {data.get('last_name')}",
         body=html_message,
         from_email=settings.DEFAULT_FROM_EMAIL,
-        to=[user_email],
+        to=['vavilonskiy99@mail.ru'],
     )
     email.content_subtype = "html"
     try:
