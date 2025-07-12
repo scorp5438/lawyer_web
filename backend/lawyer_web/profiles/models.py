@@ -99,6 +99,8 @@ class Address(models.Model):
 
     @property
     def coordinates(self):
+        if not self.latitude and not self.longitude:
+            return self.latitude, self.longitude
         return PhotonGeocoder.geocode(self.get_full_address())
 
     def save(self, *args, **kwargs):

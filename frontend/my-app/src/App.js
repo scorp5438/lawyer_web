@@ -78,7 +78,7 @@ function App({user}) {
 
                             <main className="content">
                                 <Routes>
-                                    <Route path="/static_react/" element={
+                                    <Route path="/" element={
                                         <Main
                                             activeSection={activeSection}
                                             selectedType={selectedType}

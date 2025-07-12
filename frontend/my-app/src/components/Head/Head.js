@@ -20,7 +20,7 @@ const Head = ({ onBlogClick, onMainClick, setShowOnlyProfile }) => {
     const handleClick = () => {
         onMainClick();
         setShowOnlyProfile(false);
-        navigate('/static_react/');
+        navigate('/');
         setMobileMenuOpen(false);
     };
     useEffect(() => {
@@ -42,7 +42,7 @@ const Head = ({ onBlogClick, onMainClick, setShowOnlyProfile }) => {
 
     const handleProfileClick = () => {
         setShowOnlyProfile(true);
-        navigate('/static_react/');
+        navigate('/');
         setMobileMenuOpen(false);
     };
 
