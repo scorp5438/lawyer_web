@@ -16,6 +16,7 @@ services:
       - PYTHONPATH=/app
     volumes:
       - static_volume:/app/static
+      - ./logs/django:/var/log/django  # Логи Django
 
   db:
     image: postgres:17
@@ -36,6 +37,7 @@ services:
     ports:
       - "80:80"
     volumes:
+      - ./logs/nginx:/var/log/nginx  # Логи Nginx
       - ./backend/lawyer_web/nginx.conf:/etc/nginx/nginx.conf
       - static_volume:/app/static
       - ./frontend/my-app/build:/usr/share/nginx/html
@@ -50,13 +52,16 @@ services:
 
   celery:
     build: backend/lawyer_web
-    command: celery -A lawyer_web worker --loglevel=info
+    command: celery -A lawyer_web worker --loglevel=error --logfile=/var/log/celery/celery.log
     depends_on:
-      - redis
-      - db
+      redis:
+        condition: service_started
+      db:
+        condition: service_healthy
     environment:
       - PYTHONPATH=/app
     volumes:
+      - ./logs/celery:/var/log/celery  # Логи Celery
       - ./backend/lawyer_web:/app/
     healthcheck:
       test: [ "CMD", "celery", "-A", "lawyer_web", "status" ]

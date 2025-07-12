@@ -79,9 +79,12 @@ class Profile(models.Model):
 
 class Address(models.Model):
     region = models.CharField(max_length=100)
+    district = models.CharField(blank=True, max_length=100)
     city = models.CharField(max_length=100)
     street = models.CharField(blank=True, max_length=100)
     house = models.CharField(max_length=20)
+    structure = models.CharField(blank=True, max_length=100)
+    housing = models.CharField(blank=True, max_length=100)
 
     latitude = models.FloatField(null=True, blank=True, verbose_name='широта')
     longitude = models.FloatField(null=True, blank=True, verbose_name='долгота')
