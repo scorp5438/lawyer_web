@@ -1,5 +1,6 @@
 import os
 import sys
+from logging.config import dictConfig
 from pathlib import Path
 
 from corsheaders.defaults import default_headers
@@ -90,24 +91,24 @@ WSGI_APPLICATION = 'lawyer_web.wsgi.application'
 
 
 # Database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('POSTGRES_NAME_DB', 'test_lawyer_db'),
-        'USER': os.getenv('POSTGRES_USER_NAME', 'test_lawyer_user'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'test_lawyer_password'),
-        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
-        'PORT': os.getenv('POSTGRES_PORT', 5001),
-    }
-}
-
-# Database для локального запуска на винде
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv('POSTGRES_NAME_DB', 'test_lawyer_db'),
+#         'USER': os.getenv('POSTGRES_USER_NAME', 'test_lawyer_user'),
+#         'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'test_lawyer_password'),
+#         'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
+#         'PORT': os.getenv('POSTGRES_PORT', 5001),
 #     }
 # }
+
+# Database для локального запуска на винде
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # Автоматически переключаться на SQLite при запуске тестов
 if 'test' in sys.argv or 'test_coverage' in sys.argv:
@@ -184,3 +185,53 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'test@mail.ru')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'test_password!!')
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'test@mail.ru')
 
+
+
+logs_dir = os.path.join(BASE_DIR, 'logs' ,'django')
+if not os.path.exists(logs_dir):
+    os.makedirs(logs_dir)
+
+logging_config = {
+    'version': 1,
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard',
+            'stream': 'ext://sys.stdout'
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'standard',
+            'filename': os.path.join(logs_dir,'lawyer_app.log'),
+            'maxBytes': 10485760,  # 10 MB
+            'backupCount': 5,
+            'encoding': 'utf8'
+        },
+    },
+    'loggers': {
+        'console_logger': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False
+        },
+        'file_logger': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': False
+        }
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO'
+    }
+}
+
+dictConfig(logging_config)
