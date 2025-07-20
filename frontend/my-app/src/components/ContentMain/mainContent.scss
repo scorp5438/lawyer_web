@@ -1,0 +1,963 @@
+@import '../../assets/styles/variables';
+@import '../../assets/styles/mixins';
+
+.main__content {
+  height: auto;
+  width: $widthSite;
+  background: $mainBackground;
+  @include flex-center-top;
+  font-family: 'Open Sans', sans-serif;
+
+  &_content {
+    width: $widthSiteContent;
+    display: flex;
+    @include flex-between;
+    padding: 10px;
+
+    &_block {
+      width: 800px;
+      @include flex-center-column;
+      gap: 45px;
+
+      &_logo {
+        box-sizing: border-box;
+        width: 200px;
+        border: none;
+        border-bottom: 3px solid $colorH1;
+        background: none;
+        @include flex-center-column;
+        text-shadow: 0 2px 2px rgba(9, 9, 9, 0.7);
+
+        &_h1 {
+          text-align: center;
+          color: $colorH1;
+        }
+      }
+
+      &_dis {
+        width: 200px;
+        @include flex-center;
+
+        &_p {
+          color: $colorH1;
+          text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
+
+    &_img {
+      position: relative;
+      overflow: hidden;
+      border-radius: 5px;
+
+      &_photo {
+        width: 700px;
+        height: 700px;
+        object-fit: cover;
+        box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.3);
+        mask-image: radial-gradient(
+                        circle at center,
+                        #f3e5e5 70%,
+                        transparent 100%
+        );
+      }
+
+    }
+
+    &_info {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+
+      &_head {
+        @include grid-2x2-plus-row;
+        margin-top: 20px;
+
+        h2 {
+          color: $textColor;
+          font-size: $sizeContent;
+          border: none;
+          border-bottom: 3px solid $textColor;
+        }
+
+        &_practice {
+          @include grid-2x2-plus-row;
+          width: 500px;
+        }
+      }
+    }
+
+
+    .practice-item {
+      border: 2px solid $headerBackground;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
+      color: $textColor;
+      font-size: 16px;
+      cursor: pointer;
+
+      &:hover {
+        border: 3px solid $colorH1;
+        background-color: $textColor;
+        transition: background 0.3s ease;
+        color: $colorH1;
+        text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+
+      }
+
+      &:last-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .loading, .error {
+      font-size: $sizeContent;
+      color: $colorH1;
+      text-align: center;
+      margin: 20px 0;
+    }
+  }
+
+  &_categary {
+    &_categories-list {
+      @include flex-center-row;
+
+      &_item {
+        list-style-type: none;
+        font-weight: bold;
+        color: $textColor;
+        font-size: $sizeContent;
+        cursor: pointer;
+
+        &:hover {
+          border-bottom: 3px solid $colorH1;
+          color: $colorH1;
+          transition: background 0.3s ease;
+          margin-bottom: -3px;
+        }
+      }
+    }
+
+    &_info {
+      @include flex-center-row;
+      width: 550px;
+
+      &_blog {
+        @include flex-center-column;
+        gap: 30px;
+
+        &_head {
+
+          h2 {
+            color: $textColor;
+            font-size: $sizeContent;
+            border: none;
+            border-bottom: 3px solid $textColor;
+          }
+
+          &_practice {
+            @include grid-2x2-plus-row;
+            width: 550px;
+          }
+        }
+
+      }
+    }
+  }
+}
+
+.practice-item {
+  position: relative;
+  cursor: pointer;
+  padding: 8px 12px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  white-space: normal; // разрешает перенос строк
+  text-align: center;
+  word-break: break-word;
+  margin: 0;
+
+  &:hover {
+    background-color: #e0e0e0;
+  }
+}
+
+.practice-tooltip {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  pointer-events: none;
+
+  h4 {
+    margin-top: 0;
+    color: #333;
+  }
+
+  p {
+    margin-bottom: 0;
+    color: #666;
+  }
+}
+
+.practice-item.full-width {
+  grid-column: 1 / -1; // занимает всю ширину сетки
+}
+
+@media (min-width: 375px) and (max-width: 575px) {
+  .main__content {
+    min-width: 375px;
+    max-width: 575px;
+
+    &_content {
+      min-width: 375px;
+      max-width: 575px;
+      @include flex-center-column;
+      padding: 10px;
+      &_block {
+        width: 300px;
+        @include flex-center-column;
+        justify-content: space-evenly;
+        height: 80px;
+
+        &_center {
+          width: 200px;
+          @include flex-center-column;
+        }
+
+        &_logo {
+          width: 135px;
+
+          &_h1 h1 {
+            text-align: center;
+            font-size: 22px;
+            color: $colorH1;
+          }
+        }
+
+        &_dis p {
+          @include flex-center;
+          font-size: 12px;
+
+          &_p {
+            color: $colorH1;
+            text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+
+          }
+        }
+      }
+
+      &_img {
+        visibility: hidden;
+
+      }
+
+      &_info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        width: 300px;
+
+      }
+
+      .practice-item {
+        border: 2px solid $headerBackground;
+        border-radius: 5px;
+        @include flex-center;
+        height: 35px;
+        color: $textColor;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 0;
+
+        &:active {
+          border: 3px solid $colorH1;
+          background-color: $textColor;
+          transition: background 0.3s ease;
+          color: $colorH1;
+          text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+
+        }
+
+        &:last-child {
+          grid-column: 1 / -1;
+        }
+      }
+
+      .loading, .error {
+        font-size: $sizeContent;
+        color: $colorH1;
+        text-align: center;
+        margin: 10px 0;
+      }
+    }
+
+    &_categary {
+      &_categories-list {
+        @include flex-center-row;
+
+        &_item {
+          list-style-type: none;
+          font-weight: bold;
+          color: $textColor;
+          font-size: $sizeContent;
+          cursor: pointer;
+
+          &:active {
+            border-bottom: 3px solid $colorH1;
+            color: $colorH1;
+            transition: background 0.3s ease;
+            margin-bottom: -3px;
+          }
+        }
+      }
+
+      &_info {
+        @include flex-center-row;
+        width: 500px;
+
+        &_blog {
+          gap: 10px;
+
+          &_head {
+            h2 {
+              font-size: 20px;
+            }
+
+            &_practice {
+              @include grid-2x2-plus-row;
+              gap: 8px;
+              width: 300px;
+
+              h3 {
+                font-size: 12px;
+              }
+            }
+
+          }
+
+        }
+      }
+    }
+  }
+
+}
+.modal-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    font-size: 12px;
+    text-align: left;
+  }
+}
+.practice-item {
+  &:active {
+    background-color: #e0e0e0;
+  }
+}
+.modal-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.practice-tooltip {
+  position: fixed;
+  left: 79px;
+  top: 233px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 150px;
+  pointer-events: none;
+  h4 {
+    margin-top: 0;
+    font-size: 10px;
+    color: $textColor;
+  }
+
+  p {
+    margin-bottom: 0;
+    font-size: 6px;
+    color: $textColor;
+  }
+
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .main__content {
+    min-width: 576px;
+    max-width: 767px;
+
+    &_content {
+      min-width: 576px;
+      max-width: 767px;
+      @include flex-center-column;
+      gap: 20px;
+      padding: 10px;
+      &_block {
+        width: 400px;
+        @include flex-center-column;
+        gap: 30px;
+
+        &_center {
+          width: 200px;
+          @include flex-center-column;
+        }
+
+        &_logo {
+          width: 135px;
+
+          &_h1 h1 {
+            text-align: center;
+            font-size: 22px;
+            color: $colorH1;
+          }
+        }
+
+        &_dis p {
+          @include flex-center;
+          font-size: 12px;
+
+          &_p {
+            color: $colorH1;
+            text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+
+          }
+        }
+      }
+
+      &_img {
+        position: relative;
+        overflow: hidden;
+        border-radius: 5px;
+
+        &_photo {
+          width: 400px;
+          height: 400px;
+          object-fit: cover;
+          box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.3);
+          mask-image: radial-gradient(
+                          circle at center,
+                          #f3e5e5 70%,
+                          transparent 100%
+          );
+        }
+      }
+
+      &_info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+      }
+
+      .practice-item {
+        border: 2px solid $headerBackground;
+        border-radius: 5px;
+        @include flex-center;
+        height: 35px;
+        color: $textColor;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 0;
+
+        &:active {
+          border: 3px solid $colorH1;
+          background-color: $textColor;
+          transition: background 0.3s ease;
+          color: $colorH1;
+          text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+
+        }
+
+        &:last-child {
+          grid-column: 1 / -1;
+        }
+      }
+
+      .loading, .error {
+        font-size: $sizeContent;
+        color: $colorH1;
+        text-align: center;
+        margin: 10px 0;
+      }
+    }
+
+    &_categary {
+      &_categories-list {
+        @include flex-center-row;
+
+        &_item {
+          list-style-type: none;
+          font-weight: bold;
+          color: $textColor;
+          font-size: $sizeContent;
+          cursor: pointer;
+
+          &:active {
+            border-bottom: 3px solid $colorH1;
+            color: $colorH1;
+            transition: background 0.3s ease;
+            margin-bottom: -3px;
+          }
+        }
+      }
+
+      &_info {
+        @include flex-center-row;
+        width: 500px;
+
+        &_blog {
+          gap: 10px;
+
+          &_head {
+            h2 {
+              font-size: 22px;
+            }
+
+            &_practice {
+              @include grid-2x2-plus-row;
+              gap: 10px;
+              width: 400px;
+
+              h3 {
+                font-size: 14px;
+              }
+            }
+
+          }
+
+        }
+      }
+    }
+  }
+}
+
+.practice-item {
+  &:active {
+    background-color: #e0e0e0;
+  }
+}
+
+.practice-tooltip {
+  h4 {
+    margin-top: 0;
+    font-size: 12px;
+    color: $textColor;
+  }
+
+  p {
+    margin-bottom: 0;
+    font-size: 10px;
+    color: $textColor;
+  }
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .main__content {
+    min-width: 768px;
+    max-width: 991px;
+
+    &_content {
+      min-width: 768px;
+      max-width: 991px;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+
+      &_block {
+        width: 500px;
+        @include flex-center-column;
+        gap: 30px;
+
+        &_center {
+          width: 200px;
+          @include flex-center-column;
+        }
+
+        &_logo {
+          width: 135px;
+
+          &_h1 h1 {
+            text-align: center;
+            font-size: 22px;
+            color: $colorH1;
+          }
+        }
+
+        &_dis p {
+          @include flex-center;
+          font-size: 12px;
+
+          &_p {
+            color: $colorH1;
+            text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+
+          }
+        }
+      }
+
+      &_img {
+        position: relative;
+        overflow: hidden;
+        border-radius: 5px;
+
+        &_photo {
+          width: 500px;
+          height: 500px;
+          object-fit: cover;
+          box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.3);
+          mask-image: radial-gradient(
+                          circle at center,
+                          #f3e5e5 70%,
+                          transparent 100%
+          );
+        }
+      }
+
+      &_info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .practice-item {
+        border: 2px solid $headerBackground;
+        border-radius: 5px;
+        @include flex-center;
+        height: 35px;
+        color: $textColor;
+        font-size: 16px;
+        cursor: pointer;
+        margin: 0;
+
+        &:active {
+          border: 3px solid $colorH1;
+          background-color: $textColor;
+          transition: background 0.3s ease;
+          color: $colorH1;
+          text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+
+        }
+
+        &:last-child {
+          grid-column: 1 / -1;
+        }
+      }
+
+      .loading, .error {
+        font-size: $sizeContent;
+        color: $colorH1;
+        text-align: center;
+        margin: 10px 0;
+      }
+    }
+
+    &_categary {
+      &_categories-list {
+        @include flex-center-row;
+
+        &_item {
+          list-style-type: none;
+          font-weight: bold;
+          color: $textColor;
+          font-size: $sizeContent;
+          cursor: pointer;
+
+          &:active {
+            border-bottom: 3px solid $colorH1;
+            color: $colorH1;
+            transition: background 0.3s ease;
+            margin-bottom: -3px;
+          }
+        }
+      }
+
+      &_info {
+        @include flex-center-row;
+        width: 500px;
+
+        &_blog {
+          gap: 10px;
+
+          &_head {
+            h2 {
+              font-size: 22px;
+            }
+
+            &_practice {
+              @include grid-2x2-plus-row;
+              gap: 10px;
+              width: 500px;
+
+              h3 {
+                font-size: 14px;
+              }
+            }
+
+          }
+
+        }
+      }
+    }
+  }
+}
+
+.practice-item {
+  &:active {
+    background-color: #e0e0e0;
+  }
+}
+
+.practice-tooltip {
+  h4 {
+    margin-top: 0;
+    font-size: 12px;
+    color: $textColor;
+  }
+
+  p {
+    margin-bottom: 0;
+    font-size: 10px;
+    color: $textColor;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .main__content {
+    min-width: 992px;
+    max-width: 1199px;
+
+    &_content {
+      min-width: 992px;
+      max-width: 1199px;
+      @include flex-center;
+      padding: 10px;
+      gap: 20px;
+
+      &_block {
+        width: 500px;
+        @include flex-center-column;
+        gap: 35px;
+
+        &_center {
+          width: 200px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        &_logo {
+          @include flex-center-column;
+          width: 135px;
+
+          &_h1 h1 {
+            text-align: center;
+            font-size: 22px;
+            color: $colorH1;
+          }
+        }
+
+        &_dis p {
+          @include flex-center;
+          font-size: 12px;
+
+          &_p {
+            color: $colorH1;
+            text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+          }
+        }
+      }
+
+      &_img {
+        position: relative;
+        overflow: hidden;
+        border-radius: 5px;
+
+        &_photo {
+          width: 500px;
+          height: 500px;
+          object-fit: cover;
+          box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.3);
+          mask-image: radial-gradient(
+                          circle at center,
+                          #f3e5e5 70%,
+                          transparent 100%
+          );
+        }
+      }
+
+      &_info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        &_head {
+          @include grid-2x2-plus-row;
+          margin-top: 10px;
+
+          h2 {
+            color: $textColor;
+            font-size: $sizeContent;
+            border: none;
+            border-bottom: 3px solid $textColor;
+          }
+
+          &_practice {
+            @include grid-2x2-plus-row;
+            width: 500px;
+          }
+        }
+      }
+
+      .practice-item {
+        height: 30px;
+        margin: 0;
+
+        &:active {
+          border: 3px solid $colorH1;
+          background-color: $textColor;
+          transition: background 0.3s ease;
+          color: $colorH1;
+          text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        &:last-child {
+          grid-column: 1 / -1;
+        }
+      }
+
+      .loading, .error {
+        font-size: $sizeContent;
+        color: $colorH1;
+        text-align: center;
+        margin: 10px 0;
+      }
+    }
+
+    &_categary {
+      &_categories-list {
+        @include flex-center-row;
+
+        &_item {
+          list-style-type: none;
+          font-weight: bold;
+          color: $textColor;
+          font-size: $sizeContent;
+          cursor: pointer;
+
+          &:active {
+            border-bottom: 3px solid $colorH1;
+            color: $colorH1;
+            transition: background 0.3s ease;
+            margin-bottom: -3px;
+          }
+        }
+      }
+
+      &_info {
+        @include flex-center-row;
+        width: 500px;
+
+        &_blog {
+          gap: 10px;
+
+          &_head {
+            h2 {
+              font-size: 22px;
+            }
+
+            &_practice {
+              @include grid-2x2-plus-row;
+              width: 410px;
+
+              h3 {
+                font-size: 14px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .practice-item {
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  }
+  .practice-tooltip {
+    h4 {
+      font-size: 12px;
+    }
+
+    p {
+      font-size: 10px;
+    }
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .main__content {
+    min-width: 1200px;
+    max-width: 1439px;
+
+    &_content {
+      min-width: 1200px;
+      max-width: 1439px;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+
+      &_block {
+        width: 600px;
+
+        &_logo {
+          width: 200px;
+        }
+      }
+
+      &_img {
+        &_photo {
+          width: 600px;
+          height: 600px;
+        }
+
+      }
+    }
+  }
+}
+
+@media (min-width: 1440px) and (max-width: 1600px) {
+  .main__content {
+    min-width: 1440px;
+    max-width: 1600px;
+
+    &_content {
+      min-width: 1440px;
+      max-width: 1600px;
+
+      &_block {
+        width: 700px;
+        @include flex-center-column;
+        gap: 45px;
+
+      }
+    }
+  }
+
+}

@@ -1,0 +1,94 @@
+@import '../../assets/styles/variables';
+@import "../../assets/styles/mixins";
+.main-section {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background: $mainBackground;
+  //height: 100%;
+  padding: 20px;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.case {
+  width: $widthSite;
+  height: 350px;
+  @include flex-center;
+  margin: 0 auto;
+  padding: 0;
+  background: $mainBackground;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+@media (min-width: 375px) and (max-width: 575px) {
+  .main-section {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background: $mainBackground;
+    //height: 100%;
+    padding: 20px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .case {
+    width: 375px;
+    height: 100%;
+
+  }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  .case {
+    width: 576px;
+    height: 100%;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .main-section {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background: $mainBackground;
+    //height: 100%;
+    padding: 20px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .case {
+    width: 768px;
+    height: 100%;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .main-section {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background: $mainBackground;
+    min-width: 992px;
+    max-width: 1199px;
+    padding: 40px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .case {
+    width: 992px;
+    height: 100%;
+  }
+}
+@media (min-width: 1200px) and (max-width: 1440px) {
+  .main-section {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background: $mainBackground;
+    min-width: 1200px;
+    max-width: 1440px;
+    padding: 40px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .case {
+    width: 1200px;
+    height: 100%;
+  }
+}

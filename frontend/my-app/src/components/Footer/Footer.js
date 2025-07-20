@@ -1,0 +1,59 @@
+import React, {useState, useEffect} from "react";
+import {fetchTypes, fetchUserData} from '../utils/api';
+import axios from "axios";
+import './footer.scss';
+
+
+const Footer = () => {
+    const [user, setUser] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const loadData = async () => {
+            setLoading(true);
+            setError(null);
+
+            try {
+                const [ userData] = await Promise.all([
+
+                    fetchUserData()
+                ]);
+
+                setUser(userData);
+            } catch (err) {
+                setError(err.message);
+                console.error('Ошибка загрузки данных:', err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadData();
+    }, []);
+    if (loading) {
+        return <header className="App-header">Загрузка...</header>;
+    }
+    return (
+        <header className="App-header">
+            <nav className="head">
+                <ul className="head__nav">
+                    {user.length > 0 ? (
+                        <>
+                            <li className="head__nav_item">
+                                Телефон: <a href={`tel:${user[0].phone}`}>{user[0].phone}</a>
+                            </li>
+                            <li className="head__nav_item">
+                                EMAIL: <a href={`mailto:${user[0].email}`}>{user[0].email}</a>
+                            </li>
+                        </>
+                    ) : (
+                        <li className="nav-item">Загрузка данных...</li>
+                    )}
+                </ul>
+            </nav>
+        </header>
+    );
+
+};
+export default Footer;

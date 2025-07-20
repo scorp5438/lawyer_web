@@ -1,0 +1,19 @@
+@import '../../assets/styles/variables';
+@import "../../assets/styles/mixins";
+
+.head {
+  @include flex-center-row;
+  width: 100%;
+  height: 75px;
+  background-color: $headerBackground;
+  &__nav {
+    @include flex-center-row;
+    width: 100%;
+    height: 75px;
+    background-color: $headerBackground;
+    &_item {
+      color: $colorNavigate;
+      font-size: $sizeNavigate;
+    }
+  }
+}
