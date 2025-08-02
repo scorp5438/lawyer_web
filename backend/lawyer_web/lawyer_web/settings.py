@@ -91,24 +91,24 @@ WSGI_APPLICATION = 'lawyer_web.wsgi.application'
 
 
 # Database
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.getenv('POSTGRES_NAME_DB', 'test_lawyer_db'),
-#         'USER': os.getenv('POSTGRES_USER_NAME', 'test_lawyer_user'),
-#         'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'test_lawyer_password'),
-#         'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
-#         'PORT': os.getenv('POSTGRES_PORT', 5001),
-#     }
-# }
-
-# Database для локального запуска на винде
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('POSTGRES_NAME_DB', 'test_lawyer_db'),
+        'USER': os.getenv('POSTGRES_USER_NAME', 'test_lawyer_user'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'test_lawyer_password'),
+        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
+        'PORT': os.getenv('POSTGRES_PORT', 5001),
     }
 }
+
+# Database для локального запуска на винде
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 # Автоматически переключаться на SQLite при запуске тестов
 if 'test' in sys.argv or 'test_coverage' in sys.argv:
