@@ -28,12 +28,15 @@ services:
       dockerfile: Dockerfile.prod
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./logs/nginx:/var/log/nginx  # Логи Nginx
       - ./backend/lawyer_web/nginx.prod.conf:/etc/nginx/nginx.conf
       - static_volume:/app/static
 #      - static_react:/usr/share/nginx/html/static_react
       - media:/media
+      - /etc/letsencrypt/live/advocat-saprolex.ru:/etc/letsencrypt/live/advocat-saprolex.ru
+      - /etc/letsencrypt/archive/advocat-saprolex.ru:/etc/letsencrypt/archive/advocat-saprolex.ru
     depends_on:
       - web
 #      - frontend
