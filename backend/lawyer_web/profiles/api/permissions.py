@@ -4,7 +4,7 @@ from rest_framework.permissions import BasePermission
 from dotenv import load_dotenv
 load_dotenv()
 
-HEADER_SUPERUSER_ACCESS = os.getenv('HEADER_SUPERUSER_ACCESS')
+HEADER_SUPERUSER_ACCESS = os.getenv('HEADER_SUPERUSER_ACCESS', 'Test_Superuser-Access')
 
 
 class HasHeaderReact(BasePermission):

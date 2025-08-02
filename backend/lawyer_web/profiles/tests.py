@@ -33,7 +33,7 @@ class ProfileApiViewTestCase(TestCase):
 
     def test_user_api_with_headers(self):
         headers = {
-            'X-Superuser-Access': 'hjflSdhjlkSDfjo79sdffs009fs87s0df09s8d'
+            'X-Superuser-Access': 'Test_Superuser-Access'
         }
         response = self.client.get(reverse('api-root:user-list'), headers=headers)
 
