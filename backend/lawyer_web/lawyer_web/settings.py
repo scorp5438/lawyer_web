@@ -63,6 +63,11 @@ CORS_ALLOWED_ORIGINS = [
     "https://localhost:443",
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://advocat-saprolex.ru',
+    'https://www.advocat-saprolex.ru',
+]
+
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
