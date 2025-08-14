@@ -15,6 +15,7 @@ import '@fontsource/open-sans';
 import '@fontsource/open-sans/600.css';
 import '@fontsource/open-sans/700.css';
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import YandexMap from "./components/Contact/YandexMap";
 
 
 function App({user}) {
@@ -33,7 +34,7 @@ function App({user}) {
             const timer = setTimeout(() => {
                 setShowLogo(false);
                 localStorage.setItem('showLogo', 'false'); // сохраняем состояние
-            }, 2000);
+            }, 5000);
 
             return () => clearTimeout(timer);
         }
@@ -71,24 +72,27 @@ function App({user}) {
                                 user={user}
                                 onBlogClick={handleBlogClick}
                                 onMainClick={handleMainClick}
+                                // setForceShowProfile={setForceShowProfile}
                                 setShowOnlyProfile={setShowOnlyProfile}
                             />
 
 
-
                             <main className="content">
                                 <Routes>
-                                    <Route path="/" element={
+                                    {/* Главная страница — в Main компонент добавляем ArticleCard */}
+                                    <Route path="/static_react/" element={
                                         <Main
                                             activeSection={activeSection}
                                             selectedType={selectedType}
                                             setSelectedType={setSelectedType}
-
+                                            // forceShowProfile={forceShowProfile}
+                                            // setForceShowProfile={setForceShowProfile}
                                             showOnlyProfile={showOnlyProfile}
-
+                                            // setShowOnlyProfile={setShowOnlyProfile}
                                         />
 
                                     }/>
+                                    {/* Страница со статьями */}
                                     <Route
                                         path="/static_react/articles"
                                         element={
@@ -101,9 +105,11 @@ function App({user}) {
                                     {/* Страница полной статьи */}
                                     <Route path="/static_react/article/:id" element={<ArticleDetails/>}/>
                                 </Routes>
+
                                 <div className="button-scroll">
-                                    <ScrollToTop />
+                                    <ScrollToTop/>
                                 </div>
+
                             </main>
 
                             <div className="App-footer">

@@ -9,6 +9,9 @@
 
 html, body, #root {
   height: 100%;
+  overflow-x: hidden; /* Скрывает горизонтальный скролл */
+  width: 100%; /* Фиксирует ширину */
+  max-width: 100%; /* Предотвращает растяжение */
 
   font-family: 'Open Sans', sans-serif;
 }
@@ -60,7 +63,7 @@ h1, h2, h3 {
   right: 0;
   width: 100%;
   height: 75px;
-  z-index: 100;
+  z-index: 1;
 }
 .content {
   overflow-y: auto;
@@ -70,13 +73,14 @@ h1, h2, h3 {
   align-items: center;
   flex-direction: column;
   gap: 20px;
+  background: $mainBackground;
 
 }
 .App-footer {
   position: fixed;
   bottom: 0;
   width: $widthSite;
-  height: 75px; // высота футера
+  height: 75px;
   background-color: $headerBackground;
   color: white;
   z-index: 10;
@@ -91,4 +95,5 @@ h1, h2, h3 {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+  background: $mainBackground;
 }
