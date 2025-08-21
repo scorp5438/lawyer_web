@@ -1,21 +1,22 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: process.env.REACT_APP_API_BASE_URL || '/api/',
-    timeout: parseInt(process.env.REACT_APP_API_TIMEOUT) || 5000,
+    baseURL: 'http://localhost:80/api/',
+    timeout: 5000,
     withCredentials: true,
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'X-Superuser-Access': process.env.REACT_APP_SUPERUSER_KEY || '',
-        'X-Api-Version': process.env.REACT_APP_API_VERSION || '1.0'
+        'X-Superuser-Access': 'Hkjh98hjk8khj77slkhj',
+        'X-Api-Version': '1.0',
+        'X-Get-Token-Csrf-For-React': 'hjflSdhjlkSDfjo79sdffs009fs87s0df09s8d'
     }
 });
 
 // Проверка обязательных переменных окружения
-if (!process.env.REACT_APP_API_BASE_URL) {
-    console.warn('Warning: REACT_APP_API_BASE_URL is not set - using fallback /api/');
-}
+// if (!process.env.REACT_APP_API_BASE_URL) {
+//     console.warn('Warning: REACT_APP_API_BASE_URL is not set - using fallback /api/');
+// }
 
 // Базовые методы API
 const get = async (url, params = {}) => {
@@ -68,14 +69,13 @@ export const fetchSortedCases = async (ordering = process.env.REACT_APP_DEFAULT_
     return get('case/', {ordering});
 };
 
-export const fetchToken = async (headers, setToken) => {
+export const fetchToken = async (headers) => {
     try {
         const response = await api.get(
-            process.env.REACT_APP_CSRF_TOKEN_ENDPOINT || 'get-csrf-token/',
+            'get-csrf-token/',
             { headers }
         );
-        setToken(response.data);
-        return response.data;
+        return response.data; // Просто возвращаем данные
     } catch (error) {
         console.error("Ошибка при получении CSRF-токена:", error);
         throw error;

@@ -5,13 +5,14 @@ import ContentMain from "../ContentMain/ContentMain";
 import Profile from "../Profile/Profile";
 import CaseList from "../CaseList/CaseList";
 import {useLocation} from "react-router-dom";
+import YandexMap from "../Contact/YandexMap";
 
 const Main = ({activeSection, selectedType, setSelectedType, showOnlyProfile}) => {
     const location = useLocation();
 
     useEffect(() => {
         if (location.state?.forceShowProfileOnly) {
-            window.history.replaceState({}, document.title); // убираем флаг из URL
+            window.history.replaceState({}, document.title);
         }
     }, [location]);
 
@@ -31,7 +32,7 @@ const Main = ({activeSection, selectedType, setSelectedType, showOnlyProfile}) =
                         )}
                     </div>
 
-                    <div>
+                    <div className="profile">
                         {activeSection !== 'blog' && (
                             <div id="profile-section"><Profile/></div>
                         )}
@@ -42,6 +43,8 @@ const Main = ({activeSection, selectedType, setSelectedType, showOnlyProfile}) =
                             <CaseList />
                         </div>
                     )}
+                    <div className='map'>
+                        <YandexMap/></div>
                 </>
             )}
         </div>

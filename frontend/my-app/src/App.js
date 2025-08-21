@@ -15,7 +15,6 @@ import '@fontsource/open-sans';
 import '@fontsource/open-sans/600.css';
 import '@fontsource/open-sans/700.css';
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
-import YandexMap from "./components/Contact/YandexMap";
 
 
 function App({user}) {
@@ -80,7 +79,7 @@ function App({user}) {
                             <main className="content">
                                 <Routes>
                                     {/* Главная страница — в Main компонент добавляем ArticleCard */}
-                                    <Route path="/static_react/" element={
+                                    <Route path="/" element={
                                         <Main
                                             activeSection={activeSection}
                                             selectedType={selectedType}
@@ -94,7 +93,7 @@ function App({user}) {
                                     }/>
                                     {/* Страница со статьями */}
                                     <Route
-                                        path="/static_react/articles"
+                                        path="/article"
                                         element={
                                             <ArticleCard
                                                 selectedType={selectedType}
@@ -103,7 +102,7 @@ function App({user}) {
                                         }
                                     />
                                     {/* Страница полной статьи */}
-                                    <Route path="/static_react/article/:id" element={<ArticleDetails/>}/>
+                                    <Route path="/article/:id" element={<ArticleDetails/>}/>
                                 </Routes>
 
                                 <div className="button-scroll">

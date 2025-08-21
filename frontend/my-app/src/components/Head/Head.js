@@ -42,7 +42,7 @@ const Head = ({ onBlogClick, onMainClick, setShowOnlyProfile }) => {
 
     const handleProfileClick = () => {
         setShowOnlyProfile(true);
-        navigate('/');
+        navigate('/profile');
         setMobileMenuOpen(false);
     };
 
@@ -85,7 +85,7 @@ const Head = ({ onBlogClick, onMainClick, setShowOnlyProfile }) => {
         setMobileMenuOpen(false);
 
         // Всегда перенаправляем на страницу со статьями
-        navigate('/static_react/articles', {
+        navigate('/articles', {
             state: {
                 type: selectedType
             }
