@@ -8,7 +8,6 @@ const api = axios.create({
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'X-Superuser-Access': 'Hkjh98hjk8khj77slkhj',
-        'X-Api-Version': '1.0',
         'X-Get-Token-Csrf-For-React': 'hjflSdhjlkSDfjo79sdffs009fs87s0df09s8d'
     }
 });

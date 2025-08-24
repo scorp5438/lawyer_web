@@ -25,4 +25,3 @@ urlpatterns = [
     path('', include(router.urls)),
     path('get-csrf-token/', CustomCSRFView.as_view(), name='get-csrf-token'),
 ]
-

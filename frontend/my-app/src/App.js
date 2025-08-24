@@ -71,7 +71,6 @@ function App({user}) {
                                 user={user}
                                 onBlogClick={handleBlogClick}
                                 onMainClick={handleMainClick}
-                                // setForceShowProfile={setForceShowProfile}
                                 setShowOnlyProfile={setShowOnlyProfile}
                             />
 
@@ -84,10 +83,7 @@ function App({user}) {
                                             activeSection={activeSection}
                                             selectedType={selectedType}
                                             setSelectedType={setSelectedType}
-                                            // forceShowProfile={forceShowProfile}
-                                            // setForceShowProfile={setForceShowProfile}
                                             showOnlyProfile={showOnlyProfile}
-                                            // setShowOnlyProfile={setShowOnlyProfile}
                                         />
 
                                     }/>

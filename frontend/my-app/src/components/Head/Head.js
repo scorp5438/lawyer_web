@@ -84,8 +84,7 @@ const Head = ({ onBlogClick, onMainClick, setShowOnlyProfile }) => {
         setIsOpen(false);
         setMobileMenuOpen(false);
 
-        // Всегда перенаправляем на страницу со статьями
-        navigate('/articles', {
+        navigate('/article', {
             state: {
                 type: selectedType
             }

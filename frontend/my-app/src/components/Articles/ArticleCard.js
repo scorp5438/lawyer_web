@@ -169,7 +169,6 @@ const ArticleCard = ({selectedType, setSelectedType }) => {
 
     if (loading) return <div className="loading">Загрузка...</div>;
     if (error) return <div className="error">Ошибка: {error}</div>;
-    // if (articles.length === 0) return <div>Нет статей для отображения</div>;
 
     return (
         <div className='main__content'>
@@ -204,11 +203,11 @@ const ArticleCard = ({selectedType, setSelectedType }) => {
                                      articleRefs.current[index] = el;
                                      contentRefs.current[index] = el;}}
                                  style={{position: 'relative'}}>
-                                {article.image_url && (
+                                {articles.image_url && (
                                     <div className="articles_container_image-wrapper">
                                         <img
-                                            src={article.image_url}
-                                            alt={article.title}
+                                            src={articles.image_url}
+                                            alt={articles.title}
                                             className="articles_container_article-image"
                                             onError={(e) => {
                                                 e.target.onerror = null;
