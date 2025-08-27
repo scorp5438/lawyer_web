@@ -15,6 +15,7 @@ import '@fontsource/open-sans';
 import '@fontsource/open-sans/600.css';
 import '@fontsource/open-sans/700.css';
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import YandexMap from "./components/Contact/YandexMap";
 
 
 function App({user}) {
@@ -32,14 +33,14 @@ function App({user}) {
         if (showLogo) {
             const timer = setTimeout(() => {
                 setShowLogo(false);
-                localStorage.setItem('showLogo', 'false'); // сохраняем состояние
+                localStorage.setItem('showLogo', 'false');
             }, 5000);
 
             return () => clearTimeout(timer);
         }
     }, [showLogo]);
     useEffect(() => {
-        localStorage.removeItem('showLogo'); // Удалите эту строку после теста
+        localStorage.removeItem('showLogo');
     }, []);
     const handleBlogClick = (type) => {
         if (selectedType === type) {
@@ -54,7 +55,7 @@ function App({user}) {
 
     const handleMainClick = () => {
         setSelectedType(null);
-        setActiveSection('main'); // вот этого не хватало
+        setActiveSection('main');
     };
 
     return (
@@ -89,7 +90,7 @@ function App({user}) {
                                     }/>
                                     {/* Страница со статьями */}
                                     <Route
-                                        path="/article"
+                                        path="/articles"
                                         element={
                                             <ArticleCard
                                                 selectedType={selectedType}

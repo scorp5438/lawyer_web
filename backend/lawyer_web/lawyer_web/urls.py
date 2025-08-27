@@ -13,7 +13,4 @@ urlpatterns = [
     path('api/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc')
 ]
 
-urlpatterns = [
-    path('', include(router.urls)),
-    path('get-csrf-token/', CustomCSRFView.as_view(), name='get-csrf-token'),
-]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

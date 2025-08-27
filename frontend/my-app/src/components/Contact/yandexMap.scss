@@ -1,5 +1,6 @@
 @import '../../assets/styles/variables';
 @import "../../assets/styles/mixins";
+
 .map {
   &__content {
     display: flex;
@@ -8,6 +9,7 @@
     gap: 10px;
     color: $textColor;
     text-shadow: #393838 2px 2px 4px;
+    width: 100%;
 
     &_center {
       width: 1600px;
@@ -15,23 +17,71 @@
       box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
       @media (max-width: 1600px) {
-        width: 1200px;
-      }
+        .map {
+          &__content {
+            width: 1180px;
+          }
+        }
 
-      @media (max-width: 1199px) {
-        width: 992px;
       }
+    }
+  }
 
-      @media (max-width: 991px) {
+
+  @media (min-width: 360px) and (max-width: 575px) {
+    .map {
+      &__content {
+        width: 340px;
+
+        &_center {
+          width: 340px;
+        }
+      }
+    }
+  }
+  @media (min-width: 575px) and (max-width: 767px) {
+    .map {
+      &__content {
+        width: 575px;
+
+        &_center {
+          width: 575px;
+
+        }
+      }
+    }
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+    .map {
+      &__content {
         width: 768px;
-      }
 
-      @media (max-width: 767px) {
-        width: 576px;
+        &_center {
+          width: 768px;
+        }
       }
+    }
+  }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    .map {
+      &__content {
+        width: 980px;
 
-      @media (max-width: 575px) {
-        width: 375px;
+        &_center {
+          width: 980px;
+        }
+      }
+    }
+
+  }
+  @media (min-width: 1200px) and (max-width: 1400px) {
+    .map {
+      &__content {
+        width: 1180px;
+
+        &_center {
+          width: 1180px;
+        }
       }
     }
   }

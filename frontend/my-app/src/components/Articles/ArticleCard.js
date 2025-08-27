@@ -169,7 +169,7 @@ const ArticleCard = ({selectedType, setSelectedType }) => {
 
     if (loading) return <div className="loading">Загрузка...</div>;
     if (error) return <div className="error">Ошибка: {error}</div>;
-
+console.log(articles[0]?.image_url ? articles[0].image_url : "rfhnbyrf");
     return (
         <div className='main__content'>
             <div className="articles_container">
@@ -203,10 +203,11 @@ const ArticleCard = ({selectedType, setSelectedType }) => {
                                      articleRefs.current[index] = el;
                                      contentRefs.current[index] = el;}}
                                  style={{position: 'relative'}}>
-                                {articles.image_url && (
+                                {article.image_url && (
                                     <div className="articles_container_image-wrapper">
                                         <img
-                                            src={articles.image_url}
+                                            // src={`http://localhost:80/${article.image_url}`}
+                                            src={article.image_url}
                                             alt={articles.title}
                                             className="articles_container_article-image"
                                             onError={(e) => {
@@ -230,9 +231,9 @@ const ArticleCard = ({selectedType, setSelectedType }) => {
                                 {expandedCards[index] && (
                                     <button
                                         className="read-more-button"
-                                        onClick={() => navigate(`/static_react/article/${article.id}`, {
+                                        onClick={() => navigate(`/article/${article.id}`, {
                                             state: {
-                                                from: '/static_react/articles',
+                                                from: '/articles',
                                                 page,
                                                 category: selectedCategory?.pk,
                                                 type: selectedType
