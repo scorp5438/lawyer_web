@@ -71,7 +71,6 @@ const YandexMap = () => {
 
             const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker } = ymaps3;
 
-            // ИСПРАВЛЕНИЕ: Меняем порядок координат [долгота, широта]
             const originalCoordinates = addressData[0].coordinates;
             const correctCoordinates = [originalCoordinates[1], originalCoordinates[0]];
 
