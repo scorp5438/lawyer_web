@@ -100,12 +100,12 @@ const ArticleDetails = () => {
                     >
                         <img
                             className="article-image"
-                            src={`http://localhost:80/${article.image_url}`}
-                            // src={article.image_url}
+                            // src={`http://localhost:80/${article.image_url}`}
+                            src={article.image_url}
                             alt={article.title}
                             onError={(e) => {
                                 e.target.onerror = null;
-                                e.target.src = 'http://localhost:80/media/images/image.jpg';
+                                e.target.src = '/media/images/image.jpg';
                             }}
                         />
                     </motion.div>

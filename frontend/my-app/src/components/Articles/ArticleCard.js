@@ -204,13 +204,13 @@ console.log(articles[0]?.image_url ? articles[0].image_url : "rfhnbyrf");
                                 {article.image_url && (
                                     <div className="articles_container_image-wrapper">
                                         <img
-                                            src={`http://localhost:80/${article.image_url}`}
-                                            // src={article.image_url}
+                                            // src={`http://localhost:80/${article.image_url}`}
+                                            src={article.image_url}
                                             alt={articles.title}
                                             className="articles_container_article-image"
                                             onError={(e) => {
                                                 e.target.onerror = null;
-                                                e.target.src = 'http://localhost:80/media/images/image.jpg';
+                                                e.target.src = '/media/images/image.jpg';
                                             }}
                                         />
                                     </div>
