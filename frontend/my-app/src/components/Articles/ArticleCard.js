@@ -29,7 +29,7 @@ const ArticleCard = ({selectedType, setSelectedType }) => {
                 setPage(location.state.page);
             }
         }
-    }, [location.state, initialStateApplied]);
+    }, [location.state, initialStateApplied, setSelectedType]);
 
     useEffect(() => {
         if (!initialStateApplied && location.state && categories.length > 0) {
@@ -40,7 +40,7 @@ const ArticleCard = ({selectedType, setSelectedType }) => {
                 }
             }
 
-            setInitialStateApplied(true); // переносим сюда
+            setInitialStateApplied(true);
         }
     }, [categories, location.state, initialStateApplied]);
 
@@ -50,14 +50,12 @@ const ArticleCard = ({selectedType, setSelectedType }) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        // Можно отключить наблюдение после появления
-                        // observer.unobserve(entry.target);
                     }
                 });
             },
             {
-                threshold: 0.1, // Срабатывает когда 10% элемента видно
-                rootMargin: '0px 0px -50px 0px' // Небольшой отступ снизу
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
             }
         );
 
@@ -169,8 +167,7 @@ const ArticleCard = ({selectedType, setSelectedType }) => {
 
     if (loading) return <div className="loading">Загрузка...</div>;
     if (error) return <div className="error">Ошибка: {error}</div>;
-    // if (articles.length === 0) return <div>Нет статей для отображения</div>;
-
+console.log(articles[0]?.image_url ? articles[0].image_url : "rfhnbyrf");
     return (
         <div className='main__content'>
             <div className="articles_container">
@@ -207,12 +204,13 @@ const ArticleCard = ({selectedType, setSelectedType }) => {
                                 {article.image_url && (
                                     <div className="articles_container_image-wrapper">
                                         <img
+                                            // src={`http://localhost:80/${article.image_url}`}
                                             src={article.image_url}
-                                            alt={article.title}
+                                            alt={articles.title}
                                             className="articles_container_article-image"
                                             onError={(e) => {
                                                 e.target.onerror = null;
-                                                e.target.src = '/path/to/default/image.jpg';
+                                                e.target.src = '/media/images/image.jpg';
                                             }}
                                         />
                                     </div>
@@ -231,9 +229,9 @@ const ArticleCard = ({selectedType, setSelectedType }) => {
                                 {expandedCards[index] && (
                                     <button
                                         className="read-more-button"
-                                        onClick={() => navigate(`/static_react/article/${article.id}`, {
+                                        onClick={() => navigate(`/article/${article.id}`, {
                                             state: {
-                                                from: '/static_react/articles',
+                                                from: '/articles',
                                                 page,
                                                 category: selectedCategory?.pk,
                                                 type: selectedType

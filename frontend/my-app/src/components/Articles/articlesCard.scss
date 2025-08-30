@@ -19,7 +19,9 @@
   gap: 30px;
 
 
+
   &_article-card {
+    background: $mainBackground;
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
@@ -34,6 +36,10 @@
     }
 
     &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    &:active {
       transform: translateY(-5px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
@@ -54,6 +60,9 @@
     border-radius: 50%;
 
     &:hover {
+      transform: scale(1.05);
+    }
+    &:active {
       transform: scale(1.05);
     }
   }
@@ -172,16 +181,16 @@
   }
 }
 
-@media (min-width: 375px) and (max-width: 575px) {
+@media (min-width: 360px) and (max-width: 575px) {
   .main__content {
     height: auto;
-    width: 375px;
+    width: 340px;
   }
 
   .articles_container {
     @include flex-center-column;
     margin-top: 10px;
-    width: 375px;
+    width: 340px;
     gap: 10px;
 
     &_article-content {
@@ -292,7 +301,7 @@
   }
 
   .pagination-carts {
-    width: 375px;
+    width: 340px;
     height: 30px;
 
     &_toPage {

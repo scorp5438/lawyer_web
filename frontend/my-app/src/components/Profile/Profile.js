@@ -6,6 +6,7 @@ const AboutMe = () => {
     const [user, setUser] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    console.log(error, loading);
     useEffect(() => {
         const loadData = async () => {
             setLoading(true);

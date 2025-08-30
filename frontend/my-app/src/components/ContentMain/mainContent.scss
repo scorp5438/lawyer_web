@@ -12,10 +12,8 @@
     width: $widthSiteContent;
     display: flex;
     @include flex-between;
-    padding: 10px;
 
     &_block {
-      width: 800px;
       @include flex-center-column;
       gap: 45px;
 
@@ -210,14 +208,13 @@
   grid-column: 1 / -1; // занимает всю ширину сетки
 }
 
-@media (min-width: 375px) and (max-width: 575px) {
+@media (min-width: 360px) and (max-width: 575px) {
   .main__content {
-    min-width: 375px;
-    max-width: 575px;
+    width: 340px;
 
     &_content {
-      min-width: 375px;
-      max-width: 575px;
+     width: 360px;
+
       @include flex-center-column;
       padding: 10px;
       &_block {
@@ -232,7 +229,7 @@
         }
 
         &_logo {
-          width: 135px;
+          width: 125px;
 
           &_h1 h1 {
             text-align: center;
@@ -263,7 +260,8 @@
         flex-direction: column;
         gap: 10px;
         align-items: center;
-        width: 300px;
+        min-width: 340px;
+        max-width: 550px;
 
       }
 
@@ -334,7 +332,7 @@
             &_practice {
               @include grid-2x2-plus-row;
               gap: 8px;
-              width: 300px;
+              width: 340px;
 
               h3 {
                 font-size: 12px;
@@ -617,8 +615,8 @@
         border-radius: 5px;
 
         &_photo {
-          width: 500px;
-          height: 500px;
+          width: 550px;
+          height: 550px;
           object-fit: cover;
           box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.3);
           mask-image: radial-gradient(
@@ -634,7 +632,7 @@
         flex-direction: column;
         gap: 10px;
       }
-
+      article.image_url
       .practice-item {
         border: 2px solid $headerBackground;
         border-radius: 5px;
@@ -689,7 +687,7 @@
 
       &_info {
         @include flex-center-row;
-        width: 500px;
+        width: 550px;
 
         &_blog {
           gap: 10px;
@@ -702,7 +700,7 @@
             &_practice {
               @include grid-2x2-plus-row;
               gap: 10px;
-              width: 500px;
+              width: 550px;
 
               h3 {
                 font-size: 14px;

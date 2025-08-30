@@ -1,15 +1,27 @@
 @import '../../assets/styles/variables';
 @import "../../assets/styles/mixins";
+
 .main-section {
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
   background: $mainBackground;
-  //height: 100%;
+  gap: 40px;
+  height: auto;
   padding: 20px;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.profile {
+  width: $widthSite;
+}
+
+#profile-section {
+  display: flex;
+  justify-content: center;
+}
+
 .case {
   width: $widthSite;
   height: 350px;
@@ -19,29 +31,53 @@
   background: $mainBackground;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-@media (min-width: 375px) and (max-width: 575px) {
+
+.map {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 360px) and (max-width: 575px) {
   .main-section {
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
     background: $mainBackground;
-    //height: 100%;
     padding: 20px;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
-  .case {
-    width: 375px;
+  .profile {
+    width: 340px;
     height: 100%;
-
+  }
+  .case {
+    width: 340px;
+    height: 100%;
+  }
+  .map {
+    width: 340px;
+    height: 100%;
   }
 }
+
 @media (min-width: 576px) and (max-width: 767px) {
+  .profile {
+    width: 576px;
+    height: 100%;
+  }
   .case {
     width: 576px;
     height: 100%;
   }
+  .map {
+    width: 576px;
+    height: 100%;
+  }
 }
+
 @media (min-width: 768px) and (max-width: 991px) {
   .main-section {
     display: flex;
@@ -53,11 +89,20 @@
     padding: 20px;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
+  .profile {
+    width: 768px;
+    height: 100%;
+  }
   .case {
     width: 768px;
     height: 100%;
   }
+  .map {
+    width: 768px;
+    height: 100%;
+  }
 }
+
 @media (min-width: 992px) and (max-width: 1199px) {
   .main-section {
     display: flex;
@@ -65,30 +110,37 @@
     flex-direction: column;
     justify-content: center;
     background: $mainBackground;
-    min-width: 992px;
+    min-width: 980px;
     max-width: 1199px;
     padding: 40px;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
+  .profile {
+    width: 980px;
+    height: 100%;
+  }
   .case {
-    width: 992px;
+    width: 980px;
+    height: 100%;
+  }
+  .map {
+    width: 980px;
     height: 100%;
   }
 }
-@media (min-width: 1200px) and (max-width: 1440px) {
-  .main-section {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    background: $mainBackground;
-    min-width: 1200px;
-    max-width: 1440px;
-    padding: 40px;
-    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+@media (min-width: 1200px) and (max-width: 1600px) {
+  .profile {
+    width: 1180px;
+    height: 100%;
   }
+
   .case {
-    width: 1200px;
+    width: 1180px;
+    height: 100%;
+  }
+  .map {
+    width: 1180px;
     height: 100%;
   }
 }

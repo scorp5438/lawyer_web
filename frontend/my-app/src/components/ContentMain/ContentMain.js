@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { fetchPractices } from '../utils/api';
+import {fetchPractices} from '../utils/api';
 import lawyerPhoto from '../img/lawyer.jpg';
 import './mainContent.scss';
 import ModalForm from "../ModalForm/ModalForm";
@@ -11,7 +11,7 @@ const ContentMain = () => {
     const [hoveredPractice, setHoveredPractice] = useState(null);
     const [tooltipPosition, setTooltipPosition] = useState({x: 0, y: 0});
     const [showModal, setShowModal] = useState(false);
-
+    console.log(showModal);
     useEffect(() => {
         const getPractices = async () => {
             try {

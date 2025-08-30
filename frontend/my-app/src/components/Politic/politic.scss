@@ -1,3 +1,4 @@
+@import '../../assets/styles/variables';
 .politic-modal {
   position: fixed;
   top: 0;
@@ -28,10 +29,48 @@
   background: none;
   border: none;
   font-size: 24px;
+  color: $textColor;
   cursor: pointer;
+  &:hover {
+    color: $colorH1;
+    text-shadow: 2px 2px 4px rgb(23, 19, 19);
+  }
+  &:after {
+    color: $colorH1;
+    text-shadow: 2px 2px 4px rgb(23, 19, 19);
+  }
 }
 
 .politic-text {
   margin-top: 20px;
   line-height: 1.6;
+}
+@media (min-width: 360px) and (max-width: 575px) {
+  .politic-content {
+    width: 300px;
+  }
+  .close-button {
+    font-size: $sizeNavigate;
+  }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  .politic-content {
+    width: 450px;
+  }
+
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .politic-content {
+    width: 600px;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .politic-content {
+    width: 900px;
+  }
+}
+@media (min-width: 1200px) and (max-width: 1600px) {
+  .politic-content {
+    width: 1200px;
+  }
 }

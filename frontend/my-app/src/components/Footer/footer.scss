@@ -1,19 +1,84 @@
 @import '../../assets/styles/variables';
 @import "../../assets/styles/mixins";
 
-.head {
+.footer {
   @include flex-center-row;
-  width: 100%;
+  width: $widthSite;
   height: 75px;
   background-color: $headerBackground;
   &__nav {
     @include flex-center-row;
-    width: 100%;
+    width: $widthSite;
     height: 75px;
     background-color: $headerBackground;
     &_item {
       color: $colorNavigate;
       font-size: $sizeNavigate;
+    }
+  }
+}
+@media (min-width: 360px) and (max-width: 575px) {
+  .footer {
+    width: 360px;
+
+    &__nav {
+      width: 360px;
+
+      &_item {
+        font-size: $sizePage;
+      }
+    }
+  }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  .footer {
+    width: 576px;
+
+    &__nav {
+      width: 576px;
+
+      &_item {
+        font-size: $sizePage;
+      }
+    }
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .footer {
+    width: 768px;
+
+    &__nav {
+      width: 768px;
+
+      &_item {
+        font-size: $sizePage;
+      }
+    }
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .footer {
+    width: 992px;
+
+    &__nav {
+      width: 992px;
+
+      &_item {
+        font-size: $sizePage;
+      }
+    }
+  }
+}
+@media (min-width: 1200px) and (max-width: 1600px) {
+  .footer {
+    width: 1200px;
+
+    &__nav {
+      width: 1200px;
+
+      &_item {
+        font-size: $sizeNavigate;
+      }
     }
   }
 }

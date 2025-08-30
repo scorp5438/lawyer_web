@@ -159,20 +159,20 @@
   }
 }
 
-@media (min-width: 375px) and (max-width: 575px) {
+@media (min-width: 360px) and (max-width: 575px) {
   .margin {
     margin-bottom: 10px;
   }
   .case-list-wrapper {
-    width: 375px;
+    width: 340px;
   }
 
   .case-list {
-    width: 375px;
+    width: 340px;
     height: auto;
 
     &_head {
-      font-size: 20px;
+      font-size: $sizeContent;
       text-shadow: 1px 1px 2px #000000;
     }
 
@@ -367,10 +367,10 @@
 
 @media (min-width: 992px) and (max-width: 1199px) {
   .case-list-wrapper {
-    width: 992px;
+    width: 980px;
   }
   .case-list {
-    width: 992px;
+    width: 980px;
     height: auto;
 
     &_head {

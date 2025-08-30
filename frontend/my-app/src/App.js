@@ -7,14 +7,15 @@ import ArticleCard from './components/Articles/ArticleCard';
 import ArticleDetails from './components/ArticleDetails/ArticleDetails';
 import Head from "./components/Head/Head";
 import Footer from "./components/Footer/Footer";
-
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 //Импорт шрифтов
 import '@fontsource/lora';
 import '@fontsource/lora/700.css';
 import '@fontsource/open-sans';
 import '@fontsource/open-sans/600.css';
 import '@fontsource/open-sans/700.css';
-import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+
+
 
 
 function App({user}) {
@@ -32,14 +33,14 @@ function App({user}) {
         if (showLogo) {
             const timer = setTimeout(() => {
                 setShowLogo(false);
-                localStorage.setItem('showLogo', 'false'); // сохраняем состояние
-            }, 2000);
+                localStorage.setItem('showLogo', 'false');
+            }, 5000);
 
             return () => clearTimeout(timer);
         }
     }, [showLogo]);
     useEffect(() => {
-        localStorage.removeItem('showLogo'); // Удалите эту строку после теста
+        localStorage.removeItem('showLogo');
     }, []);
     const handleBlogClick = (type) => {
         if (selectedType === type) {
@@ -54,7 +55,7 @@ function App({user}) {
 
     const handleMainClick = () => {
         setSelectedType(null);
-        setActiveSection('main'); // вот этого не хватало
+        setActiveSection('main');
     };
 
     return (
@@ -75,22 +76,21 @@ function App({user}) {
                             />
 
 
-
                             <main className="content">
                                 <Routes>
+                                    {/* Главная страница — в Main компонент добавляем ArticleCard */}
                                     <Route path="/" element={
                                         <Main
                                             activeSection={activeSection}
                                             selectedType={selectedType}
                                             setSelectedType={setSelectedType}
-
                                             showOnlyProfile={showOnlyProfile}
-
                                         />
 
                                     }/>
+                                    {/* Страница со статьями */}
                                     <Route
-                                        path="/static_react/articles"
+                                        path="/articles"
                                         element={
                                             <ArticleCard
                                                 selectedType={selectedType}
@@ -99,11 +99,13 @@ function App({user}) {
                                         }
                                     />
                                     {/* Страница полной статьи */}
-                                    <Route path="/static_react/article/:id" element={<ArticleDetails/>}/>
+                                    <Route path="/article/:id" element={<ArticleDetails/>}/>
                                 </Routes>
+
                                 <div className="button-scroll">
-                                    <ScrollToTop />
+                                    <ScrollToTop/>
                                 </div>
+
                             </main>
 
                             <div className="App-footer">

@@ -94,10 +94,10 @@
   }
 
   .textarea {
-    width: 500px;
-    min-width: 500px;
+    width: 520px;
+    min-width: 520px;
     min-height: 100px;
-    max-width: 500px;
+    max-width: 520px;
     max-height: 200px;
     height: 100px;
     font-size: 16px;
@@ -109,7 +109,7 @@
     align-items: center;
     margin-bottom: 20px;
     gap: 10px;
-
+    width: 520px;
     input[type="checkbox"] {
       appearance: none; // убираем стандартный стиль
       width: 20px;
@@ -140,7 +140,7 @@
   }
 
   .submit {
-    width: 100%;
+    width: 520px;
     padding: 10px;
     color: #7E7E7E;
     border: none;
@@ -201,9 +201,9 @@
   margin-top: 5px;
   color: red;
   font-size: 14px;
-  background-color: rgba(255, 77, 79, 0.1); // легкий фон под ошибкой
-  padding: 5px 10px; // внутр. отступы
-  border-radius: 5px; // скругление
+  background-color: rgba(255, 77, 79, 0.1);
+  padding: 5px 10px;
+  border-radius: 5px;
   border: 1px solid #fdfdfd;
 }
 
@@ -216,21 +216,16 @@
     font-size: 12px;
   }
 }
-.form-success {
-  color: $colorNavigate;
-  font-weight: lighter;
-  font-size: 16px;
-}
-@media (min-width: 375px) and (max-width: 575px) {
+@media (min-width: 360px) and (max-width: 575px) {
   .form-center {
-    max-width: 300px;
+    max-width: 340px;
 
     &_content {
-      max-width: 300px;
+      max-width: 340px;
     }
 
     .form {
-      max-width: 300px;
+      max-width: 340px;
       padding: 10px;
       gap: 10px;
       display: flex;
@@ -243,14 +238,14 @@
         color: #7E7E7E;
       }
       .form-row {
-        width: 300px;
+        width: 550px;
         @include flex-center-column;
         margin-bottom: 15px;
 
         input[type="text"],
         input[type="tel"],
         input[type="email"] {
-          width: 220px;
+          width: 280px;
           font-size: 12px;
         }
       }
@@ -268,11 +263,11 @@
 
   }
   .form-row__label {
-    width: 220px;
+
     input[type="text"],
     input[type="tel"],
     input[type="email"] {
-      width: 220px;
+      width: 280px;
       font-size: 12px;
     }
   }
@@ -287,6 +282,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    width: 280px !important;
 
     input[type="checkbox"] {
 
@@ -315,13 +311,12 @@
   }
 
   .submit {
-    width: 100%;
-    padding: 10px;
+    width: 280px !important;
     color: #7E7E7E;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 12px !important;
     transition: background-color 0.3s ease, color 0.3s ease;
 
     &:disabled {
@@ -337,8 +332,8 @@
 
     &:not(:disabled):after {
       background: linear-gradient(270deg, #ffd700, #d4af37, #cfb53b);
-      background-size: 600% 600%;
-      animation: gradientShift 3s ease infinite;
+      background-size: 600% 600%; // увеличенный для эффекта перелива
+      animation: gradientShift 3s ease infinite; // применяем анимацию перелива
       color: #878484;
     }
   }
@@ -353,11 +348,6 @@
     100% {
       background-position: 0% 50%;
     }
-  }
-  .form-success {
-    color: $colorNavigate;
-    font-weight: lighter;
-    font-size: 12px;
   }
 }
 
@@ -424,12 +414,12 @@
     input[type="checkbox"] {
 
       &:checked {
-        background-color: #FFD700FF;
+        background-color: #FFD700FF; // фон если чекнут
       }
 
       &:checked::after {
-        content: '✔';
-        color: #333232;
+        content: '✔'; // символ галочки
+        color: #333232; // цвет галочки
         font-size: 12px;
         position: absolute;
         top: 0;
@@ -439,36 +429,20 @@
 
     p {
       color: #7E7E7E;
-      font-size: 9px;
+      font-size: 8px;
     }
   }
 
   .submit {
-    width: 100%;
-    padding: 10px;
-    color: #7E7E7E;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, color 0.3s ease;
 
     &:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
+
+      width: 380px;
     }
 
     &:not(:disabled) {
-      background: #c5b07c; // основной фон, пока не наведён
-      background-size: 200% 200%; // стандартный размер
-      transition: background 0.5s ease, color 0.3s ease;
-    }
 
-    &:not(:disabled):after {
-      background: linear-gradient(270deg, #ffd700, #d4af37, #cfb53b);
-      background-size: 600% 600%; // увеличенный для эффекта перелива
-      animation: gradientShift 3s ease infinite; // применяем анимацию перелива
-      color: #878484;
+      width: 380px;
     }
   }
 
@@ -497,26 +471,17 @@
     font-size: 10px;
     width: 100%;
   }
-  .form-success {
-    color: $colorNavigate;
-    font-weight: lighter;
-    font-size: 14px;
-  }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-  .form-success {
-    color: $colorNavigate;
-    font-weight: normal;
-    font-size: 14px;
-  }
+
   .error-message {
     margin-top: 5px;
     color: red;
     font-size: 10px;
-    background-color: rgba(255, 77, 79, 0.1);
-    padding: 5px 10px;
-    border-radius: 5px;
+    background-color: rgba(255, 77, 79, 0.1); // легкий фон под ошибкой
+    padding: 5px 10px; // внутр. отступы
+    border-radius: 5px; // скругление
     border: 1px solid #fdfdfd;
   }
 
@@ -548,13 +513,12 @@
       }
 
       .form-row {
-        width: 390px;
-        @include grid-2x2-plus-column;
-        margin-bottom: 15px;
+        width: 400px;
+        gap: 10px;
         input[type="text"],
         input[type="tel"],
         input[type="email"] {
-          width: 180px;
+          width: 190px;
           font-size: 14px;
         }
       }
@@ -572,7 +536,7 @@
 
   }
   .form-row__label {
-    width: 180px;
+    width: 193px;
   }
   .textarea-wrapper {
     width: 400px;
@@ -582,9 +546,7 @@
   }
 
   .checkbox {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+    width: 400px !important;
 
     input[type="checkbox"] {
       appearance: none; // убираем стандартный стиль
@@ -612,12 +574,12 @@
 
     p {
       color: #7E7E7E;
-      font-size: 10px;
+      font-size: 11px;
     }
   }
 
-  .submit {
-    width: 100%;
+  .form-center .submit {
+    width: 400px;
     padding: 10px;
     color: #7E7E7E;
     border: none;
@@ -657,11 +619,7 @@
     }
   }
 }
-.form-success {
-  color: $colorNavigate;
-  font-weight: normal;
-  font-size: 16px;
-}
+
 .form-error {
   color: $colorError;
   box-shadow: 0 2px 8px rgba(251, 251, 251, 0.5);
@@ -683,10 +641,15 @@
 }
 
 
-@media (min-width: 1200px) and (max-width: 1439px) {
-
+@media (min-width: 360px) and (max-width: 575px) {
+  .error-message {
+    width: 280px;
+    font-size: 8px;
+  }
 }
 
-@media (min-width: 1440px) and (max-width: 1600px) {
-
+@media (min-width: 576px) and (max-width: 767px) {
+  .form-center .checkbox {
+    width: 380px;
+  }
 }
