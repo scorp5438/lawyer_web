@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 
-import axios from "axios";
 import './modalForm.scss';
 import {fetchToken } from "../utils/api";
 import Politic from "../Politic/Politic";
@@ -38,10 +37,21 @@ const ModalForm = ({handleCloseModal}) => {
         };
     }, [errors]);
     useEffect(() => {
-        const headers = {
-            'X-Get-Token-Csrf-For-React': 'Hkjh98hjk8khj77slkhj'
+        const getToken = async () => {
+            try {
+                const headers = {
+                    'X-Get-Token-Csrf-For-React': 'hjflSdhjlkSDfjo79sdffs009fs87s0df09s8d'
+                };
+                const tokenData = await fetchToken(headers);
+                setToken(tokenData); // Убедитесь, что tokenData содержит csrfToken
+            } catch (error) {
+                console.error('Ошибка получения токена:', error);
+                // Можно установить значение по умолчанию или показать ошибку
+                setToken({ csrfToken: 'fallback-token' });
+            }
         };
-        fetchToken(headers, setToken);
+
+        getToken();
     }, []);
 
     const handleChange = (e) => {

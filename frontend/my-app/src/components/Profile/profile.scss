@@ -16,7 +16,7 @@
   background-color: $mainBackground;
   padding: 20px;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  margin-bottom: 10px;
+
   &_container {
     width: $widthSiteContent;
     color: $textColor;
@@ -52,17 +52,30 @@
 
     p {
       text-align: justify;
-      font-size: 16px;
+      font-size: $sizePage;
+    }
+    .item_link {
+      text-decoration: none;
+      font-size: $sizePage;
+      color: inherit;
+      list-style-type: none;
+    }
+    .item_link:hover {
+      color: $colorH1;
+      text-shadow: 2px 2px 0 rgb(58, 56, 56);
+    }
+    .item_link:after {
+      color: $colorH1;
+      text-shadow: 2px 2px 0 rgb(58, 56, 56);
     }
   }
 }
 
-@media (min-width: 375px) and (max-width: 575px) {
+@media (min-width: 360px) and (max-width: 575px) {
   .about__content {
-    width: 375px;
-
+    width: 340px;
     &_container {
-      width: 375px;
+      width: 340px;
 
 
       &_head {
@@ -147,10 +160,11 @@
 
 @media (min-width: 992px) and (max-width: 1199px) {
   .about__content {
-    width: 992px;
+    min-width: 980px;
+    max-width: 1199px;
 
     &_container {
-      width: 992px;
+      width: 980px;
 
       h1, h2 {
         font-family: 'Open Sans', sans-serif;
@@ -184,7 +198,7 @@
 
 @media (min-width: 1200px) and (max-width: 1439px) {
   .about__content {
-    width: 1200px;
+    width: 1180px;
 
     &_container {
       width: 1200px;

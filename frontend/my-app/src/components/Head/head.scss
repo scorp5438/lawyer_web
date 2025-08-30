@@ -29,6 +29,7 @@
   position: relative;
   width: auto !important;
   font-family: 'Open Sans', sans-serif;
+  z-index: 100;
 
   &_item {
     cursor: pointer;
@@ -36,49 +37,37 @@
     font-size: $sizeNavigate;
     list-style-type: none;
 
-    &_blog {
-      position: absolute;
-      top: 50px !important;
-      background-color: rgba(40, 44, 52, 0.8);
-      border: 1px solid #FFD700;
-      border-radius: 5px;
-      padding: 10px;
-      width: 180px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      z-index: 1;
-    }
+    a {
+      text-decoration: none;
+      color: $colorNavigate;
 
-    &_blog li {
-      text-align: center;
-    }
-
-    &_blog li:hover {
-      color: $colorH1;
-      box-shadow: 0 4px 8px rgb(255, 255, 255);
-      border: 1px solid #FFD700;
-      border-radius: 5px;
-      padding: 5px;
+      &:hover {
+        color: $colorH1;
+      }
+      &:after {
+        color: $colorH1;
+      }
     }
   }
-
-  &_item a {
-    text-decoration: none;
-    color: $colorNavigate;
-
-    &:hover {
-      color: $colorH1;
+  @media (min-width: 360px) and (max-width: 1200px) {
+    .head__nav {
+      &_item {
+        font-size:$sizePage;
+      }
     }
   }
 }
 
 .head__nav_menu_wrapper {
   position: relative;
+  z-index: 1000;
 }
 
 .head__nav_menu_toggle {
   display: none;
   cursor: pointer;
   padding: 10px;
+  z-index: 1001;
 
   svg {
     width: 24px;
@@ -90,55 +79,152 @@
     }
   }
 
-  @media (min-width: 375px) and (max-width: 992px) {
+  @media (min-width: 360px) and (max-width: 1200px) {
     display: block;
+    position: relative;
   }
 }
 
-.head__nav_menu {
+.head__nav_menu.desktop-menu {
   display: flex;
   justify-content: space-between;
   gap: 30px;
   width: auto !important;
+  position: relative;
+  z-index: 100;
 
-  @media (min-width: 375px) and (max-width: 992px) {
+  @media (min-width: 360px) and (max-width: 1200px) {
     display: none;
-    position: absolute;
-    top: 100%;
+  }
+}
+
+.head__nav_menu.mobile-menu {
+  display: none;
+
+  @media (min-width: 360px) and (max-width: 1200px) {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
     background-color: $headerBackground;
     flex-direction: column;
-    gap: 5px;
-    padding: 8px;
-    z-index: 100;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: 80px 20px 20px 20px;
+    z-index: 1001;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
 
     &.mobile-menu-open {
-      display: flex;
-    }
-  }
-
-  &_item {
-    cursor: pointer;
-    color: $colorNavigate;
-    font-size: $sizeNavigate;
-    list-style-type: none;
-
-    &:hover {
-      color: $colorH1;
-    }
-
-    @media (min-width: 375px) and (max-width: 992px) {
-      padding: 8px 0;
+      transform: translateX(0);
     }
   }
 }
 
-.modal-overlay {
+.head__nav_menu_item {
+  cursor: pointer;
+  color: $colorNavigate;
+  font-size: $sizePage;
+  text-align: center;
+  padding: 10px;
+  transition: color 0.2s ease-in-out;
+  position: relative;
+
+  &:hover {
+    color: $colorH1;
+  }
+
+  &.blog-item {
+    position: relative;
+    z-index: 1000;
+  }
+
+  @media (min-width: 360px) and (max-width: 1200px) {
+    font-size: $sizePage;
+    padding: 15px;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+.head__nav_item_blog {
   position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(40, 44, 52, 0.95);
+  border: 1px solid #FFD700;
+  border-radius: 5px;
+  padding: 10px;
+  width: 180px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 9999 !important;
+
+  &_list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &_category {
+    text-align: center;
+    padding: 8px 5px;
+    cursor: pointer;
+    color: $colorNavigate;
+    font-size: 14px;
+    transition: all 0.2s ease-in-out;
+    border-radius: 3px;
+    pointer-events: auto; /* Явно разрешаем клики */
+
+    &:hover {
+      color: $colorH1;
+      background-color: rgba(255, 215, 0, 0.1);
+      box-shadow: 0 2px 4px rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+/* Специальные стили для десктопной версии */
+@media (min-width: 1201px) {
+  .head__nav_item_blog {
+    z-index: 10000; /* Очень высокий z-index для десктопа */
+  }
+
+  .blog-item {
+    z-index: 10001;
+  }
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+
+  &.overlay-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
   background-color: $colorBack;
   width: 100%;
   height: 100%;
-  z-index: 1;
+  z-index: 1000;
   @include flex-center-column;
 }
 
@@ -149,14 +235,18 @@
   background-color: $headerBackground;
   display: flex;
   flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
 }
 
 .modal-close {
   border: none;
   background: none;
   padding-right: 10px;
-  display: flex;
-  justify-content: right;
+  text-align: right;
 }
 
 .modal-close svg {
@@ -168,50 +258,45 @@
   fill: $colorH1;
 }
 
-@media (min-width: 375px) and (max-width: 575px) {
+/* Медиазапросы для мобильного меню */
+@media (min-width: 360px) and (max-width: 1200px) {
+  .head__nav_menu.mobile-menu .blog-item {
+    position: relative;
+  }
+
+  .head__nav_menu.mobile-menu .head__nav_item_blog {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 160px;
+    z-index: 1002;
+  }
+}
+
+/* Остальные медиазапросы остаются без изменений */
+@media (min-width: 360px) and (max-width: 575px) {
   .header__navigate {
-    min-width: 375px;
+    min-width: 360px;
     max-width: 575px;
+    display: flex;
 
     &_head {
-      min-width: 375px;
+      min-width: 360px;
       max-width: 575px;
       display: flex;
       flex-direction: row;
       justify-content: space-around;
     }
   }
-  .head__nav {
-    &_item {
-      font-size: 12px !important;
 
-      & a {
-        font-size: 12px;
-      }
+  .head__nav_item_blog {
+    width: 140px;
+
+    &_category {
+      font-size: 12px;
+      padding: 6px 3px;
     }
-
-    &_menu_item {
-      font-size: 14px;
-
-    }
-
-    &_item_blog {
-      width: 100px;
-      padding: 5px;
-      right: 112px;
-      margin-top: 95px;
-
-      & li {
-        font-size: 12px;
-      }
-    }
-  }
-  .modal-close {
-    display: flex;
-    justify-content: right;
-  }
-  .modal-close svg:active {
-    fill: $colorH1;
   }
 }
 
@@ -228,55 +313,6 @@
       justify-content: space-around;
     }
   }
-  .head__nav {
-    &_item {
-      font-size: 14px !important;
-
-      & a {
-        font-size: 14px;
-      }
-    }
-
-    &_menu_item {
-      font-size: 14px;
-
-    }
-
-    &_item_blog {
-      width: 140px;
-      padding: 10px;
-      right: 115px;
-      margin-top: 95px;
-
-      & li {
-        font-size: 14px;
-      }
-    }
-  }
-
-  .modal-content {
-    border: 2px solid $headerBackground;
-    border-radius: 5px;
-    padding: 10px;
-    background-color: $headerBackground;
-  }
-
-  .modal-close {
-    display: flex;
-    justify-content: right;
-  }
-
-  .modal-close svg {
-    cursor: pointer;
-    fill: $colorError;
-  }
-
-  .modal-close svg:active {
-    fill: $colorH1;
-  }
-  .modal-close svg:active {
-    fill: $colorH1;
-  }
 }
 
 @media (min-width: 768px) and (max-width: 992px) {
@@ -292,41 +328,6 @@
       justify-content: space-around;
     }
   }
-  .head__nav {
-    &_item {
-      font-size: 16px;
-
-      & a {
-        font-size: 16px;
-      }
-    }
-
-    &_menu_item {
-      font-size: 16px;
-
-    }
-
-    &_item_blog {
-      width: 140px;
-      padding: 10px;
-      right: 125px;
-      margin-top: 100px;
-
-      & li {
-        font-size: 16px;
-      }
-    }
-  }
-  .modal-content {
-    width: 570px;
-  }
-  .modal-close {
-    display: flex;
-    justify-content: right;
-  }
-  .modal-close svg:active {
-    fill: $colorH1;
-  }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -338,6 +339,7 @@
       min-width: 992px;
       max-width: 1200px;
     }
+
     &_head {
       min-width: 992px;
       max-width: 1200px;
@@ -345,40 +347,6 @@
       flex-direction: row;
       justify-content: space-around;
     }
-  }
-  .head__nav {
-    &_item li {
-      font-size: 16px;
-
-      & a {
-        font-size: 16px;
-      }
-    }
-
-    &_menu_item {
-      font-size: 16px;
-
-    }
-
-    &_item_blog {
-      width: 140px;
-      padding: 10px;
-
-      & li {
-        font-size: 16px;
-      }
-    }
-
-  }
-  .modal-close svg:active {
-    fill: $colorH1;
-  }
-  .modal-content {
-    width: 450px;
-  }
-  .modal-close {
-    display: flex;
-    justify-content: right;
   }
 }
 
@@ -388,20 +356,11 @@
     max-width: 1600px;
 
     &_head {
-      min-width: 1200px;
+      width: 1200px;
       max-width: 1600px;
       display: flex;
       flex-direction: row;
       justify-content: space-around;
-    }
-    &_item_blog {
-      width: 140px;
-      padding: 10px;
-      right: 0;
-
-      & li {
-        font-size: 16px;
-      }
     }
   }
 }

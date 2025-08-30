@@ -64,8 +64,11 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://advocat-saprolex.ru',
-    'https://www.advocat-saprolex.ru',
+     "http://localhost:3000",
+     "http://127.0.0.1:3000",
+
+    #'https://advocat-saprolex.ru',
+    #'https://www.advocat-saprolex.ru',
 ]
 
 SESSION_COOKIE_SECURE = True
@@ -78,6 +81,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'X-Superuser-Access',
     'X-Get-Token-Csrf-For-React',
+
 ]
 
 ROOT_URLCONF = 'lawyer_web.urls'
@@ -110,7 +114,7 @@ DATABASES = {
         'USER': os.getenv('POSTGRES_USER_NAME', 'test_lawyer_user'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'test_lawyer_password'),
         'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
-        'PORT': os.getenv('POSTGRES_PORT', 5001),
+        'PORT': os.getenv('POSTGRES_PORT', 5432),
     }
 }
 
