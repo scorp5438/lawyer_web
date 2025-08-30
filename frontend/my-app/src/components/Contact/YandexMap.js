@@ -1,15 +1,39 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { fetchAddress } from "../utils/api";
+import './yandexMap.scss';
 
 const YandexMap = () => {
     const mapRef = useRef(null);
     const mapInstanceRef = useRef(null);
+    const [addressData, setAddressData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    const getAddressData = async () => {
+        try {
+            setLoading(true);
+            setError(null);
+            const data = await fetchAddress();
+            setAddressData(data);
+        } catch (err) {
+            console.error('Ошибка при получении данных адреса:', err);
+            setError('Не удалось загрузить данные адреса');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
+        getAddressData();
+    }, []);
+
+    useEffect(() => {
+        if (!addressData || addressData.length === 0) return;
+
         const ymapsSrc = 'https://api-maps.yandex.ru/v3/?apikey=fb196f34-9e30-4890-a1c3-227bf444bcb8&lang=ru_RU';
 
         const loadScript = () => {
             return new Promise((resolve, reject) => {
-                // Проверяем, не был ли уже добавлен этот скрипт
                 const existingScript = document.querySelector(`script[src="${ymapsSrc}"]`);
                 if (existingScript) {
                     if (window.ymaps3) {
@@ -39,7 +63,6 @@ const YandexMap = () => {
             const ymaps3 = window.ymaps3;
             await ymaps3.ready;
 
-            // Уничтожаем карту, если она уже была создана
             if (mapInstanceRef.current) {
                 mapInstanceRef.current.destroy();
                 mapInstanceRef.current = null;
@@ -48,10 +71,17 @@ const YandexMap = () => {
 
             const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker } = ymaps3;
 
+            // ИСПРАВЛЕНИЕ: Меняем порядок координат [долгота, широта]
+            const originalCoordinates = addressData[0].coordinates;
+            const correctCoordinates = [originalCoordinates[1], originalCoordinates[0]];
+
+            console.log('Координаты из API:', originalCoordinates);
+            console.log('Исправленные координаты для Яндекс.Карт:', correctCoordinates);
+
             const map = new YMap(mapRef.current, {
                 location: {
-                    center: [37.617644, 55.755819],
-                    zoom: 10
+                    center: correctCoordinates,
+                    zoom: 15
                 }
             });
 
@@ -60,12 +90,21 @@ const YandexMap = () => {
 
             const markerElement = document.createElement('div');
             markerElement.textContent = '📍';
-            map.addChild(new YMapMarker({ coordinates: [37.617644, 55.755819] }, markerElement));
+            markerElement.style.fontSize = '24px';
+            markerElement.style.cursor = 'pointer';
+
+            markerElement.title = `${addressData[0].region}, ${addressData[0].city}, ${addressData[0].street}, ${addressData[0].house}`;
+
+            // Используем исправленные координаты для маркера
+            map.addChild(new YMapMarker({ coordinates: correctCoordinates }, markerElement));
 
             mapInstanceRef.current = map;
         };
 
-        loadScript().then(initMap).catch(console.error);
+        loadScript().then(initMap).catch((err) => {
+            console.error('Ошибка инициализации карты:', err);
+            setError('Ошибка загрузки карты');
+        });
 
         return () => {
             if (mapInstanceRef.current) {
@@ -73,12 +112,33 @@ const YandexMap = () => {
                 mapInstanceRef.current = null;
             }
         };
-    }, []);
+    }, [addressData]);
+
+    const handleRetry = () => {
+        getAddressData();
+    };
 
     return (
-        <div>
+        <div className="map__content">
             <h2>Карта Яндекс</h2>
-            <div ref={mapRef} style={{ width: '1600px', height: '300px' }} />
+
+            {loading && <div className="map__loading">Загрузка данных...</div>}
+
+            {error && (
+                <div className="map__error">
+                    <p>{error}</p>
+                    <button onClick={handleRetry}>Попробовать снова</button>
+                </div>
+            )}
+
+            {addressData && addressData.length > 0 && (
+                <div className="map__info">
+                    <p><strong>Адрес:</strong> {addressData[0].region}, {addressData[0].city}, {addressData[0].street}, {addressData[0].house}</p>
+                    {/*<p><strong>Координаты:</strong> {addressData[0].coordinates[0]}, {addressData[0].coordinates[1]}</p>*/}
+                </div>
+            )}
+
+            <div className="map__content_center" ref={mapRef} />
         </div>
     );
 };

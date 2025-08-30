@@ -17,7 +17,7 @@ const ArticleDetails = () => {
     const [error, setError] = useState(null);
 
     const handleBack = () => {
-        navigate(location.state?.from || '/static_react/articles', {
+        navigate(location.state?.from || '/articles', {
             state: {
                 page: location.state?.page,
                 category: location.state?.category,
@@ -47,7 +47,8 @@ const ArticleDetails = () => {
     if (loading) return <div>Загрузка...</div>;
     if (error) return <div>Ошибка: {error}</div>;
     if (!article) return <div>Статья не найдена</div>;
-
+    console.log(page);
+    console.log(article?.image_url ? article.image_url : "ntkfkmjb");
     return (
         <motion.div
             className="article-details-container"
@@ -99,11 +100,12 @@ const ArticleDetails = () => {
                     >
                         <img
                             className="article-image"
-                            src={article.image_url}
+                            src={`http://localhost:80/${article.image_url}`}
+                            // src={article.image_url}
                             alt={article.title}
                             onError={(e) => {
                                 e.target.onerror = null;
-                                e.target.src = '/path/to/default/image.jpg';
+                                e.target.src = 'http://localhost:80/media/images/image.jpg';
                             }}
                         />
                     </motion.div>

@@ -17,6 +17,7 @@ services:
     volumes:
       - static_volume:/app/static
       - ./logs/django:/var/log/django  # Логи Django
+      - media:/app/media
 
   db:
     image: postgres:17

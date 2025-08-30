@@ -1,21 +1,28 @@
 import axios from "axios";
 
+// Утилита для получения переменных окружения
+const getEnv = (key, defaultValue) => {
+    const reactAppKey = `REACT_APP_${key}`
+    return process.env[reactAppKey] || defaultValue;
+};
+
+// Конфигурационные константы
+const BASE_URL = getEnv('BASE_URL', '/api/');
+const API_TIMEOUT = parseInt(getEnv('API_TIMEOUT', '5000'));
+const SUPERUSER_ACCESS_KEY = getEnv('SUPERUSER_ACCESS_KEY', '');
+const CSRF_TOKEN_HEADER_KEY = getEnv('CSRF_TOKEN_HEADER_KEY', '');
+
 const api = axios.create({
-    baseURL: 'http://localhost:80/api/',
-    timeout: 5000,
+    baseURL: BASE_URL,
+    timeout: API_TIMEOUT,
     withCredentials: true,
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'X-Superuser-Access': 'Hkjh98hjk8khj77slkhj',
-        'X-Get-Token-Csrf-For-React': 'hjflSdhjlkSDfjo79sdffs009fs87s0df09s8d'
+        'X-Superuser-Access': SUPERUSER_ACCESS_KEY,
+        'X-Get-Token-Csrf-For-React': CSRF_TOKEN_HEADER_KEY
     }
 });
-
-// Проверка обязательных переменных окружения
-// if (!process.env.REACT_APP_API_BASE_URL) {
-//     console.warn('Warning: REACT_APP_API_BASE_URL is not set - using fallback /api/');
-// }
 
 // Базовые методы API
 const get = async (url, params = {}) => {
@@ -49,9 +56,12 @@ export const fetchPractices = async () => {
 };
 
 export const fetchArticles = async ({category, page, pageSize, selectedType}) => {
+    const DEFAULT_PAGE = parseInt(getEnv('DEFAULT_PAGE', '1'));
+    const DEFAULT_PAGE_SIZE = parseInt(getEnv('DEFAULT_PAGE_SIZE', '10'));
+
     const params = {
-        page: page || process.env.REACT_APP_DEFAULT_PAGE || 1,
-        page_size: pageSize || process.env.REACT_APP_DEFAULT_PAGE_SIZE || 10,
+        page: page || DEFAULT_PAGE,
+        page_size: pageSize || DEFAULT_PAGE_SIZE,
         ...(category === 'all' ? {category: 'all'} :
             category ? {category: category.pk} : {}),
         ...(selectedType ? {type: selectedType} : {})
@@ -64,8 +74,20 @@ export const fetchArticleById = async (id) => {
     return get(`article/${id}/`);
 };
 
-export const fetchSortedCases = async (ordering = process.env.REACT_APP_DEFAULT_ORDERING || '-pk') => {
-    return get('case/', {ordering});
+export const fetchSortedCases = async (ordering = null) => {
+    const DEFAULT_ORDERING = getEnv('DEFAULT_ORDERING', '-pk');
+    return get('case/', {ordering: ordering || DEFAULT_ORDERING});
+};
+
+export const fetchAddress = async () => {
+    try {
+        const response = await get('address/');
+        console.log('Ответ от API address:', response);
+        return response;
+    } catch (error) {
+        console.error('Ошибка в fetchAddress:', error);
+        throw error;
+    }
 };
 
 export const fetchToken = async (headers) => {
@@ -74,7 +96,7 @@ export const fetchToken = async (headers) => {
             'get-csrf-token/',
             { headers }
         );
-        return response.data; // Просто возвращаем данные
+        return response.data;
     } catch (error) {
         console.error("Ошибка при получении CSRF-токена:", error);
         throw error;

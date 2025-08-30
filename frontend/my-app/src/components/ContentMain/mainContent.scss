@@ -210,12 +210,11 @@
 
 @media (min-width: 360px) and (max-width: 575px) {
   .main__content {
-    min-width: 340px;
-    max-width: 575px;
+    width: 340px;
 
     &_content {
-      min-width: 360px;
-      max-width: 575px;
+     width: 360px;
+
       @include flex-center-column;
       padding: 10px;
       &_block {
@@ -633,7 +632,7 @@
         flex-direction: column;
         gap: 10px;
       }
-
+      article.image_url
       .practice-item {
         border: 2px solid $headerBackground;
         border-radius: 5px;

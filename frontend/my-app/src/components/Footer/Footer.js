@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
-import {fetchTypes, fetchUserData} from '../utils/api';
-import axios from "axios";
+import {fetchUserData} from '../utils/api';
+
 import './footer.scss';
 
 
@@ -8,7 +8,7 @@ const Footer = () => {
     const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-
+    console.log(error);
     useEffect(() => {
         const loadData = async () => {
             setLoading(true);

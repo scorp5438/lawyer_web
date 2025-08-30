@@ -7,15 +7,15 @@ import ArticleCard from './components/Articles/ArticleCard';
 import ArticleDetails from './components/ArticleDetails/ArticleDetails';
 import Head from "./components/Head/Head";
 import Footer from "./components/Footer/Footer";
-
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 //Импорт шрифтов
 import '@fontsource/lora';
 import '@fontsource/lora/700.css';
 import '@fontsource/open-sans';
 import '@fontsource/open-sans/600.css';
 import '@fontsource/open-sans/700.css';
-import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
-import YandexMap from "./components/Contact/YandexMap";
+
+
 
 
 function App({user}) {

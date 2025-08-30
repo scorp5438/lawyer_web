@@ -73,11 +73,9 @@
 
 @media (min-width: 360px) and (max-width: 575px) {
   .about__content {
-    min-width: 340px;
-    max-width: 560px;
+    width: 340px;
     &_container {
-      min-width: 340px;
-      max-width: 560px;
+      width: 340px;
 
 
       &_head {
