@@ -57,7 +57,7 @@ h1, h2, h3 {
   z-index: 1;
 }
 .content {
-  verflow: scroll;
+  overflow: scroll;
   height: calc(100vh - 75px - 75px);
   display: flex;
   align-items: center;
