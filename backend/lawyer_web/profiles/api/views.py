@@ -104,7 +104,7 @@ class AddressViewSet(ModelViewSet):
 class CustomCSRFView(APIView):
 
     def get(self, request):
-        referrer = request.META.get('HTTP_X_GET_TOKEN_CSRF_FOR_REACT')
+        referrer = request.META.get('X-Get-Token-Csrf-For-React')
         if not referrer or HEADER_CSRF_TOKEN != referrer:
             file_logger.error('Access denied')
             return JsonResponse({'error': 'Access denied'}, status=403)
