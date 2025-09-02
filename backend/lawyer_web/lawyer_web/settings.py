@@ -61,14 +61,16 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:80",
     "https://127.0.0.1:443",
     "https://localhost:443",
+    'https://advocat-saprolex.ru', 
+    'https://www.advocat-saprolex.ru',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
      "http://localhost:3000",
      "http://127.0.0.1:3000",
 
-    'https://advocat-saprolex.ru',
-    'https://www.advocat-saprolex.ru',
+     'https://advocat-saprolex.ru',
+     'https://www.advocat-saprolex.ru',
 ]
 
 SESSION_COOKIE_SECURE = True
@@ -83,6 +85,9 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
     'X-Get-Token-Csrf-For-React',
 
 ]
+
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ROOT_URLCONF = 'lawyer_web.urls'
 
