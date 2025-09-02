@@ -174,3 +174,4 @@ cython_debug/
 # PyPI configuration file.txt
 .pypirc
 .env
+.env.prodaction
