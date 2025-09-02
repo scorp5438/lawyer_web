@@ -10,5 +10,5 @@ HEADER_SUPERUSER_ACCESS = os.getenv('HEADER_SUPERUSER_ACCESS', 'Test_Superuser-A
 class HasHeaderReact(BasePermission):
 
     def has_permission(self, request, view):
-        react_header = request.headers.get('HTTP_X_SUPERUSER_ACCESS')
+        react_header = request.headers.get('X-Superuser-Access')
         return react_header == HEADER_SUPERUSER_ACCESS
