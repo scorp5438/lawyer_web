@@ -30,7 +30,7 @@ const YandexMap = () => {
     useEffect(() => {
         if (!addressData || addressData.length === 0) return;
 
-        const ymapsSrc = 'https://api-maps.yandex.ru/v3/?apikey=fb196f34-9e30-4890-a1c3-227bf444bcb8&lang=ru_RU';
+        const ymapsSrc = 'https://api-maps.yandex.ru/v3/?apikey=fa239969-b5e2-4934-ab8a-05ad35199110&lang=ru_RU';
 
         const loadScript = () => {
             return new Promise((resolve, reject) => {
