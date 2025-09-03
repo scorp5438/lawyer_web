@@ -83,13 +83,13 @@ class Profile(models.Model):
 
 
 class Address(models.Model):
-    region = models.CharField(max_length=100)
-    district = models.CharField(blank=True, max_length=100)
-    city = models.CharField(max_length=100)
-    street = models.CharField(blank=True, max_length=100)
-    house = models.CharField(max_length=20)
-    structure = models.CharField(blank=True, max_length=100)
-    housing = models.CharField(blank=True, max_length=100)
+    region = models.CharField(max_length=100, verbose_name='Регион')
+    district = models.CharField(blank=True, max_length=100, verbose_name='Район')
+    city = models.CharField(max_length=100, verbose_name='Населенный пункт')
+    street = models.CharField(blank=True, max_length=100, verbose_name='Улица')
+    house = models.CharField(max_length=20, verbose_name='Номер дома')
+    structure = models.CharField(blank=True, max_length=100, verbose_name='Строение')
+    housing = models.CharField(blank=True, max_length=100, verbose_name='Корпус')
 
     latitude = models.FloatField(null=True, blank=True, verbose_name='широта')
     longitude = models.FloatField(null=True, blank=True, verbose_name='долгота')
