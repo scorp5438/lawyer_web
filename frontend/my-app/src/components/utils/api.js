@@ -94,7 +94,7 @@ export const fetchToken = async (headers) => {
     try {
         const response = await api.get(
             'get-csrf-token/',
-            { headers }
+          
         );
         return response.data;
     } catch (error) {

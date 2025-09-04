@@ -1,8 +1,10 @@
 bind = "0.0.0.0:8000"
-workers = 4
+workers = 2
 worker_class = "sync"
-timeout = 120
-max_requests = 500
+timeout = 30
+max_requests = 1000
+max_requests_jitter = 100  # добавить джиттер
+preload_app = True  # предзагрузка приложения
 capture_output = True
 accesslog = "-"  # логировать запросы в stdout
 errorlog = "-"   # логировать ошибки в stdout

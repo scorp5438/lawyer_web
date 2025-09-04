@@ -3,6 +3,8 @@ services:
   web:
     build: backend/lawyer_web
     command: gunicorn --config gunicorn.conf.py lawyer_web.wsgi:application
+    mem_limit: 1.2G
+    mem_reservation: 512M
     depends_on:
       - db
     environment:
