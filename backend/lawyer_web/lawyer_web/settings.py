@@ -256,3 +256,15 @@ logging_config = {
 }
 
 dictConfig(logging_config)
+
+if 'test' in sys.argv:
+    # Отключаем SSL редиректы для тестов
+    SECURE_SSL_REDIRECT = False
+    SECURE_PROXY_SSL_HEADER = None
+
+    # Отключаем secure cookies для тестов
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+
+    # Упрощаем CORS для тестов
+    CORS_ALLOW_ALL_ORIGINS = True
