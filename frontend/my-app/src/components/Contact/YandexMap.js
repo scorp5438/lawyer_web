@@ -9,6 +9,10 @@ const YandexMap = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // Координаты по умолчанию
+    const DEFAULT_COORDINATES = [38.975313, 45.035470]; // [долгота, широта]
+    const DEFAULT_ADDRESS = "Краснодар, ул. Красная, 176";
+
     const getAddressData = async () => {
         try {
             setLoading(true);
@@ -18,6 +22,16 @@ const YandexMap = () => {
         } catch (err) {
             console.error('Ошибка при получении данных адреса:', err);
             setError('Не удалось загрузить данные адреса');
+
+            // Устанавливаем данные по умолчанию при ошибке
+            setAddressData([{
+                coordinates: DEFAULT_COORDINATES,
+                region: "Краснодарский край",
+                city: "Краснодар",
+                street: "ул. Красная",
+                house: "176",
+                fullAddress: DEFAULT_ADDRESS
+            }]);
         } finally {
             setLoading(false);
         }
@@ -28,7 +42,18 @@ const YandexMap = () => {
     }, []);
 
     useEffect(() => {
-        if (!addressData || addressData.length === 0) return;
+        // Если нет данных адреса, используем данные по умолчанию
+        if (!addressData || addressData.length === 0) {
+            setAddressData([{
+                coordinates: DEFAULT_COORDINATES,
+                region: "Краснодарский край",
+                city: "Краснодар",
+                street: "ул. Красная",
+                house: "176",
+                fullAddress: DEFAULT_ADDRESS
+            }]);
+            return;
+        }
 
         const ymapsSrc = 'https://api-maps.yandex.ru/v3/?apikey=fa239969-b5e2-4934-ab8a-05ad35199110&lang=ru_RU';
 
@@ -71,10 +96,11 @@ const YandexMap = () => {
 
             const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker } = ymaps3;
 
-            const originalCoordinates = addressData[0].coordinates;
+            // Получаем координаты из данных или используем по умолчанию
+            const originalCoordinates = addressData[0]?.coordinates || DEFAULT_COORDINATES;
             const correctCoordinates = [originalCoordinates[1], originalCoordinates[0]];
 
-            console.log('Координаты из API:', originalCoordinates);
+            console.log('Координаты:', originalCoordinates);
             console.log('Исправленные координаты для Яндекс.Карт:', correctCoordinates);
 
             const map = new YMap(mapRef.current, {
@@ -92,7 +118,11 @@ const YandexMap = () => {
             markerElement.style.fontSize = '24px';
             markerElement.style.cursor = 'pointer';
 
-            markerElement.title = `${addressData[0].region}, ${addressData[0].city}, ${addressData[0].street}, ${addressData[0].house}`;
+            // Текст для маркера
+            const addressText = addressData[0]?.fullAddress ||
+                `${addressData[0]?.region || "Краснодарский край"}, ${addressData[0]?.city || "Краснодар"}, ${addressData[0]?.street || "ул. Красная"}, ${addressData[0]?.house || "176"}`;
+
+            markerElement.title = addressText;
 
             // Используем исправленные координаты для маркера
             map.addChild(new YMapMarker({ coordinates: correctCoordinates }, markerElement));
@@ -133,7 +163,6 @@ const YandexMap = () => {
             {addressData && addressData.length > 0 && (
                 <div className="map__info">
                     <p><strong>Адрес:</strong> {addressData[0].region}, {addressData[0].city}, {addressData[0].street}, {addressData[0].house}</p>
-                    {/*<p><strong>Координаты:</strong> {addressData[0].coordinates[0]}, {addressData[0].coordinates[1]}</p>*/}
                 </div>
             )}
 
