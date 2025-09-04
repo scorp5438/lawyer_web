@@ -75,8 +75,8 @@ backend/
 ├── frontend                 
 ├───├── my-app/              # папка с frontend
 ├───├── Dockerfile           # Dockerfile для разработки
-├───├── Dockerfile.prod      # Dockerfile для продакшена
-├───└── logs/                # Папка для логов
+├───└── Dockerfile.prod      # Dockerfile для продакшена
+├── logs/                    # Папка для логов
 ├── docker-compose.prod.yml  # docker-compose для продакшена
 └── docker-compose.yml       # docker-compose для разработки
 .github/workflows/           # CI/CD конфигурация
