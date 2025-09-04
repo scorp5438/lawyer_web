@@ -204,8 +204,8 @@ DEFAULT_FROM_EMAIL=Почта для сервиса отправки писем
 REDIS_HOST=redis
 ```
 - Файл .env для frontend 
-ini
-```
+
+```ini
 REACT_APP_BASE_URL=Базовый url на в разработке http://localhost/api/ в проде /api/
 REACT_APP_DEFAULT_PAGE=Дефолтное значение для страницы со статьями
 REACT_APP_DEFAULT_PAGE_SIZE=Дефолтное максимальное значение для страниц со статьями
