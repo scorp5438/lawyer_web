@@ -22,7 +22,18 @@ class Profile(models.Model):
         unique=True,
         verbose_name='номер телефона'
     )
-
+    vk = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        verbose_name='Вконтакте'
+    )
+    _max = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        verbose_name='MAX'
+    )
     fb = models.CharField(
         max_length=50,
         blank=True,
