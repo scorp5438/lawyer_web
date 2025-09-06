@@ -163,12 +163,6 @@ backend/
 * ВАЖНО Если выполнен шаг 7, загрузка фикстур, супер пользователь уже есть
 
 ```bash
-   sudo docker exec {id контейнера web} python manage.py createsuperuser
-```
-
-    или зайти в контейнер и выполнить команду внутри
-
-```bash
   sudo docker ps
   sudo docker exec -it {id контейнера web} /bin/bash
   python manage.py createsuperuser
