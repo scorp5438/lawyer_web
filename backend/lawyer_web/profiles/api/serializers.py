@@ -16,6 +16,8 @@ from ..models import Address
                 "email": "ivanov@example.com",
                 "is_staff": False,
                 "phone": "+79001234567",
+                "vk": "vk.com",
+                "max": "@andrey123",
                 "fb": "https://fb.com/ivanov",
                 "x": "https://x.com/ivanov",
                 "tg": "@ivanov_tg",
@@ -47,6 +49,8 @@ class UserSerializer(serializers.ModelSerializer):
     """
     phone = serializers.SerializerMethodField()
     fb = serializers.SerializerMethodField()
+    vk = serializers.SerializerMethodField()
+    max = serializers.SerializerMethodField()
     x = serializers.SerializerMethodField()
     tg = serializers.SerializerMethodField()
     wa = serializers.SerializerMethodField()
@@ -64,6 +68,8 @@ class UserSerializer(serializers.ModelSerializer):
             'email',
             'is_staff',
             'phone',
+            'vk',
+            'max',
             'fb',
             'x',
             'tg',
@@ -77,6 +83,14 @@ class UserSerializer(serializers.ModelSerializer):
     def get_phone(self, obj):
         """Возвращает телефон из профиля пользователя."""
         return obj.profile.phone
+
+    def get_vk(self, obj):
+        """Возвращает ссылку на Вконтакте из профиля."""
+        return obj.profile.vk
+
+    def get_max(self, obj):
+        """Возвращает ссылку на MAX из профиля."""
+        return obj.profile._max
 
     def get_fb(self, obj):
         """Возвращает ссылку на Facebook из профиля."""
