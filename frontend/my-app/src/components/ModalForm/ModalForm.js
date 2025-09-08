@@ -3,7 +3,9 @@ import React, {useState, useEffect} from 'react';
 import './modalForm.scss';
 import {fetchToken } from "../utils/api";
 import Politic from "../Politic/Politic";
+import { getEnv } from "../utils/env";
 const ModalForm = ({handleCloseModal}) => {
+    const SUPERUSER_ACCESS_KEY = getEnv('SUPERUSER_ACCESS_KEY', '');
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
@@ -28,7 +30,6 @@ const ModalForm = ({handleCloseModal}) => {
     };
     useEffect(() => {
         return () => {
-            // Очищаем все таймеры при размонтировании компонента
             Object.values(errors).forEach(error => {
                 if (error.timer) {
                     clearTimeout(error.timer);
@@ -40,19 +41,18 @@ const ModalForm = ({handleCloseModal}) => {
         const getToken = async () => {
             try {
                 const headers = {
-                    'X-Get-Token-Csrf-For-React': 'hjflSdhjlkSDfjo79sdffs009fs87s0df09s8d'
+                    'X-Get-Token-Csrf-For-React': 'SUPERUSER_ACCESS_KEY'
                 };
                 const tokenData = await fetchToken(headers);
                 setToken(tokenData); // Убедитесь, что tokenData содержит csrfToken
             } catch (error) {
                 console.error('Ошибка получения токена:', error);
-                // Можно установить значение по умолчанию или показать ошибку
                 setToken({ csrfToken: 'fallback-token' });
             }
         };
 
         getToken();
-    }, []);
+    }, [SUPERUSER_ACCESS_KEY]);
 
     const handleChange = (e) => {
         const {name, value, type, checked} = e.target;
@@ -61,7 +61,6 @@ const ModalForm = ({handleCloseModal}) => {
             [name]: type === 'checkbox' ? checked : value
         }));
 
-        // Очищаем ошибку и таймер при изменении поля
         if (errors[name]) {
             if (errors[name].timer) {
                 clearTimeout(errors[name].timer);

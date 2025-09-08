@@ -16,7 +16,10 @@ const Main = ({activeSection, selectedType, setSelectedType, showOnlyProfile}) =
         }
     }, [location]);
 
-
+    // Добавьте проверку
+    if (!activeSection) {
+        return <div>Загрузка...</div>;
+    }
 
     return (
         <div className="main-section">

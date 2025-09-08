@@ -8,7 +8,7 @@
   justify-content: space-around;
   background-color: $headerBackground;
   height: 75px;
-  font-family: 'Lora', serif;
+  font-family: 'Open Sans', sans-serif;
 
   &_width {
     width: $widthSiteContent;
@@ -127,7 +127,7 @@
 .head__nav_menu_item {
   cursor: pointer;
   color: $colorNavigate;
-  font-size: $sizePage;
+  font-size: $sizeNavigate;
   text-align: center;
   padding: 10px;
   transition: color 0.2s ease-in-out;
@@ -177,7 +177,7 @@
     font-size: 14px;
     transition: all 0.2s ease-in-out;
     border-radius: 3px;
-    pointer-events: auto; /* Явно разрешаем клики */
+    pointer-events: auto;
 
     &:hover {
       color: $colorH1;
@@ -187,10 +187,9 @@
   }
 }
 
-/* Специальные стили для десктопной версии */
 @media (min-width: 1201px) {
   .head__nav_item_blog {
-    z-index: 10000; /* Очень высокий z-index для десктопа */
+    z-index: 10000;
   }
 
   .blog-item {
