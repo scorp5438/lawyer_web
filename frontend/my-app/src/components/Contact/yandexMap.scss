@@ -45,7 +45,7 @@
         width: 575px;
 
         &_center {
-          width: 575px;
+          width: auto;
 
         }
       }
@@ -54,10 +54,11 @@
   @media (min-width: 768px) and (max-width: 991px) {
     .map {
       &__content {
-        width: 768px;
+        min-width: 750px;
+        max-width: 980px;
 
         &_center {
-          width: 768px;
+          width: auto;
         }
       }
     }
@@ -65,7 +66,8 @@
   @media (min-width: 992px) and (max-width: 1199px) {
     .map {
       &__content {
-        width: 980px;
+        min-width: 980px;
+        max-width: 1180px;
 
         &_center {
           width: 980px;

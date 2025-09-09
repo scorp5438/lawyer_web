@@ -86,7 +86,6 @@ h1, h2, h3 {
   gap: 20px;
 }
 
-// Футер
 .App-footer {
   position: fixed;
   bottom: 0;
@@ -97,11 +96,15 @@ h1, h2, h3 {
   background-color: $headerBackground;
   color: white;
   z-index: 1000;
+  @include flex-center;
 }
 
 .button-scroll {
   position: relative;
-  z-index: 1001;
+  z-index: 999;
+  bottom: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .logo-wrapper {
@@ -123,7 +126,6 @@ body {
   overflow-x: hidden;
 }
 
-// Медиа-запросы для адаптивности
 @media (max-width: 1200px) {
   .content-wrapper {
     width: 100%;
@@ -152,8 +154,9 @@ body {
   }
 
   .button-scroll {
-    bottom: 70px;
-    right: 10px;
+    bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 }
 
