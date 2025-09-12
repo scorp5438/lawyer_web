@@ -17,6 +17,9 @@ html, body, #root {
 
 h1, h2, h3 {
   font-family: 'Lora', serif;
+  @media (min-width: 360px) and (max-width: 767px) {
+    font-size: 20px;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -145,7 +148,8 @@ body {
   }
 
   .App-footer {
-    height: 60px;
+    padding-top: 10px;
+    height: auto;
   }
 
   .content-wrapper {
@@ -167,11 +171,12 @@ body {
   }
 
   .Head {
-    height: 50px;
+    height: auto;
   }
 
   .App-footer {
-    height: 50px;
+    padding-top: 10px;
+    height: auto;
   }
 
   .content-wrapper {
@@ -179,8 +184,4 @@ body {
     min-height: calc(100% - 50px - 50px);
   }
 
-  .button-scroll {
-    bottom: 60px;
-    right: 5px;
-  }
 }

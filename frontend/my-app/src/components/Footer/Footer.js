@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import {fetchUserData} from '../utils/api';
 import SocialNetworks from '../SocialNetworks/SocialNetworks';
 import './footer.scss';
+import PhoneIcon from "../IconNetworks/PhoneIcon";
+import EmailIcon from "../IconNetworks/EmailIcon";
 
 
 const Footer = () => {
@@ -41,17 +43,20 @@ const Footer = () => {
                     {user.length > 0 ? (
                         <>
                             <li className="footer__nav_item">
-                                Телефон: <a href={`tel:${user[0].phone}`}>{user[0].phone}</a>
+                                <a href={`tel:${user[0].phone}`}> <PhoneIcon/> {user[0].phone}</a>
                             </li>
                             <li className="footer__nav_item">
-                                EMAIL: <a href={`mailto:${user[0].email}`}>{user[0].email}</a>
+                                <a href={`mailto:${user[0].email}`}> <EmailIcon/> {user[0].email}</a>
                             </li>
 
                         </>
                     ) : (
                         <li className="nav-item">Загрузка данных...</li>
                     )}
-                    {user.length > 0 ? (
+
+                </ul>
+                <ul className="footer_nav_nav-icon">
+                   {user.length > 0 ? (
                         <>
                             <li className="footer_nav-icon">
                                 <SocialNetworks/>

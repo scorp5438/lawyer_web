@@ -4,6 +4,8 @@ import ModalForm from "../ModalForm/ModalForm";
 import IconClose from "../svg/IconClose";
 import {fetchTypes, fetchUserData} from '../utils/api';
 import {useNavigate} from 'react-router-dom';
+import PhoneIcon from "../IconNetworks/PhoneIcon";
+import EmailIcon from "../IconNetworks/EmailIcon";
 
 const Head = ({onBlogClick, onMainClick, setShowOnlyProfile}) => {
     const [user, setUser] = useState([]);
@@ -111,11 +113,11 @@ const Head = ({onBlogClick, onMainClick, setShowOnlyProfile}) => {
                             <ul className="head__nav_item">
                                 {user.length > 0 ? (
                                     <>
-                                        <li className="head__nav_item">
-                                            Телефон: <a href={`tel:${user[0].phone}`}>{user[0].phone}</a>
+                                        <li className="head__nav_item_icon">
+                                            <a href={`tel:${user[0].phone}`}> <PhoneIcon/> {user[0].phone}</a>
                                         </li>
-                                        <li className="head__nav_item">
-                                            EMAIL: <a href={`mailto:${user[0].email}`}>{user[0].email}</a>
+                                        <li className="head__nav_item_icon">
+                                            <a href={`mailto:${user[0].email}`}> <EmailIcon/> {user[0].email}</a>
                                         </li>
                                     </>
                                 ) : (
