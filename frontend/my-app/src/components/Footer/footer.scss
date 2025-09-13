@@ -69,6 +69,13 @@
     list-style-type: none;
     width: auto;
   }
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: inherit;
+  }
 }
 
 @media (min-width: 360px) and (max-width: 575px) {
@@ -76,65 +83,68 @@
     min-width: 360px;
     max-width: 575px;
     height: auto;
+    &__link-text {
+      display: none;
+
+    }
 
     .footer__nav {
       height: auto;
       width: auto;
-      display: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
 
       &_item {
-        display: none;
         font-size: $sizePage;
-
-        a {
-          visibility: hidden;
-        }
       }
       &_nav-icon {
         width: 100%;
         gap: 5px;
       }
     }
-
-
   }
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
   .footer {
+    display: flex;
+    justify-content: center;
     min-width: 576px;
     max-width: 767px;
-
-
-    .footer__nav {
+    &__link-text {
       display: none;
-      &_item {
-        display: none;
-        font-size: $sizePage;
-
-        a {
-          visibility: hidden;
-        }
-      }
     }
 
-    &_nav-icon {
-      width: 100%;
+    .footer__nav {
+      height: auto;
+      width: auto;
+      display: flex;
+      flex-direction: column;
       gap: 5px;
 
+      &_item {
+        font-size: $sizePage;
+      }
+      &_nav-icon {
+        width: auto;
+        gap: 5px;
+      }
     }
   }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
   .footer {
-    min-width: 768px;
-    max-width: 991px;
+    display: flex;
+    justify-content: center;
+
     padding: 10px;
 
     &__nav {
       display: flex;
       flex-direction: column;
+      justify-content: center;
       gap: 0;
       &_item {
         font-size: $sizePage;
@@ -146,6 +156,8 @@
 
 @media (min-width: 992px) and (max-width: 1199px) {
   .footer {
+    display: flex;
+    justify-content: center;
     width: auto;
 
     &__nav {

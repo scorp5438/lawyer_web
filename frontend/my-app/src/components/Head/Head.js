@@ -114,10 +114,10 @@ const Head = ({onBlogClick, onMainClick, setShowOnlyProfile}) => {
                                 {user.length > 0 ? (
                                     <>
                                         <li className="head__nav_item_icon">
-                                            <a href={`tel:${user[0].phone}`}> <PhoneIcon/> {user[0].phone}</a>
+                                            <a href={`tel:${user[0].phone}`} title="Телефон"> <PhoneIcon/> {user[0].phone}</a>
                                         </li>
                                         <li className="head__nav_item_icon">
-                                            <a href={`mailto:${user[0].email}`}> <EmailIcon/> {user[0].email}</a>
+                                            <a href={`mailto:${user[0].email}`} title="Эл.почта"> <EmailIcon/> {user[0].email}</a>
                                         </li>
                                     </>
                                 ) : (

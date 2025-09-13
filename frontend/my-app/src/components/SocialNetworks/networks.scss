@@ -25,7 +25,7 @@
     height: auto;
 
     &_link {
-      @include grid-5x2-plus-colum;
+
       width: auto;
 
       a {
@@ -42,12 +42,11 @@
 
 @media (min-width: 576px) and (max-width: 767px) {
   .nav {
-    min-width: 576px;
-    max-width: 766px;
+    width: auto;
     height: auto;
 
     &_link {
-      @include grid-5x2-plus-colum;
+
       width: 100%;
 
       a {
@@ -68,7 +67,6 @@
     padding: 10px;
 
     &_link {
-      @include grid-5x2-plus-colum;
       //width: auto;
       gap: 10px;
 

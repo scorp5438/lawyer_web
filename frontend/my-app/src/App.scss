@@ -128,7 +128,6 @@ h1, h2, h3 {
 body {
   overflow-x: hidden;
 }
-
 @media (max-width: 1200px) {
   .content-wrapper {
     width: 100%;
@@ -137,7 +136,7 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+@media (min-width: 576px) and (max-width: 768px) {
   .content {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -164,7 +163,7 @@ body {
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 360px) and (max-width: 576px) {
   .content {
     margin-top: 20px;
     margin-bottom: 50px;
@@ -175,6 +174,28 @@ body {
   }
 
   .App-footer {
+    padding-top: 10px;
+    height: auto;
+  }
+
+  .content-wrapper {
+    padding: 5px;
+    min-height: calc(100% - 50px - 50px);
+  }
+
+}
+@media (max-width: 768px) and (max-width: 991px) {
+  .content {
+    margin-top: 20px;
+    margin-bottom: 50px;
+  }
+
+  .Head {
+    height: auto;
+  }
+
+  .App-footer {
+
     padding-top: 10px;
     height: auto;
   }
