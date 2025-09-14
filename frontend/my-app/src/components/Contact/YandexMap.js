@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { fetchAddress } from "../utils/api";
 import './yandexMap.scss';
 
-const DEFAULT_COORDINATES = [38.975313, 45.035470]; // формат [долгота, широта] для Яндекс.Карт
+// const DEFAULT_COORDINATES = [38.975313, 45.035470];
 const DEFAULT_ADDRESS = {
     region: "Краснодарский край",
     city: "Краснодар",

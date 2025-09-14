@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './profile.scss';
 import {fetchUserData} from '../utils/api';
-import SocialNetworks from "../SocialNetworks/SocialNetworks";
+
 
 const AboutMe = () => {
     const [user, setUser] = useState([]);
@@ -41,22 +41,10 @@ const AboutMe = () => {
                             <p>{user[0].bio}</p>
 
 
-                            <p>Вы всегда можете связаться со мной по: </p>
-                            <div>
-                                <div className="item">
-                                    Телефон: <a href={`tel:${user[0].phone}`}>{user[0].phone}</a>
-                                </div>
-                                <div className="item">
-                                    EMAIL: <a href={`mailto:${user[0].email}`}>{user[0].email}</a>
-                                </div>
-                            </div>
                         </>
                     ) : (
                         <li className="nav-item">Загрузка данных...</li>
                     )}
-                    <div>
-                        <SocialNetworks />
-                    </div>
 
                 </blockquote>
             </div>

@@ -26,6 +26,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
 }
 
 @mixin flex-between {
@@ -53,9 +54,16 @@
   text-align: center;
   gap: 10px;
 }
-@mixin grid-6x2-plus-colum {
+@mixin grid-5x2-plus-colum {
   display: grid;
-  grid-template-columns: repeat(6, 2fr);
+  grid-template-columns: repeat(5, 2fr);
+  grid-template-rows: auto auto auto;
+  text-align: center;
+  gap: 10px;
+}
+@mixin grid-2x5-plus-riw {
+  display: grid;
+  grid-template-columns: repeat(2, 5fr);
   grid-template-rows: auto auto auto;
   text-align: center;
   gap: 10px;

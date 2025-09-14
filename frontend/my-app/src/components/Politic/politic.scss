@@ -28,7 +28,7 @@
   right: 10px;
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 34px;
   color: $textColor;
   cursor: pointer;
   &:hover {
@@ -47,11 +47,12 @@
 }
 @media (min-width: 360px) and (max-width: 575px) {
   .politic-content {
-    width: 300px;
+    width: 340px;
+
   }
-  .close-button {
-    font-size: $sizeNavigate;
-  }
+  //.close-button {
+  //  font-size: $sizeNavigate;
+  //}
 }
 @media (min-width: 576px) and (max-width: 767px) {
   .politic-content {

@@ -3,101 +3,166 @@
 
 .footer {
   @include flex-center-row;
-  width: $widthSite;
+  //width: $widthSite;
   height: 75px;
   background-color: $headerBackground;
+
   &__nav {
     @include flex-center-row;
     width: $widthSite;
     height: 75px;
     background-color: $headerBackground;
+
     &_item {
       color: $colorNavigate;
       font-size: $sizeNavigate;
       list-style-type: none;
-      a {
-        color: $colorNavigate;
-        text-decoration: none;
-        &:hover {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      :hover {
+        color: $colorH1;
+
+        svg {
+          path {
+            stroke: $colorNavigate !important;
+            fill: $colorH1 !important;
+          }
+        }
+
+        a {
           color: $colorH1;
         }
-        &:after {
+      }
+
+      svg {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        &:hover {
+          fill: $colorH1;
+        }
+      }
+
+      a {
+        text-decoration: none;
+        color: $colorNavigate;
+        transition: color 0.3s ease;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+
+        &:hover {
           color: $colorH1;
         }
       }
     }
   }
+
   &_nav-icon {
     gap: 10px;
     list-style-type: none;
     width: auto;
   }
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: inherit;
+  }
 }
+
 @media (min-width: 360px) and (max-width: 575px) {
   .footer {
     min-width: 360px;
     max-width: 575px;
+    height: auto;
+    &__link-text {
+      display: none;
+
+    }
 
     .footer__nav {
       height: auto;
-      width: 360px;
-
-      &_item{
-        display: none;
-        font-size: $sizePage;
-        a {
-          visibility: hidden;
-        }
-      }
-    }
-    &_nav-icon {
-      width: 100%;
+      width: auto;
+      display: flex;
+      flex-direction: column;
       gap: 5px;
+
+      &_item {
+        font-size: $sizePage;
+      }
+      &_nav-icon {
+        width: 100%;
+        gap: 5px;
+      }
     }
   }
 }
+
 @media (min-width: 576px) and (max-width: 767px) {
   .footer {
+    display: flex;
+    justify-content: center;
     min-width: 576px;
     max-width: 767px;
+    &__link-text {
+      display: none;
+    }
 
     .footer__nav {
-
-      width: 576px;
-
-      &_item{
-        display: none;
-        font-size: $sizePage;
-        a {
-          visibility: hidden;
-        }
-      }
-    }
-    &_nav-icon {
-      width: 100%;
+      height: auto;
+      width: auto;
+      display: flex;
+      flex-direction: column;
       gap: 5px;
+
+      &_item {
+        font-size: $sizePage;
+      }
+      &_nav-icon {
+        width: auto;
+        gap: 5px;
+      }
     }
   }
 }
+
 @media (min-width: 768px) and (max-width: 991px) {
   .footer {
-    width: 768px;
+    display: flex;
+    justify-content: center;
+
+    padding: 10px;
 
     &__nav {
-      width: 768px;
-
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
       &_item {
         font-size: $sizePage;
+        @include grid-2x2-plus-column;
       }
     }
-  }
+ }
 }
+
 @media (min-width: 992px) and (max-width: 1199px) {
   .footer {
-    width: 992px;
+    display: flex;
+    justify-content: center;
+    width: auto;
 
     &__nav {
-      width: 992px;
+      width: auto;
+
 
       &_item {
         font-size: $sizePage;
@@ -105,12 +170,14 @@
     }
   }
 }
+
 @media (min-width: 1200px) and (max-width: 1600px) {
   .footer {
-    width: 1200px;
+    width: auto;
 
     &__nav {
-      width: 1200px;
+      width: auto;
+
 
       &_item {
         font-size: $sizeNavigate;
