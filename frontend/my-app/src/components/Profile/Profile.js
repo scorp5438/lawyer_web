@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './profile.scss';
 import {fetchUserData} from '../utils/api';
-import SocialNetworks from "../SocialNetworks/SocialNetworks";
+
 
 const AboutMe = () => {
     const [user, setUser] = useState([]);

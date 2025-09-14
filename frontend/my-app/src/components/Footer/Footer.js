@@ -30,7 +30,7 @@ const Footer = () => {
 
         loadData();
     }, []);
-
+    console.log(error);
     if (loading) {
         return <header className="App-header">Загрузка...</header>;
     }
