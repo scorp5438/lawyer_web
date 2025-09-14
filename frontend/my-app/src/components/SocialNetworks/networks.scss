@@ -1,0 +1,81 @@
+@import '../../assets/styles/variables';
+@import "../../assets/styles/mixins";
+
+.nav {
+  &_link {
+    @include flex-space-around;
+    gap: 20px;
+    a {
+      filter: drop-shadow(0 0 8px #FFD700FF);
+      transition: filter 0.3s ease;
+      &:hover {
+        filter: drop-shadow(0 0 12px #FFD700FF);
+      }
+      &:after {
+        filter: drop-shadow(0 0 12px #FFD700FF);
+      }
+    }
+  }
+}
+@media (min-width: 360px) and (max-width: 575px) {
+  .nav {
+    width: 100%;
+    height: 100%;
+    &_link {
+      @include flex-center;
+      width: auto;
+    }
+  }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  .footer {
+    width: 576px;
+
+    &__nav {
+      width: 576px;
+
+      &_item {
+        font-size: $sizePage;
+      }
+    }
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .footer {
+    width: 768px;
+
+    &__nav {
+      width: 768px;
+
+      &_item {
+        font-size: $sizePage;
+      }
+    }
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .footer {
+    width: 992px;
+
+    &__nav {
+      width: 992px;
+
+      &_item {
+        font-size: $sizePage;
+      }
+    }
+  }
+}
+@media (min-width: 1200px) and (max-width: 1600px) {
+  .footer {
+    width: 1200px;
+
+    &__nav {
+      width: 1200px;
+
+      &_item {
+        font-size: $sizeNavigate;
+      }
+    }
+  }
+}

@@ -46,3 +46,17 @@
   justify-content: center;
   grid-template-columns: 2fr 1fr;
 }
+@mixin grid-2x2-plus-riw {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto auto;
+  text-align: center;
+  gap: 10px;
+}
+@mixin grid-6x2-plus-colum {
+  display: grid;
+  grid-template-columns: repeat(6, 2fr);
+  grid-template-rows: auto auto auto;
+  text-align: center;
+  gap: 10px;
+}

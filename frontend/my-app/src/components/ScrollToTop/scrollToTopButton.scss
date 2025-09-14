@@ -6,7 +6,7 @@
   width: $widthSite;
   margin: 0 auto;
   border: none;
-  background: $mainBackground;
+  background: none;
   cursor: pointer;
 
 
@@ -18,22 +18,22 @@
     }
   }
 }
-@media (min-width: 375px) and (max-width: 575px) {
+@media (min-width: 360px) and (max-width: 575px) {
   .up {
     height: 40px;
-    width: 375px;
+    width: 340px;
     margin: 0 auto;
     border: none;
-    background: $mainBackground;
+    background: none;
     cursor: pointer;
   }
   .up svg path {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
   }
 }
 
-@media (min-width: 375px) and (max-width: 1199px) {
+@media (min-width: 575px) and (max-width: 1199px) {
   .up {
     top: 20px;
     height: 55px;

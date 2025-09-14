@@ -2,6 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import { fetchAddress } from "../utils/api";
 import './yandexMap.scss';
 
+const DEFAULT_COORDINATES = [38.975313, 45.035470]; // формат [долгота, широта] для Яндекс.Карт
+const DEFAULT_ADDRESS = {
+    region: "Краснодарский край",
+    city: "Краснодар",
+    street: "",
+    house: "",
+    coordinates: [45.035470, 38.975313] // обычный формат [lat, lon], как из API
+};
+
 const YandexMap = () => {
     const mapRef = useRef(null);
     const mapInstanceRef = useRef(null);
@@ -28,7 +37,10 @@ const YandexMap = () => {
     }, []);
 
     useEffect(() => {
-        if (!addressData || addressData.length === 0) return;
+        // Определяем, какие координаты использовать
+        const hasData = addressData && addressData.length > 0;
+        const coords = hasData ? addressData[0].coordinates : DEFAULT_ADDRESS.coordinates;
+        const correctCoordinates = [coords[1], coords[0]]; // [lon, lat] для Yandex
 
         const ymapsSrc = 'https://api-maps.yandex.ru/v3/?apikey=fa239969-b5e2-4934-ab8a-05ad35199110&lang=ru_RU';
 
@@ -71,12 +83,6 @@ const YandexMap = () => {
 
             const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker } = ymaps3;
 
-            const originalCoordinates = addressData[0].coordinates;
-            const correctCoordinates = [originalCoordinates[1], originalCoordinates[0]];
-
-            console.log('Координаты из API:', originalCoordinates);
-            console.log('Исправленные координаты для Яндекс.Карт:', correctCoordinates);
-
             const map = new YMap(mapRef.current, {
                 location: {
                     center: correctCoordinates,
@@ -92,9 +98,10 @@ const YandexMap = () => {
             markerElement.style.fontSize = '24px';
             markerElement.style.cursor = 'pointer';
 
-            markerElement.title = `${addressData[0].region}, ${addressData[0].city}, ${addressData[0].street}, ${addressData[0].house}`;
+            markerElement.title = hasData
+                ? `${addressData[0].region}, ${addressData[0].city}, ${addressData[0].street}, ${addressData[0].house}`
+                : `${DEFAULT_ADDRESS.region}, ${DEFAULT_ADDRESS.city}`;
 
-            // Используем исправленные координаты для маркера
             map.addChild(new YMapMarker({ coordinates: correctCoordinates }, markerElement));
 
             mapInstanceRef.current = map;
@@ -117,6 +124,8 @@ const YandexMap = () => {
         getAddressData();
     };
 
+    const hasData = addressData && addressData.length > 0;
+
     return (
         <div className="map__content">
             <h2>Карта Яндекс</h2>
@@ -130,10 +139,14 @@ const YandexMap = () => {
                 </div>
             )}
 
-            {addressData && addressData.length > 0 && (
+            {hasData ? (
                 <div className="map__info">
                     <p><strong>Адрес:</strong> {addressData[0].region}, {addressData[0].city}, {addressData[0].street}, {addressData[0].house}</p>
-                    {/*<p><strong>Координаты:</strong> {addressData[0].coordinates[0]}, {addressData[0].coordinates[1]}</p>*/}
+                </div>
+            ) : (
+                <div className="map__info">
+                    <p><strong>Адрес:</strong> {DEFAULT_ADDRESS.city}</p>
+                    <p><strong>Координаты:</strong> {DEFAULT_ADDRESS.coordinates[0]}, {DEFAULT_ADDRESS.coordinates[1]}</p>
                 </div>
             )}
 

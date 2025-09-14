@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {fetchUserData} from '../utils/api';
-
+import SocialNetworks from '../SocialNetworks/SocialNetworks';
 import './footer.scss';
 
 
@@ -35,22 +35,35 @@ const Footer = () => {
         return <header className="App-header">Загрузка...</header>;
     }
     return (
-        <header className="App-header">
-            <nav className="head">
-                <ul className="head__nav">
+        <header className="footer">
+            <nav className="footer">
+                <ul className="footer__nav">
                     {user.length > 0 ? (
                         <>
-                            <li className="head__nav_item">
+                            <li className="footer__nav_item">
                                 Телефон: <a href={`tel:${user[0].phone}`}>{user[0].phone}</a>
                             </li>
-                            <li className="head__nav_item">
+                            <li className="footer__nav_item">
                                 EMAIL: <a href={`mailto:${user[0].email}`}>{user[0].email}</a>
                             </li>
+
                         </>
                     ) : (
                         <li className="nav-item">Загрузка данных...</li>
                     )}
+                    {user.length > 0 ? (
+                        <>
+                            <li className="footer_nav-icon">
+                                <SocialNetworks/>
+                            </li>
+
+                        </>
+                    ) : (
+                        <li className="nav-item">Загрузка данных...</li>
+                    )}
+
                 </ul>
+
             </nav>
         </header>
     );

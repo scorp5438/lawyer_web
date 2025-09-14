@@ -1,4 +1,4 @@
-// components/ScrollToTopButton.js
+
 import React from 'react';
 import './scrollToTopButton.scss';
 import CircleIcon from '../img/CircleIcon';
