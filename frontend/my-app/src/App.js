@@ -15,9 +15,6 @@ import '@fontsource/open-sans';
 import '@fontsource/open-sans/600.css';
 import '@fontsource/open-sans/700.css';
 
-
-
-
 function App({user}) {
     const [showLogo, setShowLogo] = useState(() => {
         const storedValue = localStorage.getItem('showLogo');
@@ -27,7 +24,6 @@ function App({user}) {
     const [selectedType, setSelectedType] = useState(null);
     const [activeSection, setActiveSection] = useState('main');
     const [showOnlyProfile, setShowOnlyProfile] = useState(false);
-
 
     useEffect(() => {
         if (showLogo) {
@@ -39,9 +35,11 @@ function App({user}) {
             return () => clearTimeout(timer);
         }
     }, [showLogo]);
+
     useEffect(() => {
         localStorage.removeItem('showLogo');
     }, []);
+
     const handleBlogClick = (type) => {
         if (selectedType === type) {
             setSelectedType(null);
@@ -51,7 +49,6 @@ function App({user}) {
         }
         setActiveSection('blog');
     };
-
 
     const handleMainClick = () => {
         setSelectedType(null);
@@ -75,37 +72,33 @@ function App({user}) {
                                 setShowOnlyProfile={setShowOnlyProfile}
                             />
 
-
                             <main className="content">
-                                <Routes>
-                                    {/* Главная страница — в Main компонент добавляем ArticleCard */}
-                                    <Route path="/" element={
-                                        <Main
-                                            activeSection={activeSection}
-                                            selectedType={selectedType}
-                                            setSelectedType={setSelectedType}
-                                            showOnlyProfile={showOnlyProfile}
-                                        />
-
-                                    }/>
-                                    {/* Страница со статьями */}
-                                    <Route
-                                        path="/articles"
-                                        element={
-                                            <ArticleCard
+                                <div className="content-wrapper">
+                                    <Routes>
+                                        <Route path="/" element={
+                                            <Main
+                                                activeSection={activeSection}
                                                 selectedType={selectedType}
                                                 setSelectedType={setSelectedType}
+                                                showOnlyProfile={showOnlyProfile}
                                             />
-                                        }
-                                    />
-                                    {/* Страница полной статьи */}
-                                    <Route path="/article/:id" element={<ArticleDetails/>}/>
-                                </Routes>
+                                        }/>
+                                        <Route
+                                            path="/articles"
+                                            element={
+                                                <ArticleCard
+                                                    selectedType={selectedType}
+                                                    setSelectedType={setSelectedType}
+                                                />
+                                            }
+                                        />
+                                        <Route path="/article/:id" element={<ArticleDetails/>}/>
+                                    </Routes>
 
-                                <div className="button-scroll">
-                                    <ScrollToTop/>
+                                    <div className="button-scroll">
+                                        <ScrollToTop/>
+                                    </div>
                                 </div>
-
                             </main>
 
                             <div className="App-footer">
