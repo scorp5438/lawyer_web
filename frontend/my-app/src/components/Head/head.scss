@@ -32,20 +32,51 @@
   z-index: 100;
 
   &_item {
-    cursor: pointer;
     color: $colorNavigate;
     font-size: $sizeNavigate;
     list-style-type: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 
-    a {
-      text-decoration: none;
-      color: $colorNavigate;
-
-      &:hover {
+    &_icon {
+      :hover {
         color: $colorH1;
+
+        svg {
+          path {
+            stroke: $colorNavigate !important;
+            fill: $colorH1 !important;
+          }
+        }
+
+        a {
+          color: $colorH1;
+
+        }
       }
-      &:after {
-        color: $colorH1;
+
+      svg {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        &:hover {
+          fill: $colorH1;
+          stroke: $colorH1;
+        }
+      }
+
+      a {
+        text-decoration: none;
+        color: $colorNavigate;
+        transition: color 0.3s ease;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+
+        &:hover {
+          color: $colorH1;
+        }
       }
     }
   }
@@ -53,6 +84,7 @@
     .head__nav {
       &_item {
         font-size:$sizePage;
+
       }
     }
   }
@@ -257,7 +289,6 @@
   fill: $colorH1;
 }
 
-/* Медиазапросы для мобильного меню */
 @media (min-width: 360px) and (max-width: 1200px) {
   .head__nav_menu.mobile-menu .blog-item {
     position: relative;
@@ -273,7 +304,6 @@
   }
 }
 
-/* Остальные медиазапросы остаются без изменений */
 @media (min-width: 360px) and (max-width: 575px) {
   .header__navigate {
     min-width: 360px;
