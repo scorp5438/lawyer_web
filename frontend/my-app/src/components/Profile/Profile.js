@@ -37,7 +37,7 @@ const AboutMe = () => {
                     {user.length > 0 ? (
                         <>
 
-                            <p className="item_name">Я {user[0].first_name} {user[0].last_name}  – член   Адвокатской палаты Краснодарского края.</p>
+                            {/*<p className="item_name">Я {user[0].first_name} {user[0].last_name}  – член   Адвокатской палаты Краснодарского края.</p>*/}
                             <p>{user[0].bio}</p>
 
 

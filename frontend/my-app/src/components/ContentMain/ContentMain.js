@@ -49,12 +49,12 @@ const ContentMain = () => {
                     <div className="main__content_content_block_center">
                         <div className="main__content_content_block_logo">
                             <div className="main__content_content_block_logo_h1">
-                                <h1>SAProLex</h1>
+                                <h1>САПроЛекс</h1>
                             </div>
                         </div>
                         <div className="main__content_content_block_dis">
                             <p className="main__content_content_block_dis_p">
-                                ADVICE THAT MATTERS
+                                СОВЕТЫ ИМЕЮЩИЕ ЗНАЧЕНИЯ
                             </p>
                         </div>
                     </div>

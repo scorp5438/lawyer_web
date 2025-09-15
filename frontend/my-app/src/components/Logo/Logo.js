@@ -7,11 +7,11 @@ function Logo() {
     return (
         <div className="logo">
             <div className="logo__h1">
-                <h1 className='head-h1'>SAProLex</h1>
+                <h1 className='head-h1'>САПроЛекс</h1>
             </div>
             <div className="logo__p">
                 <p className='text'>
-                    ADVICE THAT MATTERS
+                    СОВЕТЫ ИМЕЮЩИЕ ЗНАЧЕНИЯ
                 </p>
             </div>
 
