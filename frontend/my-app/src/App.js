@@ -1,5 +1,6 @@
 import './App.scss';
 import {useEffect, useState} from "react";
+import { useNavigate } from 'react-router-dom';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Logo from "./components/Logo/Logo";
 import Main from "./components/Main/Main";
@@ -8,6 +9,7 @@ import ArticleDetails from './components/ArticleDetails/ArticleDetails';
 import Head from "./components/Head/Head";
 import Footer from "./components/Footer/Footer";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import NotFound from './components/NotFound/NotFound';
 //Импорт шрифтов
 import '@fontsource/lora';
 import '@fontsource/lora/700.css';
@@ -55,6 +57,19 @@ function App({user}) {
         setActiveSection('main');
     };
 
+
+    const RedirectToNotFound = () => {
+        const navigate = useNavigate();
+
+        useEffect(() => {
+            navigate('/404', { replace: true });
+        }, [navigate]);
+
+        return null;
+    };
+
+
+
     return (
         <div className="App">
             {showLogo ? (
@@ -93,6 +108,8 @@ function App({user}) {
                                             }
                                         />
                                         <Route path="/article/:id" element={<ArticleDetails/>}/>
+                                        <Route path="*" element={<NotFound />} />
+                                        <Route path="*" element={<RedirectToNotFound />} />
                                     </Routes>
 
                                     <div className="button-scroll">
