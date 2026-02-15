@@ -15,9 +15,14 @@ class PhotonGeocoder(BaseGeocoder):
     @staticmethod
     def geocode(address):
         try:
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'
+            }
             response = requests.get(
                 'https://photon.komoot.io/api/',
-                params={'q': address}
+                params={'q': address},
+                headers=headers,
+                timeout=5
             )
 
             data = response.json()
