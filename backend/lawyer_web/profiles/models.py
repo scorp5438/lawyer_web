@@ -113,14 +113,15 @@ class Address(models.Model):
     def get_full_address(self):
         return f"{self.region}, {self.city}, {self.street}, {self.house}"
 
-    @property
-    def coordinates(self):
-        if not self.latitude and not self.longitude:
-            return self.latitude, self.longitude
-        return PhotonGeocoder.geocode(self.get_full_address())
 
     def save(self, *args, **kwargs):
-        if not self.latitude and not self.longitude:
+        if not self.latitude or not self.longitude:
             self.latitude, self.longitude = PhotonGeocoder.geocode(self.get_full_address())
         super().save(*args, **kwargs)
         return None
+
+    @property
+    def coordinates(self):
+        if self.latitude and self.longitude:
+            return self.latitude, self.longitude
+        return PhotonGeocoder.geocode(self.get_full_address())
