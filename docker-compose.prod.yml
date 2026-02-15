@@ -37,6 +37,8 @@ services:
       - media:/media
       - /etc/letsencrypt/live/advocat-saprolex.ru:/etc/letsencrypt/live/advocat-saprolex.ru
       - /etc/letsencrypt/archive/advocat-saprolex.ru:/etc/letsencrypt/archive/advocat-saprolex.ru
+      - ./certbot_data:/var/www/certbot:ro
+     # - /etc/letsencrypt:/etc/letsencrypt:ro
     depends_on:
       - web
 
