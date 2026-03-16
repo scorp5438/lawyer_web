@@ -83,10 +83,8 @@ class Profile(models.Model):
         verbose_name='биография'
     )
 
-
     def __str__(self):
         return f"{self.user_id.username}"
-
 
     class Meta:
         verbose_name = 'Профиль'
@@ -113,15 +111,38 @@ class Address(models.Model):
     def get_full_address(self):
         return f"{self.region}, {self.city}, {self.street}, {self.house}"
 
-
     def save(self, *args, **kwargs):
-        if not self.latitude or not self.longitude:
-            self.latitude, self.longitude = PhotonGeocoder.geocode(self.get_full_address())
+        need_update = False
+
+        if not self.pk:
+            need_update = True
+        else:
+            try:
+                old = Address.objects.get(pk=self.pk)
+                if (old.region != self.region or
+                        old.city != self.city or
+                        old.street != self.street or
+                        old.house != self.house):
+                    need_update = True
+            except Address.DoesNotExist:
+                need_update = True
+
+        if need_update or not self.latitude or not self.longitude:
+            coords = PhotonGeocoder.geocode(self.get_full_address())
+            if coords and coords[0] is not None and coords[1] is not None:
+                self.latitude, self.longitude = coords
+
         super().save(*args, **kwargs)
-        return None
 
     @property
     def coordinates(self):
-        if self.latitude and self.longitude:
+        if self.latitude is not None and self.longitude is not None:
             return self.latitude, self.longitude
-        return PhotonGeocoder.geocode(self.get_full_address())
+
+        coords = PhotonGeocoder.geocode(self.get_full_address())
+        if coords and coords[0] is not None and coords[1] is not None:
+            self.latitude, self.longitude = coords
+            self.save(update_fields=['latitude', 'longitude'])
+            return coords
+
+        return None, None

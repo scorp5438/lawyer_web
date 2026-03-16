@@ -36,3 +36,10 @@ class PhotonGeocoder(BaseGeocoder):
 
 class YandexGeocoder(BaseGeocoder):
     pass
+
+
+if __name__ == '__main__':
+
+    geo = PhotonGeocoder()
+    coord = geo.geocode('Московская область, Москва')
+    print(coord)
